@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<PreferenceCategory
+		android:title="@string/general"
+		app:iconSpaceReserved="false">
+		<ListPreference
+			android:defaultValue="system"
+			android:entries="@array/themes_val"
+			android:entryValues="@array/themes_key"
+			android:key="theme"
+			android:title="@string/theme"
+			android:summary="@string/theme_sum"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="pitchBlack"
+			android:title="@string/pitchBlack"
+			android:summary="@string/pitchBlack_sum"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="true"
+			android:key="dynamicColor"
+			android:title="@string/dynColor"
+			android:summary="@string/dynColor_sum"
+			app:iconSpaceReserved="false" />
+		<Preference
+			android:key="dataImport"
+			android:title="@string/data_import"
+			android:summary="@string/data_import_sum"
+			app:iconSpaceReserved="false" />
+		<Preference
+			android:key="dataExport"
+			android:title="@string/data_export"
+			android:summary="@string/data_export_sum"
+			app:iconSpaceReserved="false" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/about"
+		app:iconSpaceReserved="false">
+		<Preference
+			android:title="@string/sourceCode"
+			android:summary="@string/sourceCode_sum"
+			app:iconSpaceReserved="false">
+			<intent
+				android:action="android.intent.action.VIEW"
+				android:data="https://codeberg.org/mdp43140/AndroidAppTemplate1" />
+		</Preference>
+		<Preference
+			android:title="@string/license"
+			android:summary="@string/license_sum"
+			app:iconSpaceReserved="false">
+			<intent
+				android:action="android.intent.action.VIEW"
+				android:data="https://codeberg.org/mdp43140/AndroidAppTemplate1/blob/main/LICENSE" />
+		</Preference>
+	</PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,55 @@
+name: Android CI
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'doc/**'
+      - 'fastlane/**'
+      - 'assets/**'
+      - '.github/**/*.md'
+      - '.github/FUNDING.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'doc/**'
+      - 'fastlane/**'
+      - 'assets/**'
+      - '.github/**/*.md'
+      - '.github/FUNDING.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/wrapper-validation-action@v2
+      - name: create and checkout branch
+        # push events already checked out the branch
+        if: github.event_name == 'pull_request'
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: git checkout -B "$BRANCH"
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug --stacktrace -DskipFormatKtlint
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/*.apk

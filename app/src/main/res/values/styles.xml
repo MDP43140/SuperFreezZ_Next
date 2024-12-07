@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<style name="AppTheme" parent="Theme.Material3.DayNight">
+		<item name="preferenceTheme">@style/AppPreferenceThemeOverlay</item>
+		<!-- fixes some UI issues on MIUI devices -->
+		<item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+	</style>
+	<style name="AppTheme.NoActionBar" parent="AppTheme">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+	<!-- MD3 Switch Preference workaround -->
+	<style name="AppPreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+		<item name="switchPreferenceCompatStyle">@style/AppSwitchPreference</item>
+	</style>
+	<style name="AppSwitchPreference" parent="@style/Preference.SwitchPreferenceCompat.Material">
+		<item name="widgetLayout">@layout/preference_material_switch</item>
+	</style>
+	<!-- Custom error logger theme -->
+	<style name="AEL_Theme" parent="AppTheme"/>
+</resources>
