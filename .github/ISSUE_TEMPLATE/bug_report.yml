@@ -7,11 +7,11 @@ body:
     attributes:
       label: "Checks"
       options:
-        - label: "I am able to reproduce the bug with the [latest version](https://github.com/exampleDeveloper/exampleApp/releases/latest)."
+        - label: "I am able to reproduce the bug with the [latest version](https://github.com/MDP43140/SuperFreezZ_N3XT/releases/latest)."
           required: true
-        - label: "I made sure that there are *no existing issues* - [open](https://github.com/exampleDeveloper/exampleApp/issues) or [closed](https://github.com/exampleDeveloper/exampleApp/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
+        - label: "I made sure that there are *no existing issues* - [open](https://github.com/MDP43140/SuperFreezZ_N3XT/issues) or [closed](https://github.com/MDP43140/SuperFreezZ_N3XT/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
           required: true
-        - label: "I have read the [Wiki](https://github.com/exampleDeveloper/exampleApp/wiki) and my problem isn't listed."
+        - label: "I have read the [Wiki](https://github.com/MDP43140/SuperFreezZ_N3XT/wiki) and my problem isn't listed."
           required: true
         - label: "I have taken the time to fill in all the required details. I understand that the bug report will be dismissed otherwise."
           required: true

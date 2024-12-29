@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<resources>
+	<string name="about">Tentang</string>
+	<string name="apps_system">Aplikasi sistem</string>
+	<string name="apps_user">Aplikasi pengguna</string>
+	<string name="categorize_none">Tidak ada</string>
+	<string name="categorize_appState">Keadaan berhenti</string>
+	<string name="categorize_unusedFirst">Keadaan tidak digunakan</string>
+	<string name="categorize_userSystem">Pengguna/Sistem</string>
+	<string name="data_import">Impor Data</string>
+	<string name="data_export">Ekspor Data</string>
+	<string name="data_import_sum">Kembalikan setelan dari file cadangan</string>
+	<string name="data_export_sum">Cadangkan setelan ke file XML/JSON</string>
+	<string name="dynColor">Warna dinamis</string>
+	<string name="dynColor_sum">Mengaktifkan warna dinamis (memerlukan Android 12+)</string>
+	<string name="general">Umum</string>
+	<string name="ignore_bgFree">Hiraukan bebas-latar-belakang</string>
+	<string name="ignore_running">Hiraukan keadaan berjalan</string>
+	<string name="license">Lisensi</string>
+	<string name="license_sum">Dilisensikan dibawah lisensi GPL v3</string>
+	<string name="normal">Normal</string>
+	<string name="off">Nonaktif</string>
+	<string name="other">Lainnya</string>
+	<string name="pitchBlack">Latar-belakang hitam saat tema gelap</string>
+	<string name="pitchBlack_sum">Menghemat baterai pada layar OLED</string>
+	<string name="reverse">Balikkan</string>
+	<string name="search">Cari</string>
+	<string name="settings">Pengaturan</string>
+	<string name="sort">Sortir</string>
+	<string name="sort_label">Nama aplikasi</string>
+	<string name="sort_pkg">Nama paket</string>
+	<string name="sourceCode">Sumber kode</string>
+	<string name="sourceCode_sum">Cek sumber kodenya di Codeberg!</string>
+	<string name="stop">Hentikan</string>
+	<string name="stopMode">Mode menghentikan</string>
+	<string name="stopMode_inactive">In-aktif (root)</string>
+	<string name="theme">Tema</string>
+	<string name="theme_sum">Pilih tema. Mulai ulang aplikasi untuk menerapkan perubahan sepenuhnya</string>
+	<string-array name="themes_val">
+		<item>Ikuti sistem</item>
+		<item>Terang</item>
+		<item>Gelap</item>
+	</string-array>
+</resources>

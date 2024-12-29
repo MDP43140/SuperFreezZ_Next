@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 MDP43140
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package com.example.ui
+package io.mdp43140.superfreeze.ui
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -20,11 +20,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONArray
 import org.json.JSONObject
-import com.example.App
-import com.example.CommonFunctions
-import com.example.databinding.ActivitySettingsBinding
-import com.example.util.putData // SharedPreferencesExtension.kt
-import com.example.R
+import io.mdp43140.superfreeze.App
+import io.mdp43140.superfreeze.CommonFunctions
+import io.mdp43140.superfreeze.databinding.ActivitySettingsBinding
+import io.mdp43140.superfreeze.util.putData // SharedPreferencesExtension.kt
+import io.mdp43140.superfreeze.R
 class SettingsActivity: BaseActivity(){
 	private lateinit var binding: ActivitySettingsBinding
 	private val importFileLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -105,7 +105,7 @@ class SettingsActivity: BaseActivity(){
 				}
 			findPreference<Preference>("dataExport")?.onPreferenceClickListener =
 				Preference.OnPreferenceClickListener {
-					exportFileLauncher.launch("AppTemplate_settings.json")
+					exportFileLauncher.launch("SuperFreezZ_Next_settings.json")
 					false
 				}
 			findPreference<Preference>("theme")?.onPreferenceChangeListener =

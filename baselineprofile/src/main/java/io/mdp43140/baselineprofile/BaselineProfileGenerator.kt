@@ -49,8 +49,7 @@ class BaselineProfileGenerator {
 			// Check UiAutomator documentation for more information how to interact with the app.
 			// https://d.android.com/training/testing/other-components/ui-automator
 
-			// This should run user most interacted UIs
-			// Example: Scrolling RecyclerView
+			// Scrolling RecyclerView, make sure that one goes smoothly
 			device.findObject(By.res(packageName,"appsList")).also {
 				it.setGestureMargin(device.displayWidth / 10)
 				it.fling(Direction.DOWN)

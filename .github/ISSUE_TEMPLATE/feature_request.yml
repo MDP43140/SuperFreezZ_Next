@@ -7,7 +7,7 @@ body:
     attributes:
       label: "Checklist"
       options:
-        - label: "I made sure that there are *no existing issues* - [open](https://github.com/exampleDeveloper/exampleApp/issues) or [closed](https://github.com/exampleDeveloper/exampleApp/issues?q=is%3Aissue+is%3Aclosed)."
+        - label: "I made sure that there are *no existing issues* - [open](https://github.com/MDP43140/SuperFreezZ_N3XT/issues) or [closed](https://github.com/MDP43140/SuperFreezZ_N3XT/issues?q=is%3Aissue+is%3Aclosed)."
           required: true
         - label: "I have taken the time to fill in all the required details. I understand that the feature request will be dismissed otherwise."
           required: true

@@ -17,9 +17,9 @@ kotlin {
 android {
 	compileSdk = 35
 	buildToolsVersion = "35.0.0"
-	namespace = "com.example"
+	namespace = "io.mdp43140.superfreeze"
 	defaultConfig {
-		applicationId = "com.exampleDeveloper.examplePackageName"
+		applicationId = "io.mdp43140.superfreeze_next"
 		minSdk = 24
 		targetSdk = compileSdk
 		versionCode = 1
@@ -126,6 +126,8 @@ dependencies {
 	implementation("androidx.preference:preference-ktx:1.2.1")
 	// MD3 on different Android versions
 	implementation("com.google.android.material:material:1.12.0")
+	// Pull to refresh
+	implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 	// Leak detection
 	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 	// Error logger

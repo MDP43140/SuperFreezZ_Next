@@ -4,9 +4,14 @@
 	~ SPDX-License-Identifier: GPL-3.0-or-later
 	-->
 <resources>
-	<string name="app_name">Template App</string>
-
+	<string name="app_name">SuperFreezZ Next</string>
 	<string name="about">About</string>
+	<string name="apps_system">System apps</string>
+	<string name="apps_user">User apps</string>
+	<string name="categorize_none">None</string>
+	<string name="categorize_appState">Stop state</string>
+	<string name="categorize_unusedFirst">Unused state</string>
+	<string name="categorize_userSystem">User/System</string>
 	<string name="data_import">Import Data</string>
 	<string name="data_export">Export Data</string>
 	<string name="data_import_sum">Restore settings from backup file</string>
@@ -14,17 +19,28 @@
 	<string name="dynColor">Dynamic colors</string>
 	<string name="dynColor_sum">Enables dynamic colors (requires Android 12+)</string>
 	<string name="general">General</string>
+	<string name="ignore_bgFree">Ignore background-free</string>
+	<string name="ignore_running">Ignore running state</string>
 	<string name="license">License</string>
 	<string name="license_sum">Licensed under GPL v3 license</string>
+	<string name="normal">Normal</string>
+	<string name="off">Off</string>
 	<string name="other">Other</string>
 	<string name="pitchBlack">Black background on dark theme</string>
 	<string name="pitchBlack_sum">Saves battery on OLED displays</string>
+	<string name="reverse">Reverse</string>
+	<string name="search">Search</string>
 	<string name="settings">Settings</string>
+	<string name="sort">Sort</string>
+	<string name="sort_label">App name</string>
+	<string name="sort_pkg">Package name</string>
 	<string name="sourceCode">Source code</string>
-	<string name="sourceCode_sum">Checkout App Template GitHub project!</string>
+	<string name="sourceCode_sum">Check out the source code on Codeberg!</string>
+	<string name="stop">Stop</string>
+	<string name="stopMode">Stop Mode</string>
+	<string name="stopMode_inactive">Inactive (root)</string>
 	<string name="theme">Theme</string>
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
-
 	<string-array name="themes_val">
 		<item>Follow system</item>
 		<item>Light</item>

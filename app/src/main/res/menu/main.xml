@@ -1,0 +1,102 @@
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/search"
+		android:title="@string/search"
+		app:actionViewClass="androidx.appcompat.widget.SearchView"
+		app:showAsAction="always|collapseActionView" />
+	<item
+		android:id="@+id/sort"
+		android:title="@string/sort"
+		app:showAsAction="always">
+		<menu>
+			<group
+				android:id="@+id/sortByOrder"
+				android:checkableBehavior="single">
+				<item
+					android:id="@+id/sort_label"
+					android:title="@string/sort_label" />
+				<item
+					android:id="@+id/sort_pkg"
+					android:title="@string/sort_pkg" />
+			</group>
+			<group
+				android:id="@+id/categorize"
+				android:checkableBehavior="single">
+				<item
+					android:id="@+id/categorize_none"
+					android:title="@string/categorize_none" />
+				<item
+					android:id="@+id/categorize_appState"
+					android:title="@string/categorize_appState" />
+				<item
+					android:id="@+id/categorize_unusedFirst"
+					android:title="@string/categorize_unusedFirst" />
+				<item
+					android:id="@+id/categorize_userSystem"
+					android:title="@string/categorize_userSystem" />
+			</group>
+			<group>
+				<item
+					android:id="@+id/sort_reverse"
+					android:checkable="true"
+					android:title="@string/reverse" />
+				<item
+					android:id="@+id/sort_user"
+					android:checkable="true"
+					android:title="@string/apps_user" />
+				<item
+					android:id="@+id/sort_system"
+					android:checkable="true"
+					android:title="@string/apps_system" />
+			</group>
+		</menu>
+	</item>
+	<item
+		android:id="@+id/settings"
+		android:title="@string/settings"
+		app:showAsAction="ifRoom" />
+	<group
+		app:showAsAction="never">
+		<!--item
+			android:id="@+id/hide"
+			android:title="Hide from SuperFreezZ Next" /-->
+		<!--item
+			android:id="@+id/restrictFg"
+			android:title="Restrict running as foreground" />
+		<item
+			android:id="@+id/disableSvc"
+			android:title="Disable long-running service" /-->
+		<item
+			android:id="@+id/stopMode"
+			android:title="@string/stopMode">
+			<menu>
+				<group
+					android:id="@+id/stop_method"
+					android:checkableBehavior="single">
+					<item
+						android:id="@+id/stop_off"
+						android:title="@string/off" />
+					<item
+						android:id="@+id/stop_normal"
+						android:title="@string/normal" />
+					<item
+						android:id="@+id/stop_inactive"
+						android:title="@string/stopMode_inactive" />
+				</group>
+			</menu>
+		</item>
+		<item
+			android:id="@+id/ignoreRunning"
+			android:title="@string/ignore_running"
+			android:checkable="true" />
+		<item
+			android:id="@+id/ignoreBgFree"
+			android:title="@string/ignore_bgFree"
+			android:checkable="true" />
+	</group>
+</menu>

@@ -5,6 +5,13 @@
 	-->
 <resources xmlns:tools="http://schemas.android.com/tools">
 	<style name="AppTheme" parent="Theme.Material3.DayNight">
+		<item name="colorPrimary">@color/colorAccent</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorOnPrimary">@color/fg</item>
+		<item name="colorOnSecondary">@color/fg</item>
+		<item name="colorAccent">?colorPrimary</item>
+		<item name="android:statusBarColor">?colorSurface</item>
+		<item name="android:navigationBarColor">?colorSurface</item>
 		<item name="preferenceTheme">@style/AppPreferenceThemeOverlay</item>
 		<!-- fixes some UI issues on MIUI devices -->
 		<item name="android:forceDarkAllowed" tools:targetApi="q">false</item>

@@ -49,7 +49,7 @@
 			app:iconSpaceReserved="false">
 			<intent
 				android:action="android.intent.action.VIEW"
-				android:data="https://codeberg.org/mdp43140/AndroidAppTemplate1" />
+				android:data="https://github.com/mdp43140/SuperFreezZ_Next" />
 		</Preference>
 		<Preference
 			android:title="@string/license"
@@ -57,7 +57,7 @@
 			app:iconSpaceReserved="false">
 			<intent
 				android:action="android.intent.action.VIEW"
-				android:data="https://codeberg.org/mdp43140/AndroidAppTemplate1/blob/main/LICENSE" />
+				android:data="https://github.com/mdp43140/SuperFreezZ_Next/blob/main/LICENSE" />
 		</Preference>
 	</PreferenceCategory>
 </PreferenceScreen>

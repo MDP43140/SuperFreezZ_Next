@@ -4,4 +4,6 @@
 		make the app unnecessarily larger and Android 12 automatically
 		replaces our splash screen anyway. -->
 	<issue id="CustomSplashScreen" severity="ignore"/>
+	<issue id="ProtectedPermissions" severity="ignore" />
+	<issue id="QueryAllPackagesPermission" severity="ignore" />
 </lint>

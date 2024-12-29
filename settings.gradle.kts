@@ -13,12 +13,11 @@ dependencyResolutionManagement {
 		maven("https://jitpack.io")
 	}
 }
-// Use this to override dependency to use local ones instead
 //includeBuild("../ael"){
 //	dependencySubstitution {
 //		substitute(module("com.github.mdp43140.ael:ael_kt")).using(project(":ael_kt"))
 //	}
 //}
 
-rootProject.name = "Template app"
+rootProject.name = "SuperFreezZ NEXT"
 include(":app",":baselineprofile")

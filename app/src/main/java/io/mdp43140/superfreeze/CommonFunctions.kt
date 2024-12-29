@@ -2,14 +2,14 @@
  * SPDX-FileCopyrightText: 2024 MDP43140
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package com.example
+package io.mdp43140.superfreeze
 import android.content.Context
 import android.content.res.Configuration
 import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import java.text.DecimalFormat
-//import com.example.Constants
+//import io.mdp43140.superfreeze.Constants
 import kotlin.system.exitProcess
 object CommonFunctions {
 	fun convertSize(length: Long): String {

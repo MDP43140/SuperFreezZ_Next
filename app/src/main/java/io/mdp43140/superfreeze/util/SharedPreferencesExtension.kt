@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 MDP43140
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package com.example.util
+package io.mdp43140.superfreeze.util
 import android.content.SharedPreferences
 import org.json.JSONArray
 fun SharedPreferences.Editor.putData(key: String,value: Any): Boolean {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<resources>
+	<color name="colorPrimary">#00b0ff</color>
+	<color name="colorPrimaryDark">#0081cb</color>
+	<color name="colorAccent">#4fc3f7</color>
+	<color name="fg">#000000</color>
+	<color name="ic_launcher_bg">#2b363f</color>
+	<color name="bg_highlight">#44000000</color>
+</resources>

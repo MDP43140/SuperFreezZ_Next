@@ -3,11 +3,48 @@
 	~ SPDX-FileCopyrightText: 2024 MDP43140
 	~ SPDX-License-Identifier: GPL-3.0-or-later
 	-->
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:padding="8dp">
-</LinearLayout>
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	tools:context=".ui.MainActivity">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:id="@+id/swiperefresh"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:orientation="vertical">
+			<!--ListView
+				android:fastScrollEnabled="true"
+				android:orientation="vertical" /-->
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/appsList"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:scrollbars="vertical"
+				android:scrollbarSize="24dp" />
+		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+		<com.google.android.material.appbar.MaterialToolbar
+			android:clipToPadding="false"
+			android:id="@+id/toolbar"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:title="@string/app_name" />
+	</LinearLayout>
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentBottom="true"
+		android:layout_gravity="bottom|end"
+		android:layout_marginEnd="15dp"
+		android:layout_marginBottom="80dp"
+		android:tooltipText="@string/stop" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

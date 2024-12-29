@@ -1,4 +1,4 @@
-<!-- Hey there. Thanks for improving Example App, and filling out the details. -->
+<!-- Hey there. Thanks for improving SuperFreezZ N3XT, and filling out the details. -->
 
 #### Types of changes
 <!-- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
