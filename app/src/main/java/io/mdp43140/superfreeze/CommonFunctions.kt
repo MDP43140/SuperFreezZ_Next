@@ -18,9 +18,21 @@ import android.text.SpannableString
 import android.text.style.CharacterStyle
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.topjohnwu.superuser.Shell
 //import io.mdp43140.superfreeze.Constants
 import kotlin.system.exitProcess
 object CommonFunctions {
+	fun checkRoot(ctx: Activity): Boolean? {
+			Shell.getShell()
+			val hasRoot = Shell.isAppGrantedRoot()
+			if (hasRoot != true){
+				MaterialAlertDialogBuilder(ctx).setTitle("Grant root access")
+					.setMessage("This mode requires having root access to stop apps")
+					.setPositiveButton("OK"){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+					.show()
+			}
+			return hasRoot
+	};
 	fun isFlagSet(value: Int,flag: Int): Boolean {
 		return (value and flag) == flag
 	}

@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import android.net.Uri
+import com.topjohnwu.superuser.Shell
 import io.mdp43140.superfreeze.App
 import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.AppListItems.AppItem
@@ -101,6 +102,44 @@ class FreezeShortcutActivity: Activity(){
 					.show()
 				isRunning = false
 			}
+			else if (App.workMode == "root"){
+				val sh: Shell.Job = Shell.getShell().newJob()
+				if (!Shell.rootAccess()){
+					Toast
+						.makeText(ctx,ctx.getString(R.string.root_not_avail),Toast.LENGTH_SHORT)
+						.show()
+					return
+				}
+				// Fun fact: these commands only needs shell (2000) level privilege
+				// but sadly methods other than root is not convenient to set up
+				// you will need computers, or initialize adb connection
+				// and those aren't permanent either
+				apps.forEach {
+					// Sets inactive mode (equivalent to shallow hibernation in Greenify)
+					// Perfect for most messenger and some social media apps
+					sh.add("am set-inactive ${it.pkg} true")
+					// sets app in hibernation mode, which:
+					// - Clears cache (Android 12+)
+					// - Resets permission (Android 11+, Android 6-10 with GmsCore)
+					//   some people definitely don't want reconfiguring permission,
+					//   so i decided to disable this by default
+				//sh.add("cmd app_hibernation set-state --global ${it.pkg} true")
+					if (it.stopMode == 1){
+						// Stops safe to kill processes (eg. Cached process). Frees up RAM
+						sh.add("am kill all ${it.pkg}")
+						// Unlike force-stop, this doesn't cancel
+						// app's scheduled alarm & jobs
+					//sh.add("am stop-app all ${it.pkg}")
+						// Same effect as pressing Force stop in app info
+						sh.add("am force-stop ${it.pkg}")
+					}
+				}
+				sh.submit { _ -> ctx.runOnUiThread {
+					isRunning = false
+					Toast
+						.makeText(ctx,ctx.getString(R.string.apps_is_stopped,apps.size),Toast.LENGTH_SHORT)
+						.show()
+				}}
 			}
 		}
 		fun stopBgApps(ctx: Context, apps: List<AppItem>){

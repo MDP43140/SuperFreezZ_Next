@@ -22,8 +22,8 @@ android {
 		applicationId = "io.mdp43140.superfreeze_next"
 		minSdk = 24
 		targetSdk = compileSdk
-		versionCode = 6
-		versionName = "1.4.0"
+		versionCode = 7
+		versionName = "1.4.1"
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		testInstrumentationRunnerArguments["disableAnalytics"] = "true"
 		vectorDrawables {
@@ -128,6 +128,8 @@ dependencies {
 	implementation("com.google.android.material:material:1.12.0")
 	// Pull to refresh
 	implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+	// LibSU, for root support
+	implementation("com.github.topjohnwu.libsu:core:6.0.0")
 	// Leak detection
 	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 	// Error logger

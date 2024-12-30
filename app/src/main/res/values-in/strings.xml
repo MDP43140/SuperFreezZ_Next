@@ -45,6 +45,7 @@
 	<string name="pitchBlack_sum">Menghemat baterai pada layar OLED</string>
 	<string name="playingMedia">Memutar media</string>
 	<string name="reverse">Balikkan</string>
+	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode Aksesibilitas/Manual</string>
 	<string name="search">Cari</string>
 	<string name="settings">Pengaturan</string>
 	<string name="sort">Sortir</string>

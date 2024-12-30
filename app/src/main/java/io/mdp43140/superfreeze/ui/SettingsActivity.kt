@@ -145,7 +145,11 @@ class SettingsActivity: BaseActivity(){
 							true
 						}
 						modeStr[2] -> {
-							// nothing for now...
+							// cache stuff...
+							if (CommonFunctions.checkRoot(requireActivity()) == true){
+								Toast.makeText(requireActivity(),"Root granted!",Toast.LENGTH_SHORT).show()
+							//FreezeService.stopAccessibilityService()
+							}
 							true
 						}
 						else -> false
