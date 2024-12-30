@@ -49,6 +49,8 @@ class App: Application(){
 		}
 	}
 	companion object {
+		var appListItems: AppListItems? = null
 		var prefs: SharedPreferences? = null
+		var workMode: String? = null
 	}
 }

@@ -8,22 +8,9 @@ import android.content.res.Configuration
 import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
-import java.text.DecimalFormat
 //import io.mdp43140.superfreeze.Constants
 import kotlin.system.exitProcess
 object CommonFunctions {
-	fun convertSize(length: Long): String {
-		val format = DecimalFormat("#.##")
-		val kib:Long = 1024
-		val mib:Long = 1048576
-		return if (length > mib) {
-			format.format(length / mib) + " MB"
-		} else if (length > kib) {
-			format.format(length / kib) + " KB"
-		} else {
-			format.format(length) + " B"
-		}
-	}
 	fun isDarkThemeActive(ctx: Context): Boolean {
 		return (ctx.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 	}

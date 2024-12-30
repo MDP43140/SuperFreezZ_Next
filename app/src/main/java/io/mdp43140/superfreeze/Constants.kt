@@ -4,4 +4,5 @@
  */
 package io.mdp43140.superfreeze
 object Constants {
+	val VIEW_TYPE_APP = 0
 }

@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.json.JSONArray
 import org.json.JSONObject
 import io.mdp43140.superfreeze.App
+import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.CommonFunctions
 import io.mdp43140.superfreeze.databinding.ActivitySettingsBinding
 import io.mdp43140.superfreeze.util.putData // SharedPreferencesExtension.kt
@@ -34,14 +35,24 @@ class SettingsActivity: BaseActivity(){
 					?.use { it.readBytes() }
 					!!.toString(Charsets.UTF_8)
 			)
-			val prefsEditor = App.prefs?.edit()
-			val buffer = StringBuilder()
-			for (key in jsonObject.keys()){
-				val value = jsonObject.get(key)
-				if (prefsEditor?.putData(key,value) == false)
+			val appsObject = jsonObject.getJSONObject("apps")
+			val buffer = StringBuilder();
+
+			val prefsEditor1 = AppListItems.prefs?.edit()
+			val prefsEditor2 = App.prefs?.edit()
+
+			for (key in appsObject.keys()){
+				val value = appsObject.get(key)
+				if (prefsEditor1?.putData(key,value) == false)
 					buffer.append("\n- $key: $value")
 			}
-			prefsEditor?.apply()
+			for (key in jsonObject.keys()){
+				val value = jsonObject.get(key)
+				if (key != "apps" && prefsEditor2?.putData(key,value) == false)
+					buffer.append("\n- $key: $value")
+			}
+			prefsEditor1?.apply()
+			prefsEditor2?.apply()
 			val text = buffer.toString()
 			Snackbar.make(
 				binding.root,
@@ -60,6 +71,7 @@ class SettingsActivity: BaseActivity(){
 		if (uri != null){
 			// TODO - warning - Type mismatch: inferred type is (Mutable)Map<String!, *>? but (MutableMap<Any?, Any?>..Map<*, *>) was expected
 			val jsonData = JSONObject(App.prefs?.all)
+			jsonData.put("apps",JSONObject(AppListItems.prefs?.all))
 			CommonFunctions.writeContentToUri(this,uri,jsonData.toString())
 			Snackbar.make(
 				binding.root,

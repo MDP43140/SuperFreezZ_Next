@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:gravity="center"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="8dp"
+	android:layout_marginBottom="8dp"
+	android:minHeight="?attr/listPreferredItemHeight"
+	android:orientation="horizontal"
+	android:paddingLeft="8dp"
+	tools:context=".ui.MainActivity">
+	<ImageView
+		android:adjustViewBounds="true"
+		android:contentDescription="App icon"
+		android:id="@+id/icon"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_marginRight="8dp"
+		android:scaleType="fitCenter" />
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		<TextView
+			android:id="@+id/label"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:textAppearanceMedium"
+			android:singleLine="true" />
+		<TextView
+			android:id="@+id/state"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:maxLines="4"
+			android:textAppearance="?android:textAppearanceSmall"
+			android:textSize="12sp" />
+		<!-- temp workaround to make full-width btn. TODO: how can we not depend on the workaround below? -->
+		<View
+			android:layout_width="fill_parent"
+			android:layout_height="0dp" />
+	</LinearLayout>
+</LinearLayout>
