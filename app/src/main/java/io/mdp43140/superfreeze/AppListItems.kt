@@ -13,6 +13,8 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.PowerManager
+import io.mdp43140.superfreeze.util.CertUtil.isInstalledByFDroid
+import io.mdp43140.superfreeze.util.CertUtil.isSignedByFDroid
 //import io.mdp43140.superfreeze.badPackages
 //import io.mdp43140.superfreeze.goodPackages
 class AppListItems(private val ctx: Context){
@@ -38,15 +40,26 @@ class AppListItems(private val ctx: Context){
 		override var icon: Drawable? = null
 		override var ignoreRunning: Boolean = false
 		override var ignoreBgFree: Boolean = true
-		override var isInstalledByFDroid: Boolean  = false
+		override var isInstalledByFDroid: Boolean = isInstalledByFDroid(ctx,appInfo.packageName)
 		override var isItemSelected: Boolean = false
-		override var isSignedByFDroid: Boolean = false
+		override var isSignedByFDroid: Boolean = isSignedByFDroid(ctx,appInfo.packageName)
 		override var label: String = appInfo.loadLabel(ctx.packageManager).toString()
 		override var pkg: String = appInfo.packageName
 		override var selected: Boolean = false
 		override var stopMode: Int = -1
 		override fun loadIcon(){
 			icon = appInfo.loadIcon(ctx.packageManager)
+		}
+		init {
+			val isBadPkg = badPackages.contains(pkg)
+		//ignoreRunning = false
+			ignoreBgFree = isBadPkg
+			stopMode =
+				if (isBadPkg) 1
+				else if (CommonFunctions.isFlagSet(flags,ApplicationInfo.FLAG_SYSTEM)) 0
+				else if (pkg == ctx.packageName || pkg == launcherPkg) 0
+				else if (goodPackages.contains(pkg) || isInstalledByFDroid || isSignedByFDroid) 0
+				else 1
 		}
 	}
 	class LabelItem(override var label: String): AbstractItem(){
@@ -63,8 +76,59 @@ class AppListItems(private val ctx: Context){
 		override var stopMode: Int = -1
 		override fun loadIcon(){}
 	}
+	fun getPendingStopApps(): List<AppItem>{
+		val list = mutableListOf<AppItem>()
+		for (app in appList)
+			if (isAppPendingStop(app))
+				list += app
+		// Always freeze itself last
+		list.sortBy { it.pkg == ctx.packageName }
+		return list
+	}
 	fun isAppPendingStop(app: AppItem): Boolean {
-		return false // Work In Progress
+		val isBgFree = false
+		val isBgFreeEnforced = false
+		val isForeground = false // fgApps.contains(app.pkg)
+		val hasPersistentNotification = NotificationService.persistNotificationApps.contains(app.pkg)
+		val isPlayingMedia = NotificationService.mediaPlaybackApps.contains(app.pkg)
+		val isRecentlyUnused = isPkgRecentlyUnused(app.pkg)
+		val isStopped = CommonFunctions.isFlagSet(app.flags,ApplicationInfo.FLAG_STOPPED)
+		// Stopping not disabled (normal/inactive) &
+		// not stopped (important) &
+		// - Ignore running / not playing media & not having persistent notification (foreground service) & not foreground (TODO: fix fg app detection)
+		// - Mode is not root but inactive stop mode
+		// - Ignore background free / bg free not enforced/cached (temporarily set to false. TODO. hint: GET_APP_OPS_STATS, ...greenify.utils.Hacks)
+		// - recently unused (TODO: detected as pending stop even if the app is running)
+		// - detect apps with battery optimization disabled
+		val ret =
+			(app.stopMode == 1 || app.stopMode == 2) &&
+			(App.workMode != "root" && app.stopMode == 2) == false &&
+			!isStopped && (
+				(app.ignoreRunning || (!isPlayingMedia && !hasPersistentNotification && !isForeground)) &&
+				(app.ignoreBgFree || (!isBgFree && !isBgFreeEnforced && isRecentlyUnused))
+			)
+		return ret
+	}
+	fun getAggregatedUsageStats(hours: Int){
+		val usm = ctx.getSystemService(UsageStatsManager::class.java)
+		val now = System.currentTimeMillis()
+		usageStatsMap = usm.queryAndAggregateUsageStats(
+			now - 1000L * 60 * 60 * hours,
+			now
+		)
+	}
+	fun isPkgRecentlyUnused(pkg: String): Boolean {
+		if (pkg == ctx.packageName) return false // The user is just using SFNext right now... :)
+		val usageStats = usageStatsMap?.get(pkg)
+		return usageStats == null   || // There are no usagestats of this package -> it wasn't used recently
+			isPkgInactive(pkg)        || // App is inactive
+			usageStats.lastTimeUsed > 1L // last time used is more than 1 second, considered not running (workaround)
+	};
+	fun isPkgInactive(pkg: String): Boolean {
+		return ctx.getSystemService(UsageStatsManager::class.java).isAppInactive(pkg)
+	};
+	fun isIgnoringBatteryOptimizations(pkg: String): Boolean {
+		return ctx.getSystemService(PowerManager::class.java).isIgnoringBatteryOptimizations(pkg)
 	}
 	fun loadPrefs(){
 		if (prefs == null) prefs = ctx.getSharedPreferences("apps",Context.MODE_PRIVATE)
@@ -106,7 +170,15 @@ class AppListItems(private val ctx: Context){
 			"stopMode=${appInfo.stopMode}"
 		)).apply()
 	}
+	init {
+		getAggregatedUsageStats(7 * 24)
+		launcherPkg = ctx.packageManager.resolveActivity(
+			Intent("android.intent.action.MAIN").apply { addCategory("android.intent.category.HOME") },
+			PackageManager.MATCH_DEFAULT_ONLY
+		)?.activityInfo?.packageName
+	}
 	companion object {
 		var prefs: SharedPreferences? = null // apps.xml
+		var launcherPkg: String? = null
 	}
 }

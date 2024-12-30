@@ -130,6 +130,21 @@ class SettingsActivity: BaseActivity(){
 					})
 					true
 				}
+			findPreference<Preference>("usageStatsAccess")?.onPreferenceChangeListener =
+				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
+					if (value == true) CommonFunctions.ensureUsageAccessGranted(requireActivity())
+					true
+				}
+			findPreference<Preference>("mediaPlaybackNotification")?.onPreferenceChangeListener =
+				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
+					if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
+					true
+				}
+			findPreference<Preference>("persistentNotification")?.onPreferenceChangeListener =
+				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
+					if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
+					true
+				}
 		}
 		override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 			setPreferencesFromResource(R.xml.prefs,rootKey)

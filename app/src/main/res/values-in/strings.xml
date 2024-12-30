@@ -16,8 +16,13 @@
 	<string name="data_export">Ekspor Data</string>
 	<string name="data_import_sum">Kembalikan setelan dari file cadangan</string>
 	<string name="data_export_sum">Cadangkan setelan ke file XML/JSON</string>
+	<string name="dont_stop_media_playback">Jangan hentikan apl yg memutar media</string>
+	<string name="dont_stop_media_playback_sum">Memerlukan izin akses notifikasi</string>
+	<string name="dont_stop_persistent_notification">Jangan hentikan apl yg memiliki notifikasi persisten</string>
+	<string name="dont_stop_persistent_notification_sum">cth. Termux</string>
 	<string name="dynColor">Warna dinamis</string>
 	<string name="dynColor_sum">Mengaktifkan warna dinamis (memerlukan Android 12+)</string>
+	<string name="foreground">Latar-depan</string>
 	<string name="general">Umum</string>
 	<string name="headerSection_otherApps">Aplikasi lain</string>
 	<string name="headerSection_pendingStop">Aplikasi yang akan dihentikan</string>
@@ -29,10 +34,12 @@
 	<string name="license">Lisensi</string>
 	<string name="license_sum">Dilisensikan dibawah lisensi GPL v3</string>
 	<string name="normal">Normal</string>
+	<string name="notificationSvc">Layanan notifikasi pemutaran media</string>
 	<string name="off">Nonaktif</string>
 	<string name="other">Lainnya</string>
 	<string name="pitchBlack">Latar-belakang hitam saat tema gelap</string>
 	<string name="pitchBlack_sum">Menghemat baterai pada layar OLED</string>
+	<string name="playingMedia">Memutar media</string>
 	<string name="reverse">Balikkan</string>
 	<string name="search">Cari</string>
 	<string name="settings">Pengaturan</string>
@@ -52,8 +59,11 @@
 	<string name="stopMode">Mode menghentikan</string>
 	<string name="stopMode_inactive">In-aktif (root)</string>
 	<string name="stopped">Dihentikan</string>
+	<string name="stoppingApps">Menghentikan aplikasi</string>
 	<string name="theme">Tema</string>
 	<string name="theme_sum">Pilih tema. Mulai ulang aplikasi untuk menerapkan perubahan sepenuhnya</string>
+	<string name="usageStatsAccess_sum">Memungkinkan untuk menghentikan aplikasi yang tidak di gunakan saja</string>
+	<string name="usageStatsAccess_title">Akses statistik pengunaan</string>
 	<string-array name="themes_val">
 		<item>Ikuti sistem</item>
 		<item>Terang</item>

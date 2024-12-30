@@ -41,6 +41,28 @@
 			app:iconSpaceReserved="false" />
 	</PreferenceCategory>
 	<PreferenceCategory
+		android:title="@string/stoppingApps"
+		app:iconSpaceReserved="false">
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="usageStatsAccess"
+			android:summary="@string/usageStatsAccess_sum"
+			android:title="@string/usageStatsAccess_title"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="mediaPlaybackNotification"
+			android:summary="@string/dont_stop_media_playback_sum"
+			android:title="@string/dont_stop_media_playback"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="persistentNotification"
+			android:summary="@string/dont_stop_persistent_notification_sum"
+			android:title="@string/dont_stop_persistent_notification"
+			app:iconSpaceReserved="false" />
+	</PreferenceCategory>
+	<PreferenceCategory
 		android:title="@string/about"
 		app:iconSpaceReserved="false">
 		<Preference

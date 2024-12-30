@@ -17,8 +17,13 @@
 	<string name="data_export">Export Data</string>
 	<string name="data_import_sum">Restore settings from backup file</string>
 	<string name="data_export_sum">Backup settings to XML/JSON file</string>
+	<string name="dont_stop_media_playback">Don\'t stop apps that plays media</string>
+	<string name="dont_stop_media_playback_sum">Requires notification access</string>
+	<string name="dont_stop_persistent_notification">Don\'t stop apps that has ongoing notification</string>
+	<string name="dont_stop_persistent_notification_sum">eg. Termux</string>
 	<string name="dynColor">Dynamic colors</string>
 	<string name="dynColor_sum">Enables dynamic colors (requires Android 12+)</string>
+	<string name="foreground">Foreground</string>
 	<string name="general">General</string>
 	<string name="headerSection_otherApps">Other apps</string>
 	<string name="headerSection_pendingStop">Pending stop apps</string>
@@ -30,10 +35,12 @@
 	<string name="license">License</string>
 	<string name="license_sum">Licensed under GPL v3 license</string>
 	<string name="normal">Normal</string>
+	<string name="notificationSvc">Media playback notification service</string>
 	<string name="off">Off</string>
 	<string name="other">Other</string>
 	<string name="pitchBlack">Black background on dark theme</string>
 	<string name="pitchBlack_sum">Saves battery on OLED displays</string>
+	<string name="playingMedia">Playing media</string>
 	<string name="reverse">Reverse</string>
 	<string name="search">Search</string>
 	<string name="settings">Settings</string>
@@ -53,8 +60,11 @@
 	<string name="stopMode">Stop Mode</string>
 	<string name="stopMode_inactive">Inactive (root)</string>
 	<string name="stopped">Stopped</string>
+	<string name="stoppingApps">Stopping apps</string>
 	<string name="theme">Theme</string>
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
+	<string name="usageStatsAccess_sum">Makes it possible to stop only unused apps</string>
+	<string name="usageStatsAccess_title">Usage stats access</string>
 	<string-array name="themes_val">
 		<item>Follow system</item>
 		<item>Light</item>

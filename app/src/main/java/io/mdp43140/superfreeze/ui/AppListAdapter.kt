@@ -22,6 +22,7 @@ import io.mdp43140.superfreeze.AppListItems.AppItem
 import io.mdp43140.superfreeze.AppListItems.LabelItem
 import io.mdp43140.superfreeze.CommonFunctions
 import io.mdp43140.superfreeze.Constants
+import io.mdp43140.superfreeze.NotificationService
 import io.mdp43140.superfreeze.R
 class AppListAdapter(
 	private val onAppClick: ((AppItem) -> Unit)?
@@ -119,6 +120,14 @@ class AppListAdapter(
 					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_otherApps))) +
 					otherApps
 			}
+			2 -> {
+				appListItems.getAggregatedUsageStats(356 * 2)
+				if (appListItems.usageStatsMap != null){
+					appListItems2 = appListItems2.sortedBy {
+						appListItems.usageStatsMap?.get(it.pkg)?.lastTimeUsed ?: -1L
+					}
+				}
+			}
 			3 -> {
 				val (sysApps,userApps) =
 					appListItems2.partition {
@@ -143,6 +152,18 @@ class AppListAdapter(
 				if (CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)){
 					ctx!!.getString(R.string.stopped)
 				}
+				else if (NotificationService.mediaPlaybackApps.contains(it.pkg)){
+					ctx!!.getString(R.string.playingMedia)
+				}
+				else if (NotificationService.persistNotificationApps.contains(it.pkg) || appListItems.isPkgRecentlyUnused(it.pkg) == false){
+					ctx!!.getString(R.string.foreground);
+				}
+				else if (appListItems.isPkgInactive(it.pkg)){
+					ctx!!.getString(R.string.inactiveState);
+				}
+				else if (appListItems.isPkgRecentlyUnused(it.pkg)){
+					ctx!!.getString(R.string.state_unused)
+				}
 				else "")
 				append("\n")
 				append(if (false){
@@ -158,7 +179,10 @@ class AppListAdapter(
 						ctx!!.getString(R.string.state_normalStop)
 				}
 				else if (it.stopMode == 2){
-					ctx!!.getString(R.string.state_inactiveStop)
+					if (appListItems.isIgnoringBatteryOptimizations(it.pkg))
+						ctx!!.getString(R.string.state_inactiveStopBattOptIgn)
+					else
+						ctx!!.getString(R.string.state_inactiveStop)
 				}
 				else "")
 				if (it.ignoreRunning) append("\n").append(ctx!!.getString(R.string.ignore_running));
