@@ -4,6 +4,7 @@
  */
 package io.mdp43140.superfreeze
 import android.app.Activity
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
 import android.content.DialogInterface
@@ -69,6 +70,26 @@ object CommonFunctions {
 			index = valueLower.indexOf(highlight, offset)
 		}
 		return span
+	}
+	fun ensureAccessibilityGranted(ctx: Activity){
+		if (!FreezeService.isEnabled){
+			MaterialAlertDialogBuilder(ctx)
+				.setTitle("Grant accessibility service")
+				.setMessage("Accessibility service is used for automating daunting force-stop tasks for non-root method")
+				.setPositiveButton(ctx.getString(android.R.string.ok)){ dialogInterface: DialogInterface, _: Int ->
+					ctx.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
+						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+						addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+						val showArgs = ComponentName(ctx, FreezeService::class.java).flattenToString()
+						val bundle = Bundle().apply { putString(":settings:fragment_args_key", showArgs) }
+						putExtra(":settings:fragment_args_key", showArgs)
+						putExtra(":settings:show_fragment_args",bundle)
+					})
+					dialogInterface.dismiss()
+				}
+				.setNegativeButton(ctx.getString(android.R.string.cancel)){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+				.show()
+		}
 	}
 	fun ensureNotificationAccessGranted(ctx: Activity){
 		MaterialAlertDialogBuilder(ctx)

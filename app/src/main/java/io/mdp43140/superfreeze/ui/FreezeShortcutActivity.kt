@@ -18,6 +18,7 @@ import io.mdp43140.superfreeze.App
 import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.AppListItems.AppItem
 import io.mdp43140.superfreeze.databinding.ActivityEmptyBinding
+import io.mdp43140.superfreeze.FreezeService
 import io.mdp43140.superfreeze.R
 
 class FreezeShortcutActivity: Activity(){
@@ -30,6 +31,7 @@ class FreezeShortcutActivity: Activity(){
 	}
 	override fun onDestroy(){
 		super.onDestroy()
+		FreezeService.finishedFreezing()
 		finish()
 	}
 	override fun onResume() {
@@ -73,7 +75,7 @@ class FreezeShortcutActivity: Activity(){
 					.show()
 				return
 			}
-			if (App.workMode == "manual"){
+			if (App.workMode == "manual" || App.workMode == "accessibility"){
 				if (App.workMode == "manual"){
 					Toast
 						.makeText(ctx,ctx.getString(R.string.manual_stop_tip),Toast.LENGTH_SHORT)
@@ -94,6 +96,13 @@ class FreezeShortcutActivity: Activity(){
 					}
 					else if (App.workMode == "manual"){
 						// Manual
+						ctx.startActivity(intent)
+					}
+					else if (App.workMode == "accessibility"){
+						// Accessibility
+					//FreezeService.doOnAppCouldNotBeFrozen = ::fun
+						FreezeService.stopAnyCurrentFreezing()
+						FreezeService.clickFreezeButtons(ctx,apps.size)
 						ctx.startActivity(intent)
 					}
 				}

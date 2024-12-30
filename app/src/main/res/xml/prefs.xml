@@ -53,6 +53,12 @@
 		app:iconSpaceReserved="false">
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
+			android:key="freezeWhenScreenOff"
+			android:summary="@string/freezeWhenScreenOff_sum"
+			android:title="@string/freezeWhenScreenOff_title"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
 			android:key="usageStatsAccess"
 			android:summary="@string/usageStatsAccess_sum"
 			android:title="@string/usageStatsAccess_title"

@@ -23,6 +23,7 @@ import org.json.JSONObject
 import io.mdp43140.superfreeze.App
 import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.CommonFunctions
+import io.mdp43140.superfreeze.FreezeService
 import io.mdp43140.superfreeze.databinding.ActivitySettingsBinding
 import io.mdp43140.superfreeze.util.putData // SharedPreferencesExtension.kt
 import io.mdp43140.superfreeze.R
@@ -141,7 +142,7 @@ class SettingsActivity: BaseActivity(){
 							true
 						}
 						modeStr[1] -> {
-							// nothing for now...
+							CommonFunctions.ensureAccessibilityGranted(requireActivity())
 							true
 						}
 						modeStr[2] -> {
@@ -154,6 +155,13 @@ class SettingsActivity: BaseActivity(){
 						}
 						else -> false
 					}
+				}
+			findPreference<Preference>("freezeWhenScreenOff")?.onPreferenceChangeListener =
+				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
+					if (value == true && App.workMode == "accessibility"){
+						CommonFunctions.ensureAccessibilityGranted(requireActivity())
+					}
+					true
 				}
 			findPreference<Preference>("usageStatsAccess")?.onPreferenceChangeListener =
 				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->

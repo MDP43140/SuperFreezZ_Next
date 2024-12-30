@@ -179,6 +179,7 @@ class AppListItems(private val ctx: Context){
 	}
 	companion object {
 		var prefs: SharedPreferences? = null // apps.xml
+		val settingsPkg = "com.android.settings"
 		var launcherPkg: String? = null
 	}
 }

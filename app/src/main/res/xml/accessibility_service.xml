@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ SPDX-FileCopyrightText: 2018-2020 Hocuri
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+	android:accessibilityEventTypes="typeWindowStateChanged"
+	android:accessibilityFeedbackType="feedbackGeneric"
+	android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews|flagReportViewIds|flagRetrieveInteractiveWindows|flagRequestTouchExplorationMode"
+	android:canRetrieveWindowContent="true"
+	android:description="@string/accessibility_svc_sum"
+	android:notificationTimeout="50"
+	android:packageNames="com.android.settings,com.miui.securitycenter"
+	android:settingsActivity="com.example.android.accessibility.ServiceSettingsActivity" />

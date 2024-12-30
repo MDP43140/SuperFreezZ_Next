@@ -5,6 +5,7 @@
 	-->
 <resources>
 	<string name="app_name">SuperFreezZ Next</string>
+	<string name="accessibility_svc_sum">This lets you automate stopping apps, and do it faster. SuperFreezZ Next uses the accessibility service to click "Force stop", "OK", and "Back". It finds those buttons by retrieving Settings content and tracking their appearance. On Android 9 and higher, it can also lock the screen after stopping apps.</string>
 	<string name="about">About</string>
 	<string name="all_apps_stopped">All apps are already stopped.</string>
 	<string name="apps_is_selected">%d apps selected</string>
@@ -26,7 +27,10 @@
 	<string name="dont_stop_persistent_notification_sum">eg. Termux</string>
 	<string name="dynColor">Dynamic colors</string>
 	<string name="dynColor_sum">Enables dynamic colors (requires Android 12+)</string>
+	<string name="force_stop">Force stop</string>
 	<string name="foreground">Foreground</string>
+	<string name="freezeWhenScreenOff_sum">You will need to disable \"Power button instantly locks\" in the device settings</string>
+	<string name="freezeWhenScreenOff_title">Stop when the screen turns off</string>
 	<string name="general">General</string>
 	<string name="headerSection_otherApps">Other apps</string>
 	<string name="headerSection_pendingStop">Pending stop apps</string>

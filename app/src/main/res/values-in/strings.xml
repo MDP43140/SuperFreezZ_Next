@@ -6,6 +6,7 @@
 <resources>
 	<string name="about">Tentang</string>
 	<string name="all_apps_stopped">Semua aplikasi sudah dihentikan.</string>
+	<string name="accessibility_svc_sum">Ini memungkinkan Anda menghentikan aplikasi secara otomatis, dan melakukannya lebih cepat. SuperFreezZ Next menggunakan layanan aksesibilitas untuk mengklik "Paksa berhenti", "OK", dan "Kembali". Layanan aksesibilitas ini menemukan tombol-tombol tersebut dengan mengambil konten Setelan dan melacak kemunculannya. Di Android 9 dan berikutnya, layanan aksesibilitas juga bisa mengunci layar setelah menghentikan aplikasi.</string>
 	<string name="apps_is_selected">%d aplikasi dipilih</string>
 	<string name="apps_is_stopped">%d aplikasi dihentikan</string>
 	<string name="apps_system">Aplikasi sistem</string>
@@ -25,7 +26,10 @@
 	<string name="dont_stop_persistent_notification_sum">cth. Termux</string>
 	<string name="dynColor">Warna dinamis</string>
 	<string name="dynColor_sum">Mengaktifkan warna dinamis (memerlukan Android 12+)</string>
+	<string name="force_stop">Paksa berhenti</string>
 	<string name="foreground">Latar-depan</string>
+	<string name="freezeWhenScreenOff_sum">Anda harus mematikan \"Tombol daya mengunci secara instan\" di pengaturan perangkat</string>
+	<string name="freezeWhenScreenOff_title">Hentikan saat layar mati</string>
 	<string name="general">Umum</string>
 	<string name="headerSection_otherApps">Aplikasi lain</string>
 	<string name="headerSection_pendingStop">Aplikasi yang akan dihentikan</string>
