@@ -27,6 +27,13 @@
 	<style name="AppSwitchPreference" parent="@style/Preference.SwitchPreferenceCompat.Material">
 		<item name="widgetLayout">@layout/preference_material_switch</item>
 	</style>
+	<style name="Theme.Invisible" parent="@android:style/Theme.Material">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:backgroundDimEnabled">false</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowBackground">#00000000</item>
+	</style>
 	<!-- Custom error logger theme -->
 	<style name="AEL_Theme" parent="AppTheme"/>
 </resources>

@@ -10,6 +10,14 @@
 		android:title="@string/general"
 		app:iconSpaceReserved="false">
 		<ListPreference
+			android:key="workMode"
+			android:defaultValue="manual"
+			android:entries="@array/workModes_val"
+			android:entryValues="@array/workModes_key"
+			android:summary="@string/workMode_sum"
+			android:title="@string/workMode_title"
+			app:iconSpaceReserved="false" />
+		<ListPreference
 			android:defaultValue="system"
 			android:entries="@array/themes_val"
 			android:entryValues="@array/themes_key"

@@ -1,0 +1,16 @@
+<!--
+	~ SPDX-FileCopyrightText: 2024 MDP43140
+	~ SPDX-License-Identifier: GPL-3.0-or-later
+	-->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+	<shortcut
+		android:shortcutId="FreezeShortcut"
+		android:enabled="true"
+		android:icon="@drawable/ic_stop"
+		android:shortcutShortLabel="@string/stop">
+		<intent
+			android:action="android.intent.action.MAIN"
+			android:targetPackage="io.mdp43140.superfreeze_next"
+			android:targetClass="io.mdp43140.superfreeze.ui.FreezeShortcutActivity" />
+	</shortcut>
+</shortcuts>

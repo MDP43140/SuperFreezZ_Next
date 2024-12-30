@@ -130,6 +130,27 @@ class SettingsActivity: BaseActivity(){
 					})
 					true
 				}
+			findPreference<Preference>("workMode")?.onPreferenceChangeListener =
+				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
+					val modeStr = resources.getStringArray(R.array.workModes_key)
+					val dialogBuilder = MaterialAlertDialogBuilder(requireActivity())
+					App.workMode = value as String
+					when (value){
+						modeStr[0] -> {
+							// nothing for now...
+							true
+						}
+						modeStr[1] -> {
+							// nothing for now...
+							true
+						}
+						modeStr[2] -> {
+							// nothing for now...
+							true
+						}
+						else -> false
+					}
+				}
 			findPreference<Preference>("usageStatsAccess")?.onPreferenceChangeListener =
 				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
 					if (value == true) CommonFunctions.ensureUsageAccessGranted(requireActivity())

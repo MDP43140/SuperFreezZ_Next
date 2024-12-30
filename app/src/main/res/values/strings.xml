@@ -6,13 +6,16 @@
 <resources>
 	<string name="app_name">SuperFreezZ Next</string>
 	<string name="about">About</string>
+	<string name="all_apps_stopped">All apps are already stopped.</string>
 	<string name="apps_is_selected">%d apps selected</string>
+	<string name="apps_is_stopped">%d apps stopped</string>
 	<string name="apps_system">System apps</string>
 	<string name="apps_user">User apps</string>
 	<string name="categorize_none">None</string>
 	<string name="categorize_appState">Stop state</string>
 	<string name="categorize_unusedFirst">Unused state</string>
 	<string name="categorize_userSystem">User/System</string>
+	<string name="currently_stopping">Currently stopping apps...</string>
 	<string name="data_import">Import Data</string>
 	<string name="data_export">Export Data</string>
 	<string name="data_import_sum">Restore settings from backup file</string>
@@ -34,6 +37,7 @@
 	<string name="inactiveState">Inactive state</string>
 	<string name="license">License</string>
 	<string name="license_sum">Licensed under GPL v3 license</string>
+	<string name="manual_stop_tip">Click Force Stop, OK, and Back, until there are no more apps to stop</string>
 	<string name="normal">Normal</string>
 	<string name="notificationSvc">Media playback notification service</string>
 	<string name="off">Off</string>
@@ -65,15 +69,27 @@
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
 	<string name="usageStatsAccess_sum">Makes it possible to stop only unused apps</string>
 	<string name="usageStatsAccess_title">Usage stats access</string>
+	<string name="workMode_sum">Choose how SuperFreezZ Next will stop apps</string>
+	<string name="workMode_title">Working mode</string>
 	<string-array name="themes_val">
 		<item>Follow system</item>
 		<item>Light</item>
 		<item>Dark</item>
 	</string-array>
+	<string-array name="workModes_val">
+		<item>Manual</item>
+		<item>Accessibility</item>
+		<item>Root</item>
+	</string-array>
 	<string-array name="themes_key" translatable="false">
 		<item>system</item>
 		<item>light</item>
 		<item>dark</item>
+	</string-array>
+	<string-array name="workModes_key" translatable="false">
+		<item>manual</item>
+		<item>accessibility</item>
+		<item>root</item>
 	</string-array>
 	<bool name="leak_canary_allow_in_non_debuggable_build" translatable="false">true</bool>
 </resources>

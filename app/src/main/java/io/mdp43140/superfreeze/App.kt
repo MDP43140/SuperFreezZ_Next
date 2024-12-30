@@ -41,6 +41,7 @@ class App: Application(){
 		// Can also be used for first run related codes in the future, who knows...
 		runCount = prefs!!.getInt("runCount",0)
 		prefs!!.edit().putInt("runCount",runCount + 1).apply()
+		workMode = prefs!!.getString("workMode","manual")
 		// Update theme and apply dynamic color
 		CommonFunctions.updateTheme(this,prefs)
 		if (prefs!!.getBoolean("dynamicColor",true)){

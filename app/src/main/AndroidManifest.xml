@@ -28,6 +28,16 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+			<meta-data
+				android:name="android.app.shortcuts"
+				android:resource="@xml/shortcuts"/>
+		</activity>
+		<activity
+			android:exported="true"
+			android:keepScreenOn="true"
+			android:label="@string/stop"
+			android:name=".ui.FreezeShortcutActivity"
+			android:theme="@style/Theme.Invisible">
 		</activity>
 		<activity
 			android:exported="false"

@@ -32,6 +32,9 @@ class MainActivity: BaseActivity(){
 			swiperefresh.setOnRefreshListener {
 				loadApps()
 			}
+			fab.setOnClickListener {
+				stopApps()
+			}
 			setSupportActionBar(toolbar)
 		}
 		binding.toolbar.setBackgroundColor(SurfaceColors.SURFACE_2.getColor(this))
@@ -98,6 +101,39 @@ class MainActivity: BaseActivity(){
 			}
 		}
 	}
+	fun stopApps(){
+		binding.swiperefresh.post {
+			binding.swiperefresh.isRefreshing = true
+		}
+		if (currSelectedApp.isEmpty()){
+			// stop all pending stop apps
+			FreezeShortcutActivity.freezeApp(this)
+		}
+		else {
+			var prevState: MutableMap<String,tempAppItem> = mutableMapOf()
+			for (item in currSelectedApp){
+				prevState[item.pkg] = tempAppItem(item.stopMode,item.ignoreBgFree,item.ignoreRunning)
+				item.stopMode       = 1
+				item.ignoreBgFree   = true
+				item.ignoreRunning  = true
+			}
+			FreezeShortcutActivity.freezeApp(this,currSelectedApp)
+			for (item in currSelectedApp){
+				// TODO: there is bug which had 2 same app selected,
+				// and when stopping, it tries to revert state, but for later reverts,
+				// because the 1st one already removes the reference, now its null :(
+				// and crashed.
+				item.stopMode      = prevState[item.pkg]!!.stopMode
+				item.ignoreBgFree  = prevState[item.pkg]!!.ignoreBgFree
+				item.ignoreRunning = prevState[item.pkg]!!.ignoreRunning
+				prevState.remove(item.pkg)
+			}
+		}
+		appListAdapter!!.sort()
+		binding.swiperefresh.post {
+			binding.swiperefresh.isRefreshing = false
+		}
+	};
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		menuInflater.inflate(R.menu.main,menu)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
