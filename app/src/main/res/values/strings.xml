@@ -6,6 +6,7 @@
 <resources>
 	<string name="app_name">SuperFreezZ Next</string>
 	<string name="about">About</string>
+	<string name="apps_is_selected">%d apps selected</string>
 	<string name="apps_system">System apps</string>
 	<string name="apps_user">User apps</string>
 	<string name="categorize_none">None</string>
@@ -19,8 +20,13 @@
 	<string name="dynColor">Dynamic colors</string>
 	<string name="dynColor_sum">Enables dynamic colors (requires Android 12+)</string>
 	<string name="general">General</string>
+	<string name="headerSection_otherApps">Other apps</string>
+	<string name="headerSection_pendingStop">Pending stop apps</string>
+	<string name="headerSection_sysApps">System apps</string>
+	<string name="headerSection_userApps">User apps</string>
 	<string name="ignore_bgFree">Ignore background-free</string>
 	<string name="ignore_running">Ignore running state</string>
+	<string name="inactiveState">Inactive state</string>
 	<string name="license">License</string>
 	<string name="license_sum">Licensed under GPL v3 license</string>
 	<string name="normal">Normal</string>
@@ -36,9 +42,17 @@
 	<string name="sort_pkg">Package name</string>
 	<string name="sourceCode">Source code</string>
 	<string name="sourceCode_sum">Check out the source code on Codeberg!</string>
+	<string name="state_bgFree">Background-free</string>
+	<string name="state_unused">Unused</string>
+	<string name="state_notStopped">Not stopped</string>
+	<string name="state_pendingStop">Pending stop</string>
+	<string name="state_normalStop">Normal stop</string>
+	<string name="state_inactiveStop">Inactive stop</string>
+	<string name="state_inactiveStopBattOptIgn">Inactive stop (battery optimization ignored)</string>
 	<string name="stop">Stop</string>
 	<string name="stopMode">Stop Mode</string>
 	<string name="stopMode_inactive">Inactive (root)</string>
+	<string name="stopped">Stopped</string>
 	<string name="theme">Theme</string>
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
 	<string-array name="themes_val">

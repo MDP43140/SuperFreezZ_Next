@@ -7,10 +7,16 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.SharedPreferences
 import android.net.Uri
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.CharacterStyle
 import androidx.appcompat.app.AppCompatDelegate
 //import io.mdp43140.superfreeze.Constants
 import kotlin.system.exitProcess
 object CommonFunctions {
+	fun isFlagSet(value: Int,flag: Int): Boolean {
+		return (value and flag) == flag
+	}
 	fun isDarkThemeActive(ctx: Context): Boolean {
 		return (ctx.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 	}
@@ -26,5 +32,23 @@ object CommonFunctions {
 		ctx.contentResolver.openOutputStream(uri)?.use { outputStream ->
 			outputStream.write(content.toByteArray())
 		}
+	}
+	fun highlightText(text: String, highlight: String?, spanHighlightWhat: CharacterStyle): CharSequence {
+		if (highlight.isNullOrEmpty()) return text // nothing to highlight
+		val valueLower = text.lowercase()
+		var offset = 0
+		val span = SpannableString(text)
+		var index = valueLower.indexOf(highlight, offset)
+		while (index >= 0 && offset < valueLower.length){
+			span.setSpan(
+				spanHighlightWhat,
+				index,
+				index + highlight.length,
+				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+			)
+			offset += index + highlight.length
+			index = valueLower.indexOf(highlight, offset)
+		}
+		return span
 	}
 }

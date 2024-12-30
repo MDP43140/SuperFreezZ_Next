@@ -49,6 +49,23 @@ class AppListItems(private val ctx: Context){
 			icon = appInfo.loadIcon(ctx.packageManager)
 		}
 	}
+	class LabelItem(override var label: String): AbstractItem(){
+		// TODO: remove below
+		override var flags: Int = -1
+		override var icon: Drawable? = null
+		override var ignoreRunning: Boolean = false
+		override var ignoreBgFree: Boolean = false
+		override var isInstalledByFDroid: Boolean  = false
+		override var isItemSelected: Boolean = false
+		override var isSignedByFDroid: Boolean = false
+		override var pkg: String = ""
+		override var selected: Boolean = false
+		override var stopMode: Int = -1
+		override fun loadIcon(){}
+	}
+	fun isAppPendingStop(app: AppItem): Boolean {
+		return false // Work In Progress
+	}
 	fun loadPrefs(){
 		if (prefs == null) prefs = ctx.getSharedPreferences("apps",Context.MODE_PRIVATE)
 	}
@@ -57,6 +74,37 @@ class AppListItems(private val ctx: Context){
 	}
 	fun setFromApplicationInfo(appList2: List<ApplicationInfo>){
 		appList = appList2.map { AppItem(it,ctx) }
+	}
+	fun getDataFromPrefs(){
+		prefs?.let {
+			val emptySet2: Set<String> = emptySet()
+			val equalSign = '='
+			val trueStr = "true"
+			val ignoreRunning = "ignoreRunning"
+			val ignoreBgFree = "ignoreBgFree"
+			val stopMode = "stopMode"
+			for (app in appList){
+				for (data in it.getStringSet(app.pkg,emptySet2)!!){
+					val equalIndex = data.indexOf(equalSign)
+					if (equalIndex != -1) {
+						val k = data.substring(0,equalIndex)
+						val v = data.substring(equalIndex + 1)
+						when (k){
+							ignoreRunning -> app.ignoreRunning = v == trueStr
+							ignoreBgFree  -> app.ignoreBgFree  = v == trueStr
+							stopMode      -> app.stopMode      = v.toInt()
+						}
+					}
+				}
+			}
+		}
+	}
+	fun storeDataToPrefs(appInfo: AppItem){
+		prefs!!.edit().putStringSet("${appInfo.pkg}",mutableSetOf<String>(
+			"ignoreRunning=${appInfo.ignoreRunning}",
+			"ignoreBgFree=${appInfo.ignoreBgFree}",
+			"stopMode=${appInfo.stopMode}"
+		)).apply()
 	}
 	companion object {
 		var prefs: SharedPreferences? = null // apps.xml

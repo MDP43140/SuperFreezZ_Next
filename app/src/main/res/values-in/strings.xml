@@ -5,6 +5,7 @@
 	-->
 <resources>
 	<string name="about">Tentang</string>
+	<string name="apps_is_selected">%d aplikasi dipilih</string>
 	<string name="apps_system">Aplikasi sistem</string>
 	<string name="apps_user">Aplikasi pengguna</string>
 	<string name="categorize_none">Tidak ada</string>
@@ -18,8 +19,13 @@
 	<string name="dynColor">Warna dinamis</string>
 	<string name="dynColor_sum">Mengaktifkan warna dinamis (memerlukan Android 12+)</string>
 	<string name="general">Umum</string>
+	<string name="headerSection_otherApps">Aplikasi lain</string>
+	<string name="headerSection_pendingStop">Aplikasi yang akan dihentikan</string>
+	<string name="headerSection_sysApps">Aplikasi sistem</string>
+	<string name="headerSection_userApps">Aplikasi pengguna</string>
 	<string name="ignore_bgFree">Hiraukan bebas-latar-belakang</string>
 	<string name="ignore_running">Hiraukan keadaan berjalan</string>
+	<string name="inactiveState">Keadaan in-aktif</string>
 	<string name="license">Lisensi</string>
 	<string name="license_sum">Dilisensikan dibawah lisensi GPL v3</string>
 	<string name="normal">Normal</string>
@@ -35,9 +41,17 @@
 	<string name="sort_pkg">Nama paket</string>
 	<string name="sourceCode">Sumber kode</string>
 	<string name="sourceCode_sum">Cek sumber kodenya di Codeberg!</string>
+	<string name="state_bgFree">Bebas latar-belakang</string>
+	<string name="state_unused">Tidak digunakan</string>
+	<string name="state_notStopped">Tidak dihentikan</string>
+	<string name="state_pendingStop">Akan dihentikan</string>
+	<string name="state_normalStop">Berhenti normal</string>
+	<string name="state_inactiveStop">Berhenti inaktif</string>
+	<string name="state_inactiveStopBattOptIgn">Berhenti inaktif (pengoptimalan baterai dihiraukan)</string>
 	<string name="stop">Hentikan</string>
 	<string name="stopMode">Mode menghentikan</string>
 	<string name="stopMode_inactive">In-aktif (root)</string>
+	<string name="stopped">Dihentikan</string>
 	<string name="theme">Tema</string>
 	<string name="theme_sum">Pilih tema. Mulai ulang aplikasi untuk menerapkan perubahan sepenuhnya</string>
 	<string-array name="themes_val">

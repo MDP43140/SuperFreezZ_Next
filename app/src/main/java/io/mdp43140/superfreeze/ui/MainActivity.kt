@@ -3,12 +3,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package io.mdp43140.superfreeze.ui
+import android.app.SearchManager
+import android.content.ComponentCallbacks2
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.elevation.SurfaceColors
@@ -20,6 +23,7 @@ class MainActivity: BaseActivity(){
 	private lateinit var appListAdapter: AppListAdapter
 	private lateinit var binding: ActivityMainBinding
 	private lateinit var menu: Menu
+	var currSelectedApp: MutableList<AppListItems.AppItem> = mutableListOf()
 	override fun onCreate(savedInstanceState: Bundle?){
 		super.onCreate(savedInstanceState)
 		binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,13 +52,51 @@ class MainActivity: BaseActivity(){
 			binding.swiperefresh.isRefreshing = true
 		}
 		App.appListItems?.loadApps()
+		App.appListItems?.getDataFromPrefs()
 		appListAdapter.sort()
 		binding.swiperefresh.post {
 			binding.swiperefresh.isRefreshing = false
 		}
 	}.start()
 	fun onAppClicked(app: AppListItems.AppItem){
-		// Work In Progress
+		app.isItemSelected = !app.isItemSelected
+		// process stuff
+		if (app.isItemSelected){
+			currSelectedApp.add(app)
+		} else {
+			currSelectedApp.remove(app)
+		}
+		if (currSelectedApp.isEmpty()){
+			// clear
+			binding.toolbar.subtitle = ""
+			menu.findItem(R.id.ignoreBgFree).setVisible(false)
+			menu.findItem(R.id.ignoreRunning).setVisible(false)
+			menu.findItem(R.id.stop_off).setEnabled(false)
+			menu.findItem(R.id.stop_normal).setEnabled(false)
+			menu.findItem(R.id.stop_inactive).setEnabled(false)
+		} else {
+			menu.findItem(R.id.ignoreBgFree).setVisible(true)
+			menu.findItem(R.id.ignoreRunning).setVisible(true)
+			menu.findItem(R.id.stop_off).setEnabled(true)
+			menu.findItem(R.id.stop_normal).setEnabled(true)
+			menu.findItem(R.id.stop_inactive).setEnabled(true)
+			binding.toolbar.subtitle = getString(R.string.apps_is_selected,currSelectedApp.size)
+			if (currSelectedApp.size == 1){
+				setRadioMenuSelected(menu.findItem(when (app.stopMode){
+					0 -> R.id.stop_off
+					2 -> R.id.stop_inactive
+					else -> R.id.stop_normal
+				}),R.id.stop_method)
+				menu.findItem(R.id.ignoreBgFree).isChecked = app.ignoreBgFree
+				menu.findItem(R.id.ignoreRunning).isChecked = app.ignoreRunning
+			} else {
+				menu.findItem(R.id.stop_off).isChecked = false
+				menu.findItem(R.id.stop_normal).isChecked = false
+				menu.findItem(R.id.stop_inactive).isChecked = false
+				menu.findItem(R.id.ignoreBgFree).isChecked = false
+				menu.findItem(R.id.ignoreRunning).isChecked = false
+			}
+		}
 	}
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		menuInflater.inflate(R.menu.main,menu)
@@ -62,11 +104,134 @@ class MainActivity: BaseActivity(){
 			menu.setGroupDividerEnabled(true);
 		}
 		this.menu = menu!!
+		menu.findItem(R.id.sort_reverse).isChecked = AppListAdapter.sortReverse
+		menu.findItem(R.id.sort_user).isChecked = AppListAdapter.showUserApp
+		menu.findItem(R.id.sort_system).isChecked = AppListAdapter.showSystemApp
+		menu.findItem(R.id.ignoreBgFree).setVisible(false)
+		menu.findItem(R.id.ignoreRunning).setVisible(false)
+		menu.findItem(R.id.stop_off).setEnabled(false)
+		menu.findItem(R.id.stop_normal).setEnabled(false)
+		menu.findItem(R.id.stop_inactive).setEnabled(false)
+		setRadioMenuSelected(menu.findItem(when (AppListAdapter.sortOrder){
+			1 -> R.id.sort_pkg
+			else -> R.id.sort_label
+		}),R.id.sortByOrder)
+		setRadioMenuSelected(menu.findItem(when (AppListAdapter.categorizeItem){
+			0 -> R.id.categorize_none
+			2 -> R.id.categorize_unusedFirst
+			3 -> R.id.categorize_userSystem
+			else -> R.id.categorize_appState
+		}),R.id.categorize)
+		val searchView = menu.findItem(R.id.search).actionView as SearchView
+		searchView.setSearchableInfo((getSystemService(SearchManager::class.java)).getSearchableInfo(componentName))
+		searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener {
+			override fun onQueryTextSubmit(s: String) = false
+			override fun onQueryTextChange(s: String): Boolean {
+				appListAdapter.searchPattern = s
+				return true
+			}
+		})
 		return true
 	}
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId){
 			R.id.settings -> startActivity(Intent(this,SettingsActivity::class.java))
+			R.id.stop_off -> {
+				setRadioMenuSelected(item,R.id.stop_method)
+				appListAdapter!!.sort()
+				for (app in currSelectedApp){
+					app.stopMode = 0
+					App.appListItems?.storeDataToPrefs(app)
+				}
+			}
+			R.id.stop_normal -> {
+				setRadioMenuSelected(item,R.id.stop_method)
+				appListAdapter!!.sort()
+				for (app in currSelectedApp){
+					app.stopMode = 1
+					App.appListItems?.storeDataToPrefs(app)
+				}
+			}
+			R.id.stop_inactive -> {
+				setRadioMenuSelected(item,R.id.stop_method)
+				appListAdapter!!.sort()
+				for (app in currSelectedApp){
+					app.stopMode = 2
+					App.appListItems?.storeDataToPrefs(app)
+				}
+			}
+			R.id.ignoreRunning -> {
+				menu.findItem(R.id.ignoreRunning).isChecked =
+				!menu.findItem(R.id.ignoreRunning).isChecked
+				appListAdapter!!.sort()
+				for (app in currSelectedApp){
+					app.ignoreRunning = !app.ignoreRunning
+					App.appListItems?.storeDataToPrefs(app)
+				}
+			}
+			R.id.ignoreBgFree -> {
+				menu.findItem(R.id.ignoreBgFree).isChecked =
+				!menu.findItem(R.id.ignoreBgFree).isChecked
+				appListAdapter!!.sort()
+				for (app in currSelectedApp){
+					app.ignoreBgFree = !app.ignoreBgFree
+					App.appListItems?.storeDataToPrefs(app)
+				}
+			}
+			R.id.sort_reverse -> AppListAdapter.let {
+				it.sortReverse = !it.sortReverse
+				item.isChecked = it.sortReverse
+				App.prefs!!.edit().putBoolean("sortReverse",item.isChecked).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.sort_user -> AppListAdapter.let {
+				it.showUserApp = !it.showUserApp
+				item.isChecked = it.showUserApp
+				App.prefs!!.edit().putBoolean("showUserApp",item.isChecked).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.sort_system -> AppListAdapter.let {
+				it.showSystemApp = !it.showSystemApp
+				item.isChecked = it.showSystemApp
+				App.prefs!!.edit().putBoolean("showSystemApp",item.isChecked).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.sort_label -> {
+				setRadioMenuSelected(item, R.id.sortByOrder)
+				AppListAdapter.sortOrder = 0
+				App.prefs!!.edit().putInt("sortBy",0).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.sort_pkg -> {
+				setRadioMenuSelected(item, R.id.sortByOrder)
+				AppListAdapter.sortOrder = 1
+				App.prefs!!.edit().putInt("sortBy",1).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.categorize_none -> {
+				setRadioMenuSelected(item, R.id.categorize)
+				AppListAdapter.categorizeItem = 0
+				App.prefs!!.edit().putInt("categorizeItem",0).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.categorize_appState -> {
+				setRadioMenuSelected(item, R.id.categorize)
+				AppListAdapter.categorizeItem = 1
+				App.prefs!!.edit().putInt("categorizeItem",1).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.categorize_unusedFirst -> {
+				setRadioMenuSelected(item, R.id.categorize)
+				AppListAdapter.categorizeItem = 2
+				App.prefs!!.edit().putInt("categorizeItem",2).apply()
+				appListAdapter!!.sort()
+			}
+			R.id.categorize_userSystem -> {
+				setRadioMenuSelected(item, R.id.categorize)
+				AppListAdapter.categorizeItem = 3
+				App.prefs!!.edit().putInt("categorizeItem",3).apply()
+				appListAdapter!!.sort()
+			}
 			else -> return super.onOptionsItemSelected(item)
 		}
 		return true
@@ -93,4 +258,12 @@ class MainActivity: BaseActivity(){
 		// suggested fix by LeakCanary
 		finishAfterTransition()
 	}
+	private fun setRadioMenuSelected(selectedItem: MenuItem?, groupId: Int) {
+		for (i in 0 until menu.size()){
+			val item = menu.getItem(i)
+			if (item.groupId == groupId) item.isChecked = false
+		}
+		selectedItem?.isChecked = true
+	}
+	private data class tempAppItem(val stopMode: Int,val ignoreBgFree: Boolean,val ignoreRunning: Boolean)
 }
