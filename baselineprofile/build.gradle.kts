@@ -6,8 +6,9 @@ plugins {
 	id("androidx.baselineprofile")
 }
 android {
-	namespace = "io.mdp43140.baselineprofile"
+	buildToolsVersion = "35.0.0"
 	compileSdk = 35
+	namespace = "io.mdp43140.baselineprofile"
 	java {
 		toolchain {
 			languageVersion = JavaLanguageVersion.of(21)
