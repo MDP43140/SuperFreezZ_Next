@@ -83,6 +83,12 @@ Battery Tool only works for rooted users.
 		+ Less battery usage because doesnt run when not requested
 		- slightly convoluted code
 
+### Screenshots
+<img src="screenshot1.png" width="200">
+<img src="screenshot2.png" width="200">
+<img src="screenshot3.png" width="200">
+<img src="screenshot4.png" width="200">
+
 ### Download:
 - [F-Droid (TODO, not yet)](https://f-droid.org/packages/io.mdp43140.superfreeze_next)
 - [GitHub](https://github.com/mdp43140/SuperFreezZ_Next)
