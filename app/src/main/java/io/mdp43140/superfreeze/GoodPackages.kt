@@ -2933,6 +2933,7 @@ val goodPackages = hashSetOf(
 "me.timschneeberger.rootlessjamesdsp",
 "me.tripsit.tripmobile",
 "me.tsukanov.counter",
+"me.velc.devqs",
 "me.wenxinwang.pulsedroidrtp",
 "me.wolszon.fastshopping",
 "me.writeily",
