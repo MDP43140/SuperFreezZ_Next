@@ -2,9 +2,9 @@
 An Android app that makes stopping bad apps easier.
 Inspired by Greenify, SuperFreezZ, and Battery Tool
 
-[![Android CI](https://github.com/mdp43140/SuperFreezZ_N3XT/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/mdp43140/SuperFreezZ_N3XT/actions/workflows/android.yml)
-[![GitHub issues](https://img.shields.io/github/issues/mdp43140/SuperFreezZ_N3XT)](/issues)
-[![License](https://img.shields.io/github/license/mdp43140/SuperFreezZ_N3XT)](/blob/master/LICENSE)
+[![Android CI](https://github.com/mdp43140/SuperFreezZ_Next/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/mdp43140/SuperFreezZ_Next/actions/workflows/android.yml)
+[![GitHub issues](https://img.shields.io/github/issues/mdp43140/SuperFreezZ_Next)](/issues)
+[![License](https://img.shields.io/github/license/mdp43140/SuperFreezZ_Next)](/blob/master/LICENSE)
 
 + Get back control over what apps runs on your phone
 + Improve battery life and reduce data usage by stopping rarely used apps
@@ -32,6 +32,9 @@ Battery Tool only works for rooted users.
 	+ Don't stop apps that plays media (based on Greenify)
 		- Properly working (bug media player still says playing even if its removed or paused)
 	+ Detects apps downloaded from F-Droid (installed from F-Droid, signed by F-Droid)
+	- Detects apps that has accesibility service turned on
+		(i thought this isnt possible until i saw news that another bank
+		app can detect usage of accessibility services of individual apps)
 + Label to section off app lists.
 + (Actually working) non-root accesibility method
 	+ Fixed stuck when force stop button is disabled in ColorOS
@@ -82,8 +85,8 @@ Battery Tool only works for rooted users.
 
 ### Download:
 - [F-Droid (TODO, not yet)](https://f-droid.org/packages/io.mdp43140.superfreeze_next)
-- [Codeberg (TODO, not yet)](https://codeberg.org/mdp43140/SuperFreezZ_Next)
 - [GitHub](https://github.com/mdp43140/SuperFreezZ_Next)
+- [Codeberg (TODO, not yet)](https://codeberg.org/mdp43140/SuperFreezZ_Next)
 
 SuperFreezZ Next is not yet another "magic speed booster" on play store that promises to
 delete 10 GB of data per month or making your device 2x faster. This is impossible.
@@ -108,13 +111,17 @@ but you'll need root access for this to work.
 
 ### Compiling the app
 First, export some variables (for Linux users. Windows user might want to adjust this a bit):
+
 ```bash
 export JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}"
-export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-~/.android/SDK}"```
+export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-~/.android/SDK}"
+```
 
 Then go to the project root directory, and run this command:
+
 ```bash
-./gradlew :app:assembleRelease```
+./gradlew :app:assembleRelease
+```
 
 if you're using Windows, change `./gradlew` to `gradlew.bat`
 

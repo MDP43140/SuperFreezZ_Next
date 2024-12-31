@@ -1,0 +1,59 @@
+name: Default Good/Bad apps Request
+description: Create a bug report to help us improve
+labels: [default good/bad apps, needs triage]
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Checks"
+      options:
+        - label: "I made sure that there are *no existing requests* - [open](https://github.com/MDP43140/SuperFreezZ_Next/issues) or [closed](https://github.com/MDP43140/SuperFreezZ_Next/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
+          required: true
+        - label: "I have taken the time to fill in all the required details. I understand that the bug report will be dismissed otherwise."
+          required: true
+
+  - type: input
+    id: app-name
+    attributes:
+      label: App name
+      description: What the app is called?
+      placeholder: "eg. TikTok"
+
+  - type: input
+    id: app-pkg
+    attributes:
+      label: App package name
+      description: What is the app package name? (Use App Manager, Package Manager, or similiar apps that can give app package name)
+      placeholder: "eg. com.example"
+    validations:
+      required: true
+
+  - type: input
+    id: app-link
+    attributes:
+      label: App info
+      description: Where did you get the app?
+      placeholder: "eg. https://play.google.com/store/apps/details?id=com.example"
+    validations:
+      required: true
+
+  - type: textarea
+    id: app-desc
+    attributes:
+      label: Description
+      description: |
+        Tell us what the app does, and why do you think it should be blacklisted/whitelisted by default?
+      placeholder: |
+        eg. TikTok is a social media app made by Chinese company Bytedance, I think it should be absolutely stopped by default not only because its distracting through notifications, but also its privacy-invasive and uses up lots of battery in the background
+
+        or
+
+        F-Droid Basic is a new variant of F-Droid with some features removed, its primarily made for Android 12 and above, I think this should be whitelisted because F-Droid does not run in background unless the user explicitly told it to (for repository updating purpose)
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional information
+      description: Any other information you'd like to include
