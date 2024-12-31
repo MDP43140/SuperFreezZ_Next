@@ -44,8 +44,8 @@ Battery Tool only works for rooted users.
 + Item selection: Modify/Stop multiple apps
 	- Proper implementation? (Fix bug when reloading app item not kept)
 + Properly fix stopping from shortcut
-- Rebase from new template
-- Fix IndexOutOfBounds Inconsistency crash when scrolling and searching at the same time
++ Rebase from new template
++ Fix IndexOutOfBounds Inconsistency crash when scrolling and searching at the same time (partially fixed)
 - Stop apps after screen turned off
 - Add back the on finish freeze listener
 - Automate disabling running in background toggle

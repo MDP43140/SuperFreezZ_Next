@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -163,6 +164,7 @@ class MainActivity: BaseActivity(){
 		searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(s: String) = false
 			override fun onQueryTextChange(s: String): Boolean {
+				binding.appsList.stopScroll()
 				appListAdapter.searchPattern = s
 				return true
 			}
@@ -277,12 +279,12 @@ class MainActivity: BaseActivity(){
 		//This is necessary so that the list items change their look when the screen is rotated:
 		binding.appsList.let {
 			val pos = (it.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-			it.adapter = null
-			it.layoutManager = null
-			it.recycledViewPool.clear()
-			it.adapter = appListAdapter
-			it.layoutManager = LinearLayoutManager(this)
-			appListAdapter.notifyDataSetChanged()
+//		it.adapter = null
+//		it.layoutManager = null
+//		it.recycledViewPool.clear()
+//		it.adapter = appListAdapter
+//		it.layoutManager = LinearLayoutManager(this)
+//		appListAdapter.notifyDataSetChanged()
 			(it.layoutManager as LinearLayoutManager).scrollToPosition(pos)
 		}
 	}
@@ -290,9 +292,31 @@ class MainActivity: BaseActivity(){
 		super.onResume()
 		loadApps()
 	}
+	override fun onDestroy(){
+		super.onDestroy()
+		appListAdapter.trimMemory()
+		appListAdapter.setCtx(null)
+	}
 	override fun onBackPressed(){
 		// suggested fix by LeakCanary
 		finishAfterTransition()
+	}
+	override fun onTrimMemory(level: Int){
+		// See https://developer.android.com/topic/performance/memory#release
+		// on API 34+, apps only notified with UI_HIDDEN and BACKGROUND level
+		when (level){
+			ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN -> appListAdapter.trimMemory()
+			ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE -> {}
+			ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW,
+			ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL,
+			ComponentCallbacks2.TRIM_MEMORY_BACKGROUND,
+			ComponentCallbacks2.TRIM_MEMORY_MODERATE,
+			ComponentCallbacks2.TRIM_MEMORY_COMPLETE -> {
+				appListAdapter.trimMemory()
+			}
+			else -> {}
+		}
+		Toast.makeText(this,"Memory cleared with level ${level}",Toast.LENGTH_SHORT).show()
 	}
 	private fun setRadioMenuSelected(selectedItem: MenuItem?, groupId: Int) {
 		for (i in 0 until menu.size()){

@@ -74,6 +74,12 @@ class AppListAdapter(
 		appListItems = appListItems3
 		appListItems2 = appListItems.appList
 	}
+	fun trimMemory(){
+		appLabelCache.clear()
+		appListItems2.forEach {
+			it.icon = null
+		}
+	};
 	fun sort() = Thread {
 		// Filtering (User/System/Runnning/Stopped)
 		appListItems2 = appListItems.appList.filter {
