@@ -13,5 +13,5 @@
 # Keep important stacktrace
 -keepattributes SourceFile,LineNumberTable
 
-// Needed just for androidx.preference.PreferenceManager
+# Needed just for androidx.preference.PreferenceManager
 -renamesourcefileattribute SourceFile
