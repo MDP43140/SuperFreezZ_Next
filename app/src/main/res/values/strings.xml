@@ -5,9 +5,9 @@
 	-->
 <resources>
 	<string name="app_name">SuperFreezZ Next</string>
+	<string name="about">About</string>
 	<string name="accessibility_svc_active">Accessibility service active</string>
 	<string name="accessibility_svc_sum">This lets you automate stopping apps, and do it faster. SuperFreezZ Next uses the accessibility service to click "Force stop", "OK", and "Back". It finds those buttons by retrieving Settings content and tracking their appearance. On Android 9 and higher, it can also lock the screen after stopping apps.</string>
-	<string name="about">About</string>
 	<string name="all_apps_stopped">All apps are already stopped.</string>
 	<string name="apps_is_selected">%d apps selected</string>
 	<string name="apps_is_stopped">%d apps stopped</string>
@@ -22,16 +22,16 @@
 	<string name="data_export">Export Data</string>
 	<string name="data_import_sum">Restore settings from backup file</string>
 	<string name="data_export_sum">Backup settings to XML/JSON file</string>
-	<string name="dont_stop_media_playback">Don\'t stop apps that plays media</string>
-	<string name="dont_stop_media_playback_sum">Requires notification access</string>
-	<string name="dont_stop_persistent_notification">Don\'t stop apps that has ongoing notification</string>
-	<string name="dont_stop_persistent_notification_sum">eg. Termux</string>
+	<string name="dontStopMediaPlayback_title">Detection: Ignore apps that plays media</string>
+	<string name="dontStopMediaPlayback_sum">Don\'t stop apps that\'s currently playing a media</string>
+	<string name="dontStopPersistentNotification_title">Detection: Ignore apps that has ongoing notification</string>
+	<string name="dontStopPersistentNotification_sum">Don\'t stop apps that has ongoing notification (eg. Termux, KDE Connect, Syncthing)</string>
 	<string name="dynColor">Dynamic colors</string>
 	<string name="dynColor_sum">Enables dynamic colors (requires Android 12+)</string>
 	<string name="force_stop">Force stop</string>
 	<string name="foreground">Foreground</string>
-	<string name="freezeWhenScreenOff_sum">You will need to disable \"Power button instantly locks\" in the device settings</string>
 	<string name="freezeWhenScreenOff_title">Stop when the screen turns off</string>
+	<string name="freezeWhenScreenOff_sum">You will need to disable \"Power button instantly locks\" in the device settings</string>
 	<string name="general">General</string>
 	<string name="headerSection_otherApps">Other apps</string>
 	<string name="headerSection_pendingStop">Pending stop apps</string>
@@ -40,6 +40,7 @@
 	<string name="ignore_bgFree">Ignore background-free</string>
 	<string name="ignore_running">Ignore running state</string>
 	<string name="inactiveState">Inactive state</string>
+	<string name="installed_from_fdroid">Installed from F-Droid</string>
 	<string name="license">License</string>
 	<string name="license_sum">Licensed under GPL v3 license</string>
 	<string name="manual_stop_tip">Click Force Stop, OK, and Back, until there are no more apps to stop</string>
@@ -54,6 +55,9 @@
 	<string name="root_not_avail">Root method is not available, please either grant root access, or use Accesibility/Manual method</string>
 	<string name="search">Search</string>
 	<string name="settings">Settings</string>
+	<string name="showDetailedAppStateInfo">Show detailed app state info</string>
+	<string name="showDetailedAppStateInfo_sum">eg. What causing the app to be stopped or not (for now its only F-Droid apps)</string>
+	<string name="signed_by_fdroid">Signed by F-Droid</string>
 	<string name="sort">Sort</string>
 	<string name="sort_label">App name</string>
 	<string name="sort_pkg">Package name</string>
@@ -73,10 +77,10 @@
 	<string name="stoppingApps">Stopping apps</string>
 	<string name="theme">Theme</string>
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
+	<string name="usageStatsAccess_title">Detection: Usage stats access</string>
 	<string name="usageStatsAccess_sum">Makes it possible to stop only unused apps</string>
-	<string name="usageStatsAccess_title">Usage stats access</string>
-	<string name="workMode_sum">Choose how SuperFreezZ Next will stop apps</string>
 	<string name="workMode_title">Working mode</string>
+	<string name="workMode_sum">Choose how SuperFreezZ Next will stop apps</string>
 	<string-array name="themes_val">
 		<item>Follow system</item>
 		<item>Light</item>

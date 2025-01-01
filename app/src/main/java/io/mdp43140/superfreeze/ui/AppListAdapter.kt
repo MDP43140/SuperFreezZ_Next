@@ -196,8 +196,10 @@ class AppListAdapter(
 				else "")
 				if (it.ignoreRunning) append("\n").append(ctx!!.getString(R.string.ignore_running));
 				if (it.ignoreBgFree)  append("\n").append(ctx!!.getString(R.string.ignore_bgFree));
-				if (it.isInstalledByFDroid) append("\n").append("Installed from F-Droid");
-				if (it.isSignedByFDroid)    append("\n").append("F-Droid signed app");
+				if (App.prefs!!.getBoolean("detailedAppStateInfo",false)){
+					if (it.isInstalledByFDroid) append("\n").append(ctx!!.getString(R.string.installed_from_fdroid));
+					if (it.isSignedByFDroid)    append("\n").append(ctx!!.getString(R.string.signed_by_fdroid));
+				}
 			}.toString());
 		}
 		// update list

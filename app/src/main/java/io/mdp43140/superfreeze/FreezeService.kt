@@ -87,10 +87,10 @@ class FreezeService: AccessibilityService(){
 	override fun onInterrupt() {
 	}
 	private fun wrongScreenShown() {
-		// If the last step was more than 8 seconds ago, something went wrong and we should stop not to destroy anything.
+		// If the last step was more than 8 seconds ago, something went wrong and we should stop to not destroy anything.
 		if (System.currentTimeMillis() - lastStepTimestamp > 8000) {
 				Log.e(TAG,
-					"An unexpected screen turned up and the last step was more than 8 seconds ago. Something went wrong. Aborted not to destroy anything"
+					"An unexpected screen turned up and the last step was more than 8 seconds ago. Something went wrong. Aborted to not destroy anything"
 				)
 			stopAnyCurrentFreezing() // Stop everything, it is to late to do anything :-(
 		}
@@ -160,23 +160,23 @@ class FreezeService: AccessibilityService(){
 	}
 	companion object {
 		val TAG = "FreezeService" //this::class.simpleName (this shit just puts out long nonsense bruh)
-		var doOnAppCouldNotBeFrozen: ((Context) -> Unit)? = null
+		var onAppCouldNotBeFrozen: ((Context) -> Unit)? = null
 		private var nextStep = Step.DO_NOTHING
 		private var lastStepTimestamp = 0L
 		private var appsToStop = 0
 		var isEnabled = false
 			private set
 		private val timeoutHandler = Handler(Looper.getMainLooper())
-		fun clickFreezeButtons(context: Context, amountOfApps: Int) {
+		fun clickFreezeButtons(ctx: Context, amountOfApps: Int) {
 			if (!isBusy()) {
 				nextStep = Step.PRESS_FORCE_STOP
 				appsToStop = amountOfApps
-				notifyThereIsStillMovement(context)
+				notifyThereIsStillMovement(ctx)
 			}
 		}
 		fun finishedFreezing() {
 			nextStep = if (appsToStop == 0) Step.DO_NOTHING else Step.PRESS_FORCE_STOP
-			doOnAppCouldNotBeFrozen = null
+			onAppCouldNotBeFrozen = null
 			timeoutHandler.removeCallbacksAndMessages(null)
 		}
 		fun isBusy() = (nextStep != Step.DO_NOTHING)
@@ -186,7 +186,7 @@ class FreezeService: AccessibilityService(){
 			timeoutHandler.postDelayed({
 				Log.w(TAG, "timeout")
 				stopAnyCurrentFreezing()
-				doOnAppCouldNotBeFrozen?.invoke(ctx)
+				onAppCouldNotBeFrozen?.invoke(ctx)
 			}, 4000)
 			lastStepTimestamp = System.currentTimeMillis()
 		}

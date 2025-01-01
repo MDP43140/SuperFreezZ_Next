@@ -5,9 +5,9 @@
 	-->
 <resources>
 	<string name="about">Tentang</string>
-	<string name="all_apps_stopped">Semua aplikasi sudah dihentikan.</string>
-	<string name="accessibility_svc_active">Accessibility service active</string>
+	<string name="accessibility_svc_active">Layanan aksesibilitas aktif</string>
 	<string name="accessibility_svc_sum">Ini memungkinkan Anda menghentikan aplikasi secara otomatis, dan melakukannya lebih cepat. SuperFreezZ Next menggunakan layanan aksesibilitas untuk mengklik "Paksa berhenti", "OK", dan "Kembali". Layanan aksesibilitas ini menemukan tombol-tombol tersebut dengan mengambil konten Setelan dan melacak kemunculannya. Di Android 9 dan berikutnya, layanan aksesibilitas juga bisa mengunci layar setelah menghentikan aplikasi.</string>
+	<string name="all_apps_stopped">Semua aplikasi sudah dihentikan.</string>
 	<string name="apps_is_selected">%d aplikasi dipilih</string>
 	<string name="apps_is_stopped">%d aplikasi dihentikan</string>
 	<string name="apps_system">Aplikasi sistem</string>
@@ -21,16 +21,16 @@
 	<string name="data_export">Ekspor Data</string>
 	<string name="data_import_sum">Kembalikan setelan dari file cadangan</string>
 	<string name="data_export_sum">Cadangkan setelan ke file XML/JSON</string>
-	<string name="dont_stop_media_playback">Jangan hentikan apl yg memutar media</string>
-	<string name="dont_stop_media_playback_sum">Memerlukan izin akses notifikasi</string>
-	<string name="dont_stop_persistent_notification">Jangan hentikan apl yg memiliki notifikasi persisten</string>
-	<string name="dont_stop_persistent_notification_sum">cth. Termux</string>
+	<string name="dontStopMediaPlayback_title">Deteksi: Hiraukan apl yg memutar media</string>
+	<string name="dontStopMediaPlayback_sum">Jangan hentikan aplikasi yang memutar media</string>
+	<string name="dontStopPersistentNotification_title">Deteksi: Hiraukan apl dgn notifikasi persisten</string>
+	<string name="dontStopPersistentNotification_sum">Jangan hentikan aplikasi dengan notifikasi persisten (cth. Termux, KDE Connect, Syncthing)</string>
 	<string name="dynColor">Warna dinamis</string>
 	<string name="dynColor_sum">Mengaktifkan warna dinamis (memerlukan Android 12+)</string>
 	<string name="force_stop">Paksa berhenti</string>
 	<string name="foreground">Latar-depan</string>
-	<string name="freezeWhenScreenOff_sum">Anda harus mematikan \"Tombol daya mengunci secara instan\" di pengaturan perangkat</string>
 	<string name="freezeWhenScreenOff_title">Hentikan saat layar mati</string>
+	<string name="freezeWhenScreenOff_sum">Anda harus mematikan \"Tombol daya mengunci secara instan\" di pengaturan perangkat</string>
 	<string name="general">Umum</string>
 	<string name="headerSection_otherApps">Aplikasi lain</string>
 	<string name="headerSection_pendingStop">Aplikasi yang akan dihentikan</string>
@@ -39,6 +39,7 @@
 	<string name="ignore_bgFree">Hiraukan bebas-latar-belakang</string>
 	<string name="ignore_running">Hiraukan keadaan berjalan</string>
 	<string name="inactiveState">Keadaan in-aktif</string>
+	<string name="installed_from_fdroid">Diinstall dari F-Droid</string>
 	<string name="license">Lisensi</string>
 	<string name="license_sum">Dilisensikan dibawah lisensi GPL v3</string>
 	<string name="manual_stop_tip">Klik paksa berhenti, OK, dan Kembali, sampai tidak ada aplikasi lagi untuk dihentikan</string>
@@ -53,6 +54,9 @@
 	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode Aksesibilitas/Manual</string>
 	<string name="search">Cari</string>
 	<string name="settings">Pengaturan</string>
+	<string name="showDetailedAppStateInfo">Tampilkan info status aplikasi yang mendetail</string>
+	<string name="showDetailedAppStateInfo_sum">cth. Apa yang menyebabkan aplikasi untuk dihentikan atau tidak (untuk sekarang hanya ada aplikasi F-Droid)</string>
+	<string name="signed_by_fdroid">Ditandatangani F-Droid</string>
 	<string name="sort">Sortir</string>
 	<string name="sort_label">Nama aplikasi</string>
 	<string name="sort_pkg">Nama paket</string>
@@ -72,10 +76,10 @@
 	<string name="stoppingApps">Menghentikan aplikasi</string>
 	<string name="theme">Tema</string>
 	<string name="theme_sum">Pilih tema. Mulai ulang aplikasi untuk menerapkan perubahan sepenuhnya</string>
+	<string name="usageStatsAccess_title">Deteksi: Akses statistik pengunaan</string>
 	<string name="usageStatsAccess_sum">Memungkinkan untuk menghentikan aplikasi yang tidak di gunakan saja</string>
-	<string name="usageStatsAccess_title">Akses statistik pengunaan</string>
-	<string name="workMode_sum">Tentukan bagaimana SuperFreezZ Next akan menghentikan aplikasi</string>
 	<string name="workMode_title">Mode bekerja</string>
+	<string name="workMode_sum">Tentukan bagaimana SuperFreezZ Next akan menghentikan aplikasi</string>
 	<string-array name="themes_val">
 		<item>Ikuti sistem</item>
 		<item>Terang</item>

@@ -10,12 +10,12 @@
 		android:title="@string/general"
 		app:iconSpaceReserved="false">
 		<ListPreference
-			android:key="workMode"
 			android:defaultValue="manual"
 			android:entries="@array/workModes_val"
 			android:entryValues="@array/workModes_key"
-			android:summary="@string/workMode_sum"
+			android:key="workMode"
 			android:title="@string/workMode_title"
+			android:summary="@string/workMode_sum"
 			app:iconSpaceReserved="false" />
 		<ListPreference
 			android:defaultValue="system"
@@ -54,26 +54,36 @@
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
 			android:key="freezeWhenScreenOff"
-			android:summary="@string/freezeWhenScreenOff_sum"
 			android:title="@string/freezeWhenScreenOff_title"
+			android:summary="@string/freezeWhenScreenOff_sum"
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
 			android:key="usageStatsAccess"
-			android:summary="@string/usageStatsAccess_sum"
 			android:title="@string/usageStatsAccess_title"
+			android:summary="@string/usageStatsAccess_sum"
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
 			android:key="mediaPlaybackNotification"
-			android:summary="@string/dont_stop_media_playback_sum"
-			android:title="@string/dont_stop_media_playback"
+			android:title="@string/dontStopMediaPlayback_title"
+			android:summary="@string/dontStopMediaPlayback_sum"
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
 			android:key="persistentNotification"
-			android:summary="@string/dont_stop_persistent_notification_sum"
-			android:title="@string/dont_stop_persistent_notification"
+			android:title="@string/dontStopPersistentNotification_title"
+			android:summary="@string/dontStopPersistentNotification_sum"
+			app:iconSpaceReserved="false" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/other"
+		app:iconSpaceReserved="false">
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="detailedAppStateInfo"
+			android:title="@string/showDetailedAppStateInfo"
+			android:summary="@string/showDetailedAppStateInfo_sum"
 			app:iconSpaceReserved="false" />
 	</PreferenceCategory>
 	<PreferenceCategory
