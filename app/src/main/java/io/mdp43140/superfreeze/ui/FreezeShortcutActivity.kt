@@ -59,6 +59,7 @@ class FreezeShortcutActivity: Activity(){
 			}
 			App.appListItems?.loadApps()
 			App.appListItems?.getDataFromPrefs()
+			App.appListItems?.getActiveAccessibilityServices()
 			freezeApp(ctx,App.appListItems!!.getPendingStopApps());
 		}
 		fun freezeApp(ctx: Activity, apps: List<AppItem>){

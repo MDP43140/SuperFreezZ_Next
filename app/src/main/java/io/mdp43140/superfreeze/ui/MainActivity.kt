@@ -57,6 +57,7 @@ class MainActivity: BaseActivity(){
 		}
 		App.appListItems?.loadApps()
 		App.appListItems?.getDataFromPrefs()
+		App.appListItems?.getActiveAccessibilityServices()
 		appListAdapter.sort()
 		binding.swiperefresh.post {
 			binding.swiperefresh.isRefreshing = false

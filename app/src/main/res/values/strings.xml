@@ -5,6 +5,7 @@
 	-->
 <resources>
 	<string name="app_name">SuperFreezZ Next</string>
+	<string name="accessibility_svc_active">Accessibility service active</string>
 	<string name="accessibility_svc_sum">This lets you automate stopping apps, and do it faster. SuperFreezZ Next uses the accessibility service to click "Force stop", "OK", and "Back". It finds those buttons by retrieving Settings content and tracking their appearance. On Android 9 and higher, it can also lock the screen after stopping apps.</string>
 	<string name="about">About</string>
 	<string name="all_apps_stopped">All apps are already stopped.</string>
