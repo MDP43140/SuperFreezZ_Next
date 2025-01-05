@@ -50,9 +50,19 @@
 	<string name="pitchBlack">Latar-belakang hitam saat tema gelap</string>
 	<string name="pitchBlack_sum">Menghemat baterai pada layar OLED</string>
 	<string name="playingMedia">Memutar media</string>
+	<string name="restrictStandby_title">Root: Setel mode standby aplikasi ke langka/terbatas</string>
+	<string name="restrictStandby_sum">Menghindari aplikasi dari sering berjalan di latar-belakang. Direset saat aplikasi di buka lagi</string>
 	<string name="reverse">Balikkan</string>
 	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode Aksesibilitas/Manual</string>
 	<string name="search">Cari</string>
+	<string name="setGlobHibernation_title">Root: Setel status hibernasi global aplikasi</string>
+	<string name="setGlobHibernation_sum">Setelan ini bukan mode hibernasi Greenify. Akan mengatur status hibernasi, yang akan membersihkan cache (Android 12+), da mengatur ulang izin (Android 11+, Android 6-10 dengan GmsCore, gunakan dengan risiko ditanggung sendiri)</string>
+	<string name="setInactiveBeforeNormalStop_title">Root: Atur inaktif sebelum berhenti normal</string>
+	<string name="setInactiveBeforeNormalStop_sum">Untuk memastikan Android tidak mentrigger aplikasi yang dihentikan dari berjalan di latar-belakang</string>
+	<string name="setRestrictionLvl_title">Root: Level pembatasan latar-belakang aplikasi</string>
+	<string name="setRestrictionLvl_sum">Mengubah perilaku standby aplikasi</string>
+	<string name="setStopType_title">Root: Tipe berhenti</string>
+	<string name="setStopType_sum">Mengubah bagaimana aplikasi dihentikan.</string>
 	<string name="settings">Pengaturan</string>
 	<string name="showDetailedAppStateInfo">Tampilkan info status aplikasi yang mendetail</string>
 	<string name="showDetailedAppStateInfo_sum">cth. Apa yang menyebabkan aplikasi untuk dihentikan atau tidak (untuk sekarang hanya ada aplikasi F-Droid)</string>
@@ -80,6 +90,18 @@
 	<string name="usageStatsAccess_sum">Memungkinkan untuk menghentikan aplikasi yang tidak di gunakan saja</string>
 	<string name="workMode_title">Mode bekerja</string>
 	<string name="workMode_sum">Tentukan bagaimana SuperFreezZ Next akan menghentikan aplikasi</string>
+	<string-array name="setRestrictionLvl_val">
+		<item>Jangan diubah (bawaan)</item>
+		<item>Bucket Adaptif (bawaan sistem)</item>
+		<item>Bucket Terbatas</item>
+		<item>Latar-belakang terbatas</item>
+		<item>Hibernasi</item>
+	</string-array>
+	<string-array name="setStopType_val">
+		<item>Hentikan proses latar-belakang/cache</item>
+		<item>Jangan batalkan alarm &amp; pekerjaan yang dijadwalkan</item>
+		<item>Force stop (default)</item>
+	</string-array>
 	<string-array name="themes_val">
 		<item>Ikuti sistem</item>
 		<item>Terang</item>

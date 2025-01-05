@@ -75,6 +75,40 @@
 			android:title="@string/dontStopPersistentNotification_title"
 			android:summary="@string/dontStopPersistentNotification_sum"
 			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="rootStop_setInactiveBeforeNormalStop"
+			android:title="@string/setInactiveBeforeNormalStop_title"
+			android:summary="@string/setInactiveBeforeNormalStop_sum"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="rootStop_restrictStandby"
+			android:title="@string/restrictStandby_title"
+			android:summary="@string/restrictStandby_sum"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
+			android:key="rootStop_setGlobHibernation"
+			android:title="@string/setGlobHibernation_title"
+			android:summary="@string/setGlobHibernation_sum"
+			app:iconSpaceReserved="false" />
+		<ListPreference
+			android:defaultValue="dontChange"
+			android:entries="@array/setRestrictionLvl_val"
+			android:entryValues="@array/setRestrictionLvl_key"
+			android:key="rootStop_setRestrictionLvl"
+			android:title="@string/setRestrictionLvl_title"
+			android:summary="@string/setRestrictionLvl_sum"
+			app:iconSpaceReserved="false" />
+		<ListPreference
+			android:defaultValue="force-stop"
+			android:entries="@array/setStopType_val"
+			android:entryValues="@array/setStopType_key"
+			android:key="rootStop_setStopType"
+			android:title="@string/setStopType_title"
+			android:summary="@string/setStopType_sum"
+			app:iconSpaceReserved="false" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/other"

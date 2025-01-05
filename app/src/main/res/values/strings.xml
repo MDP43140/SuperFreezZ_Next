@@ -51,9 +51,19 @@
 	<string name="pitchBlack">Black background on dark theme</string>
 	<string name="pitchBlack_sum">Saves battery on OLED displays</string>
 	<string name="playingMedia">Playing media</string>
+	<string name="restrictStandby_title">Root: Set app standby mode to rare/restricted</string>
+	<string name="restrictStandby_sum">Avoids apps from frequently running in background. Resets when the app is opened again</string>
 	<string name="reverse">Reverse</string>
 	<string name="root_not_avail">Root method is not available, please either grant root access, or use Accesibility/Manual method</string>
 	<string name="search">Search</string>
+	<string name="setGlobHibernation_title">Root: Set app global hibernation state</string>
+	<string name="setGlobHibernation_sum">This is not Greenify\'s Hibernation mode. Will set hibernation state, which clears cache (Android 12+), and resets permission (Android 11+, Android 6-10 with GmsCore, use at your own inconvenience)</string>
+	<string name="setInactiveBeforeNormalStop_title">Root: Set inactive before normal stop</string>
+	<string name="setInactiveBeforeNormalStop_sum">Makes sure to prevent Android from triggering the stopped app from running in the background</string>
+	<string name="setRestrictionLvl_title">Root: App background restriction level</string>
+	<string name="setRestrictionLvl_sum">Changes app standby behavior</string>
+	<string name="setStopType_title">Root: Stop type</string>
+	<string name="setStopType_sum">Changes how the app is being stopped.</string>
 	<string name="settings">Settings</string>
 	<string name="showDetailedAppStateInfo">Show detailed app state info</string>
 	<string name="showDetailedAppStateInfo_sum">eg. What causing the app to be stopped or not (for now its only F-Droid apps)</string>
@@ -81,6 +91,18 @@
 	<string name="usageStatsAccess_sum">Makes it possible to stop only unused apps</string>
 	<string name="workMode_title">Working mode</string>
 	<string name="workMode_sum">Choose how SuperFreezZ Next will stop apps</string>
+	<string-array name="setRestrictionLvl_val">
+		<item>Don\'t change (default)</item>
+		<item>Adaptive Bucket (system default)</item>
+		<item>Restricted Bucket</item>
+		<item>Background Restricted</item>
+		<item>Hibernation</item>
+	</string-array>
+	<string-array name="setStopType_val">
+		<item>Stop background/cached process</item>
+		<item>Don\'t cancel scheduled alarms &amp; jobs</item>
+		<item>Force stop (default)</item>
+	</string-array>
 	<string-array name="themes_val">
 		<item>Follow system</item>
 		<item>Light</item>
@@ -90,6 +112,18 @@
 		<item>Manual</item>
 		<item>Accessibility</item>
 		<item>Root</item>
+	</string-array>
+	<string-array name="setRestrictionLvl_key" translatable="false">
+		<item>dontChange</item>
+		<item>adaptive_bucket</item>
+		<item>restricted_bucket</item>
+		<item>background_restricted</item>
+		<item>hibernation</item>
+	</string-array>
+	<string-array name="setStopType_key" translatable="false">
+		<item>kill</item>
+		<item>stop-app</item>
+		<item>force-stop</item>
 	</string-array>
 	<string-array name="themes_key" translatable="false">
 		<item>system</item>

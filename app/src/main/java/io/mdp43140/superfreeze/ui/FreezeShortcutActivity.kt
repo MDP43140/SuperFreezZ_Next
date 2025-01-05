@@ -124,24 +124,53 @@ class FreezeShortcutActivity: Activity(){
 				// but sadly methods other than root is not convenient to set up
 				// you will need computers, or initialize adb connection
 				// and those aren't permanent either
+				val setInactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_setInactiveBeforeNormalStop",false)
+				val restrictStandby = App.prefs!!.getBoolean("rootStop_restrictStandby",false)
+				val setGlobHibernation = App.prefs!!.getBoolean("rootStop_setGlobHibernation",false)
+				val setRestrictionLvl = App.prefs!!.getString("rootStop_setRestrictionLvl","dontChange")
+				val setStopType = App.prefs!!.getString("rootStop_setStopType","force-stop")
+				val stopTypeArrKey = ctx.resources.getStringArray(R.array.setStopType_key)
+				val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.setRestrictionLvl_key)
 				apps.forEach {
-					// Sets inactive mode (equivalent to shallow hibernation in Greenify)
-					// Perfect for most messenger and some social media apps
-					sh.add("am set-inactive ${it.pkg} true")
-					// sets app in hibernation mode, which:
-					// - Clears cache (Android 12+)
-					// - Resets permission (Android 11+, Android 6-10 with GmsCore)
-					//   some people definitely don't want reconfiguring permission,
-					//   so i decided to disable this by default
-				//sh.add("cmd app_hibernation set-state --global ${it.pkg} true")
+					if (it.stopMode == 2 || (it.stopMode == 1 && setInactiveBeforeNormalStop)){
+						// Sets inactive mode (equivalent to Greenify's shallow hibernation)
+						// Great for most messenger and some social media apps
+						sh.add("am set-inactive ${it.pkg} true")
+					}
+					if (restrictStandby){
+						// Set the app to restricted standby mode
+						// TODO: may restrict important apps from running in background?
+						sh.add(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+							"am set-standby-bucket ${it.pkg} restricted"
+						else
+							"am set-standby-bucket ${it.pkg} rare"
+						)
+					}
+					if (setGlobHibernation){
+						// sets app in hibernation mode, which:
+						// - Clears cache (Android 12+)
+						// - Resets permission (Android 11+, Android 6-10 with GmsCore)
+						//   some people definitely don't want reconfiguring permission,
+						//   so i decided to disable this by default
+						sh.add("cmd app_hibernation set-state --global ${it.pkg} true")
+					}
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+						// Some modes [unrestricted|exempted] wont be added as an option because it does the opposite of stopping the app)
+						when (setStopType){
+							restrictionLvlArrKey[1] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} adaptive_bucket")
+							restrictionLvlArrKey[2] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} restricted_bucket")
+							restrictionLvlArrKey[3] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} background_restricted")
+							restrictionLvlArrKey[4] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} hibernation")
+						}
+					}
 					if (it.stopMode == 1){
-						// Stops safe to kill processes (eg. Cached process). Frees up RAM
-						sh.add("am kill all ${it.pkg}")
-						// Unlike force-stop, this doesn't cancel
-						// app's scheduled alarm & jobs
-					//sh.add("am stop-app all ${it.pkg}")
-						// Same effect as pressing Force stop in app info
-						sh.add("am force-stop ${it.pkg}")
+						// PS: putting "all" or "current" before process name wont
+						//     do anything to app, dont know why that's the case
+						when (setStopType){
+							stopTypeArrKey[0] -> sh.add("am kill ${it.pkg}")
+							stopTypeArrKey[1] -> sh.add("am stop-app ${it.pkg}")
+							stopTypeArrKey[2] -> sh.add("am force-stop ${it.pkg}")
+						}
 					}
 				}
 				sh.submit { _ -> ctx.runOnUiThread {
