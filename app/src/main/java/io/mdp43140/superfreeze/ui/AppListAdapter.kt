@@ -164,6 +164,9 @@ class AppListAdapter(
 				else if (appListItems.activeAccessibilityAppList.contains(it.pkg)){
 					ctx!!.getString(R.string.accessibility_svc_active);
 				}
+				else if (appListItems.enabledIMEAppList.contains(it.pkg)){
+					ctx!!.getString(R.string.ime_active);
+				}
 				else if (NotificationService.persistNotificationApps.contains(it.pkg) || appListItems.isPkgRecentlyUnused(it.pkg) == false){
 					ctx!!.getString(R.string.foreground);
 				}

@@ -40,6 +40,7 @@
 	<string name="headerSection_userApps">Aplikasi pengguna</string>
 	<string name="ignore_bgFree">Hiraukan bebas-latar-belakang</string>
 	<string name="ignore_running">Hiraukan keadaan berjalan</string>
+	<string name="ime_active">Metode input aktif</string>
 	<string name="inactiveState">Keadaan in-aktif</string>
 	<string name="installed_from_fdroid">Diinstall dari F-Droid</string>
 	<string name="license">Lisensi</string>

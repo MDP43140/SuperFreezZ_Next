@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.PowerManager
 import android.view.accessibility.AccessibilityManager
+import android.view.inputmethod.InputMethodManager
 import io.mdp43140.superfreeze.util.CertUtil.isInstalledByFDroid
 import io.mdp43140.superfreeze.util.CertUtil.isSignedByFDroid
 //import io.mdp43140.superfreeze.badPackages
@@ -22,6 +23,7 @@ import io.mdp43140.superfreeze.util.CertUtil.isSignedByFDroid
 class AppListItems(private val ctx: Context){
 	var appList: List<AppItem> = emptyList()
 	var activeAccessibilityAppList: List<String> = emptyList()
+	var enabledIMEAppList: List<String> = emptyList()
 	// TODO: should sync across instances, but putting this on companion fucked with compile error :(
 	var usageStatsMap: Map<String, UsageStats>? = null
 	abstract class AbstractItem {
@@ -93,13 +95,14 @@ class AppListItems(private val ctx: Context){
 		val isBgFreeEnforced = false
 		val isForeground = false // fgApps.contains(app.pkg)
 		val hasActiveAccessibilityService = activeAccessibilityAppList.contains(app.pkg)
+		val hasEnabledIME = enabledIMEAppList.contains(app.pkg)
 		val hasPersistentNotification = NotificationService.persistNotificationApps.contains(app.pkg)
 		val isPlayingMedia = NotificationService.mediaPlaybackApps.contains(app.pkg)
 		val isRecentlyUnused = isPkgRecentlyUnused(app.pkg)
 		val isStopped = CommonFunctions.isFlagSet(app.flags,ApplicationInfo.FLAG_STOPPED)
 		// Stopping not disabled (normal/inactive) &
 		// not stopped (important) &
-		// - Ignore running / not playing media & not having active accessibility service & not having persistent notification (foreground service) & not foreground (TODO: fix fg app detection)
+		// - Ignore running / not playing media & not having active accessibility service & Not having IME enabled & not having persistent notification (foreground service) & not foreground (TODO: fix fg app detection)
 		// - Mode is not root but inactive stop mode
 		// - Ignore background free / bg free not enforced/cached (temporarily set to false. TODO. hint: GET_APP_OPS_STATS, ...greenify.utils.Hacks)
 		// - recently unused (TODO: detected as pending stop even if the app is running)
@@ -108,7 +111,7 @@ class AppListItems(private val ctx: Context){
 			(app.stopMode == 1 || app.stopMode == 2) &&
 			(App.workMode != "root" && app.stopMode == 2) == false &&
 			!isStopped && (
-				(app.ignoreRunning || (!isPlayingMedia && !hasActiveAccessibilityService && !hasPersistentNotification && !isForeground)) &&
+				(app.ignoreRunning || (!isPlayingMedia && !hasActiveAccessibilityService && !hasEnabledIME && !hasPersistentNotification && !isForeground)) &&
 				(app.ignoreBgFree || (!isBgFree && !isBgFreeEnforced && isRecentlyUnused))
 			)
 		return ret
@@ -118,6 +121,13 @@ class AppListItems(private val ctx: Context){
 		activeAccessibilityAppList = acsbltyMgr
 			?.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
 			?.map { it.resolveInfo.serviceInfo.packageName } // applicationInfo // .toMutableList()
+			?: emptyList()
+	}
+	fun getEnabledIMEs(){
+		val imMgr = ctx.getSystemService(InputMethodManager::class.java)
+		enabledIMEAppList = imMgr
+			?.getEnabledInputMethodList()
+			?.map { it.packageName } // applicationInfo // .toMutableList()
 			?: emptyList()
 	}
 	fun getAggregatedUsageStats(hours: Int){

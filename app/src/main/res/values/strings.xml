@@ -41,6 +41,7 @@
 	<string name="headerSection_userApps">User apps</string>
 	<string name="ignore_bgFree">Ignore background-free</string>
 	<string name="ignore_running">Ignore running state</string>
+	<string name="ime_active">Active Input Method</string>
 	<string name="inactiveState">Inactive state</string>
 	<string name="installed_from_fdroid">Installed from F-Droid</string>
 	<string name="license">License</string>
