@@ -54,6 +54,7 @@ class FreezeService: AccessibilityService(){
 	override fun onAccessibilityEvent(event: AccessibilityEvent) {
 		// We are only interested in WINDOW_STATE_CHANGED events
 		if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED || event.source == null) return
+		Thread.sleep(delayAfterStepDuration)
 		when (nextStep){
 			Step.DO_NOTHING -> {}
 			Step.PRESS_FORCE_STOP -> {
@@ -164,11 +165,13 @@ class FreezeService: AccessibilityService(){
 		private var nextStep = Step.DO_NOTHING
 		private var lastStepTimestamp = 0L
 		private var appsToStop = 0
+		var delayAfterStepDuration: Long = 0
 		var isEnabled = false
 			private set
 		private val timeoutHandler = Handler(Looper.getMainLooper())
 		fun clickFreezeButtons(ctx: Context, amountOfApps: Int) {
 			if (!isBusy()) {
+				delayAfterStepDuration = if (App.prefs!!.getBoolean("accessibilitySvc_delayAfterStepDetected",false)) 250 else 0
 				nextStep = Step.PRESS_FORCE_STOP
 				appsToStop = amountOfApps
 				notifyThereIsStillMovement(ctx)

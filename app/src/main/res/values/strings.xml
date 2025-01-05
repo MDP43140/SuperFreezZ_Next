@@ -22,6 +22,8 @@
 	<string name="data_export">Export Data</string>
 	<string name="data_import_sum">Restore settings from backup file</string>
 	<string name="data_export_sum">Backup settings to XML/JSON file</string>
+	<string name="delayAfterStepDetected_title">Accessibility: Add delay after each steps</string>
+	<string name="delayAfterStepDetected_sum">Fixes odd bug where stopping from shortcut may stuck at confirmation dialog</string>
 	<string name="dontStopMediaPlayback_title">Detection: Ignore apps that plays media</string>
 	<string name="dontStopMediaPlayback_sum">Don\'t stop apps that\'s currently playing a media</string>
 	<string name="dontStopPersistentNotification_title">Detection: Ignore apps that has ongoing notification</string>

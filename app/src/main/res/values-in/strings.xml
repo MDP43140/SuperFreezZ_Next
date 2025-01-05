@@ -21,6 +21,8 @@
 	<string name="data_export">Ekspor Data</string>
 	<string name="data_import_sum">Kembalikan setelan dari file cadangan</string>
 	<string name="data_export_sum">Cadangkan setelan ke file XML/JSON</string>
+	<string name="delayAfterStepDetected_title">Aksesibilitas: Tambahkan jeda setelah tiap langkah</string>
+	<string name="delayAfterStepDetected_sum">Memperbaiki bug aneh dimana menghentikan dari pintasan mungkin stuck di dialog konfirmasi</string>
 	<string name="dontStopMediaPlayback_title">Deteksi: Hiraukan apl yg memutar media</string>
 	<string name="dontStopMediaPlayback_sum">Jangan hentikan aplikasi yang memutar media</string>
 	<string name="dontStopPersistentNotification_title">Deteksi: Hiraukan apl dgn notifikasi persisten</string>

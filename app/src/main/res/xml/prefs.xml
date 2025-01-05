@@ -77,6 +77,12 @@
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
+			android:key="accessibilitySvc_delayAfterStepDetected"
+			android:title="@string/delayAfterStepDetected_title"
+			android:summary="@string/delayAfterStepDetected_sum"
+			app:iconSpaceReserved="false" />
+		<SwitchPreferenceCompat
+			android:defaultValue="false"
 			android:key="rootStop_setInactiveBeforeNormalStop"
 			android:title="@string/setInactiveBeforeNormalStop_title"
 			android:summary="@string/setInactiveBeforeNormalStop_sum"
