@@ -47,18 +47,18 @@ class AppListAdapter(
 			else                      -> throw IllegalArgumentException("Invalid view type")
 		}
 	}
-	override fun onBindViewHolder(holder: ViewHolder, index: Int) {
+	override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
 		when (holder){
-			is AppViewHolder   -> holder.bind(appListItems2[index],this)
-			is LabelViewHolder -> holder.bind(appListItems2[index],this)
+			is AppViewHolder   -> holder.bind(appListItems2[pos],this)
+			is LabelViewHolder -> holder.bind(appListItems2[pos],this)
 		}
 	}
 	override fun getItemCount(): Int = appListItems2.size
-	override fun getItemId(index: Int): Long {
-		return appListItems2[index].pkg.hashCode().toLong()
+	override fun getItemId(pos: Int): Long {
+		return appListItems2[pos].pkg.hashCode().toLong()
 	}
-	override fun getItemViewType(index: Int): Int {
-		return when (appListItems2[index]){
+	override fun getItemViewType(pos: Int): Int {
+		return when (appListItems2[pos]){
 			is AppItem   -> Constants.VIEW_TYPE_APP
 			is LabelItem -> Constants.VIEW_TYPE_LABEL
 			else         -> throw IllegalArgumentException("Invalid view type")
@@ -106,10 +106,7 @@ class AppListAdapter(
 					it.pkg.lowercase().contains(searchPattern)
 				}
 				.partition {
-					if (sortOrder == 1)
-						it.pkg.lowercase().startsWith(searchPattern)
-					else
-						it.label.lowercase().startsWith(searchPattern)
+					(if (sortOrder == 1) it.pkg else it.label).lowercase().startsWith(searchPattern)
 				}
 			appListItems2 = importantApps + otherApps
 		}

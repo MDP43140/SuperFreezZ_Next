@@ -75,7 +75,7 @@
 	<string name="sort_label">App name</string>
 	<string name="sort_pkg">Package name</string>
 	<string name="sourceCode">Source code</string>
-	<string name="sourceCode_sum">Check out the source code on Codeberg!</string>
+	<string name="sourceCode_sum">Check out the source code on GitHub!</string>
 	<string name="state_bgFree">Background-free</string>
 	<string name="state_unused">Unused</string>
 	<string name="state_notStopped">Not stopped</string>
