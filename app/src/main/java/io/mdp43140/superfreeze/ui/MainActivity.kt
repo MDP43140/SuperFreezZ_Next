@@ -20,6 +20,7 @@ import io.mdp43140.superfreeze.App
 import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.databinding.ActivityMainBinding
 import io.mdp43140.superfreeze.R
+import me.zhanghai.android.fastscroll.FastScrollerBuilder
 class MainActivity: BaseActivity(){
 	private lateinit var appListAdapter: AppListAdapter
 	private lateinit var binding: ActivityMainBinding
@@ -50,6 +51,7 @@ class MainActivity: BaseActivity(){
 		binding.appsList.setItemViewCacheSize(15)
 		binding.appsList.addItemDecoration(DividerItemDecoration(this,1))
 		binding.appsList.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+		FastScrollerBuilder(binding.appsList).useMd2Style().build()
 	}
 	fun loadApps() = Thread {
 		binding.swiperefresh.post {

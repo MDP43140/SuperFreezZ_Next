@@ -134,6 +134,8 @@ dependencies {
 	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 	// Error logger
 	implementation("com.github.mdp43140.ael:ael_kt:1.0.1-hf")
+	// Scroll bar
+	implementation("me.zhanghai.android.fastscroll:library:1.3.0")
 	// baseline profile
 	"baselineProfile"(project(":baselineprofile"))
 

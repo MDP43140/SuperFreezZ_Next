@@ -24,9 +24,11 @@ import io.mdp43140.superfreeze.CommonFunctions
 import io.mdp43140.superfreeze.Constants
 import io.mdp43140.superfreeze.NotificationService
 import io.mdp43140.superfreeze.R
+import me.zhanghai.android.fastscroll.PopupTextProvider
+import java.util.Locale
 class AppListAdapter(
 	private val onAppClick: ((AppItem) -> Unit)?
-): RecyclerView.Adapter<ViewHolder>(){
+): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 	lateinit var appListItems: AppListItems
 	lateinit var appListItems2: List<AbstractItem>
 	private var ctx: Activity? = null
@@ -63,6 +65,10 @@ class AppListAdapter(
 			is LabelItem -> Constants.VIEW_TYPE_LABEL
 			else         -> throw IllegalArgumentException("Invalid view type")
 		}
+	}
+	override fun getPopupText(view: View, pos: Int): CharSequence {
+		val item = appListItems2[pos]
+		return (if (sortOrder == 1) item.pkg else item.label).take(1).uppercase(Locale.getDefault())
 	}
 	fun setCtx(ctx2: Activity?){
 		ctx = ctx2

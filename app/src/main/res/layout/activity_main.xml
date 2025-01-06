@@ -27,8 +27,7 @@
 				android:id="@+id/appsList"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
-				android:scrollbars="vertical"
-				android:scrollbarSize="24dp" />
+				android:scrollbars="none" />
 		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 		<com.google.android.material.appbar.MaterialToolbar
 			android:clipToPadding="false"
