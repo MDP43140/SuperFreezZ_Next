@@ -140,7 +140,7 @@ If you would like to help with developing, have a look at the issues, or think o
 Please tell me what you are going to do, to avoid implementing the same thing at the same time :-)
 
 ### Credits
-- mdp43140 - 2024 (Big refactor)
+- mdp43140 - 2025 (Big refactor)
 - Hocuri - 2018-2019 (Majority of previous codes)
 
 ### License
