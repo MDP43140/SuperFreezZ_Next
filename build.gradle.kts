@@ -1,9 +1,8 @@
 plugins {
-//auto suffixed with .gradle.plugin
-	id("androidx.baselineprofile") version "1.3.3" apply false // optional
-	id("com.android.application") version "8.8.1" apply false
-	id("com.android.test") version "8.8.1" apply false // optional, baselineprofile dependency
-	kotlin("android") version "2.1.10" apply false // kotlin("android") == "org.jetbrains.kotlin.android"
+	alias(libs.plugins.android.application) apply false
+	alias(libs.plugins.android.test) apply false // optional, baselineprofile dependency
+	alias(libs.plugins.androidx.baselineprofile) apply false // optional
+	alias(libs.plugins.kotlin.android) apply false
 }
 tasks.withType(JavaCompile::class.java){
 	options.compilerArgs.add("-Xlint:all")
