@@ -1,9 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 import com.android.build.api.dsl.ManagedVirtualDevice
 plugins {
-	id("com.android.test")
-	id("org.jetbrains.kotlin.android")
-	id("androidx.baselineprofile")
+	alias(libs.plugins.android.test)
+	alias(libs.plugins.androidx.baselineprofile)
+	alias(libs.plugins.kotlin.android)
 }
 android {
 	buildToolsVersion = "35.0.0"
@@ -48,8 +48,8 @@ androidComponents {
 	}
 }
 dependencies {
-	implementation("androidx.test.ext:junit:1.2.1")
-	implementation("androidx.test.espresso:espresso-core:3.6.1")
-	implementation("androidx.test.uiautomator:uiautomator:2.3.0")
-	implementation("androidx.benchmark:benchmark-macro-junit4:1.3.3")
+	implementation(libs.androidx.benchmark.macroJunit4)
+	implementation(libs.androidx.test.junit)
+	implementation(libs.androidx.test.espresso)
+	implementation(libs.androidx.test.uiautomator)
 }
