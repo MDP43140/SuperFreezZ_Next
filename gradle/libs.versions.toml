@@ -1,18 +1,18 @@
 [versions]
 ael = "1.0.1-hf"
-agp = "8.8.1"
+agp = "8.9.1"
 androidxAppcompat = "1.7.0"
-androidxBaselineprofile = "1.3.3"
-androidxCore = "1.15.0"
+androidxBaselineprofile = "1.3.4"
+androidxCore = "1.16.0"
 androidxPref = "1.2.1"
-androidxSwipeRefreshLayout = "1.1.0"
-androidxTest = "1.6.2"
-androidxTestBenchmarkmacrojunit4 = "1.3.3"
+androidxSwipeRefreshLayout = "1.2.0-beta01"
+androidxTestBenchmarkmacrojunit4 = "1.3.4"
 androidxTestEspresso = "3.6.1"
-androidxTestExt = "1.2.1"
+androidxTestJunit = "1.2.1"
+androidxTestRunner = "1.6.2"
 androidxTestUiautomator = "2.3.0"
 fastscroll = "1.3.0"
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 leakcanary = "2.14"
 libsu = "6.0.0"
 material = "1.12.0"
@@ -25,8 +25,8 @@ androidx-pref-kt = { group = "androidx.preference", name = "preference", version
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "androidxSwipeRefreshLayout" }
 androidx-benchmark-macroJunit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidxTestBenchmarkmacrojunit4" }
 androidx-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxTestEspresso" }
-androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }
-androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTest" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestJunit" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidxTestUiautomator" }
 fastscroll = { group = "me.zhanghai.android.fastscroll", name = "library", version.ref = "fastscroll" }
 leakcanary-android = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
