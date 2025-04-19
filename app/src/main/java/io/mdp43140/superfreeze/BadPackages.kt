@@ -181,7 +181,6 @@ val badPackages = hashSetOf<String>(
 "com.opera.browser",
 "com.simejikeyboard",
 "com.speedy.vpn",
-"com.storymatrix.drama",
 "com.taxsee.taxsee",
 "com.wejoy.weplay",
 "com.whatsapp.w4b", // i hope no avg user uses this
@@ -203,7 +202,6 @@ val badPackages = hashSetOf<String>(
 "com.emoji.coolkeyboard",
 "com.google.android.music",
 "com.google.android.videos",
-"com.lenovo.anyshare.gps",
 "com.duokan.phone.remotecontroller",
 "com.openai.chatgpt",
 )
