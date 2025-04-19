@@ -116,9 +116,10 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 				}
 			appListItems2 = importantApps + otherApps
 		}
-		// More complex sorting
+		// More complex sorting (running/stopped apps, last used, user/system apps)
 		when (categorizeItem){
 			1 -> {
+				// pending stopped first
 				val (pendingApps,otherApps) =
 					appListItems2.partition {
 						(it.stopMode == 1 || it.stopMode == 2) && !CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)
@@ -130,6 +131,7 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 					otherApps
 			}
 			2 -> {
+				// last used
 				appListItems.getAggregatedUsageStats(356 * 2)
 				if (appListItems.usageStatsMap != null){
 					appListItems2 = appListItems2.sortedBy {
@@ -138,6 +140,7 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 				}
 			}
 			3 -> {
+				// user apps first
 				val (sysApps,userApps) =
 					appListItems2.partition {
 						CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
@@ -152,61 +155,56 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 		// update state string cache
 		appLabelCache.clear()
 		appListItems2.forEach {
+			// Current status (Playing media/Foreground/Unused/Inactive/Stopped)
+			// Stop mode (nothing/Inactive stop/Not stopping)
+			// Ignored bg free
+			// Ignored running
 			appLabelCache.put(it.pkg,StringBuilder().apply {
-				// Current status (Playing media/Foreground/Unused/Inactive/Stopped)
-				// Stop mode (nothing/Inactive stop/Not stopping)
-				// Ignored bg free
-				// Ignored running
 				append(
-				if (CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)){
-					ctx!!.getString(R.string.stopped)
-				}
-				else if (NotificationService.mediaPlaybackApps.contains(it.pkg)){
-					ctx!!.getString(R.string.playingMedia)
-				}
-				else if (appListItems.activeAccessibilityAppList.contains(it.pkg)){
-					ctx!!.getString(R.string.accessibility_svc_active);
-				}
-				else if (appListItems.enabledIMEAppList.contains(it.pkg)){
-					ctx!!.getString(R.string.ime_active);
-				}
-				else if (NotificationService.persistNotificationApps.contains(it.pkg) || appListItems.isPkgRecentlyUnused(it.pkg) == false){
-					ctx!!.getString(R.string.foreground);
-				}
-				else if (appListItems.isPkgInactive(it.pkg)){
-					ctx!!.getString(R.string.inactiveState);
-				}
-				else if (appListItems.isPkgRecentlyUnused(it.pkg)){
-					ctx!!.getString(R.string.state_unused)
-				}
-				else "")
+					when {
+						CommonFunctions.isFlagSet(it.flags, ApplicationInfo.FLAG_STOPPED) ->
+							ctx!!.getString(R.string.stopped)
+						NotificationService.mediaPlaybackApps.contains(it.pkg) ->
+							ctx!!.getString(R.string.playingMedia)
+						appListItems.activeAccessibilityAppList.contains(it.pkg) ->
+							ctx!!.getString(R.string.accessibility_svc_active)
+						appListItems.enabledIMEAppList.contains(it.pkg) ->
+							ctx!!.getString(R.string.ime_active)
+						NotificationService.persistNotificationApps.contains(it.pkg) ||
+						!appListItems.isPkgRecentlyUnused(it.pkg) ->
+							ctx!!.getString(R.string.foreground)
+						appListItems.isPkgInactive(it.pkg) ->
+							ctx!!.getString(R.string.inactiveState)
+						appListItems.isPkgRecentlyUnused(it.pkg) ->
+							ctx!!.getString(R.string.state_unused)
+						else -> ""
+					}
+				)
 				append("\n")
-				append(if (false){
-					ctx!!.getString(R.string.state_bgFree)
+				append(
+					when (it.stopMode){
+						0 ->
+							ctx!!.getString(R.string.state_notStopped)
+						1 -> if (appListItems.isAppPendingStop(it as AppItem))
+							ctx!!.getString(R.string.state_pendingStop) else
+							ctx!!.getString(R.string.state_normalStop)
+						2 -> if (appListItems.isIgnoringBatteryOptimizations(it.pkg))
+							ctx!!.getString(R.string.state_inactiveStopBattOptIgn) else
+							ctx!!.getString(R.string.state_inactiveStop)
+						else -> ""
+					}
+				)
+				if (it.ignoreRunning)
+					append("\n").append(ctx!!.getString(R.string.ignore_running))
+				if (it.ignoreBgFree)
+					append("\n").append(ctx!!.getString(R.string.ignore_bgFree))
+				if (App.prefs!!.getBoolean("detailedAppStateInfo", false)){
+					if (it.isInstalledByFDroid)
+						append("\n").append(ctx!!.getString(R.string.installed_from_fdroid))
+					if (it.isSignedByFDroid)
+						append("\n").append(ctx!!.getString(R.string.signed_by_fdroid))
 				}
-				else if (it.stopMode == 0){
-					ctx!!.getString(R.string.state_notStopped)
-				}
-				else if (it.stopMode == 1){
-					if (appListItems.isAppPendingStop(it as AppItem))
-						ctx!!.getString(R.string.state_pendingStop)
-					else
-						ctx!!.getString(R.string.state_normalStop)
-				}
-				else if (it.stopMode == 2){
-					if (appListItems.isIgnoringBatteryOptimizations(it.pkg))
-						ctx!!.getString(R.string.state_inactiveStopBattOptIgn)
-					else
-						ctx!!.getString(R.string.state_inactiveStop)
-				}
-				else "")
-				if (it.ignoreRunning) append("\n").append(ctx!!.getString(R.string.ignore_running));
-				if (it.ignoreBgFree)  append("\n").append(ctx!!.getString(R.string.ignore_bgFree));
-				if (App.prefs!!.getBoolean("detailedAppStateInfo",false)){
-					if (it.isInstalledByFDroid) append("\n").append(ctx!!.getString(R.string.installed_from_fdroid));
-					if (it.isSignedByFDroid)    append("\n").append(ctx!!.getString(R.string.signed_by_fdroid));
-				}
-			}.toString());
+			}.toString())
 		}
 		// update list
 		ctx!!.runOnUiThread {
