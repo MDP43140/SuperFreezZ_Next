@@ -43,7 +43,9 @@ class MainActivity: BaseActivity(){
 		App.appListItems = AppListItems(this)
 		App.appListItems?.loadPrefs()
 
-		appListAdapter = AppListAdapter(::onAppClicked)
+		appListAdapter = AppListAdapter()
+		appListAdapter.onItemClick = ::onAppClicked
+		appListAdapter.onItemLongClick = ::onAppClicked
 		appListAdapter.setCtx(this)
 		appListAdapter.setAppList(App.appListItems!!)
 

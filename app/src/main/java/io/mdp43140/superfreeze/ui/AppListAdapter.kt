@@ -26,9 +26,9 @@ import io.mdp43140.superfreeze.NotificationService
 import io.mdp43140.superfreeze.R
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.Locale
-class AppListAdapter(
-	private val onAppClick: ((AppItem) -> Unit)?
-): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
+class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
+	var onItemClick: ((AppItem) -> Unit)? = null
+	var onItemLongClick: ((AppItem) -> Unit)? = null
 	lateinit var appListItems: AppListItems
 	lateinit var appListItems2: List<AbstractItem>
 	private var ctx: Activity? = null
@@ -51,8 +51,8 @@ class AppListAdapter(
 	}
 	override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
 		when (holder){
-			is AppViewHolder   -> holder.bind(appListItems2[pos],this)
-			is LabelViewHolder -> holder.bind(appListItems2[pos],this)
+			is AppViewHolder   -> holder.bind(appListItems2[pos])
+			is LabelViewHolder -> holder.bind(appListItems2[pos])
 		}
 	}
 	override fun getItemCount(): Int = appListItems2.size
@@ -213,46 +213,40 @@ class AppListAdapter(
 			notifyDataSetChanged()
 		}
 	}.start()
-	class AppViewHolder(binding: AppListItemBinding): ViewHolder(binding.root) {
+	inner class AppViewHolder(binding: AppListItemBinding): ViewHolder(binding.root), View.OnClickListener, View.OnLongClickListener {
 		private val icon: ImageView = binding.icon
 		private val label: TextView = binding.label
 		private val state: TextView = binding.state
-		fun bind(app: AbstractItem, adapter: AppListAdapter){
+		init {
+			itemView.setOnClickListener(this)
+			itemView.setOnLongClickListener(this)
+		}
+		fun bind(app: AbstractItem){
 			Thread {
 				// TODO: app.icon eats 400MB+ memory!
 				if (app.icon == null) app.loadIcon()
 				// TODO: crashed randomly and according to stacktrace its from here?
 				icon.post { icon.setImageDrawable(app.icon) }
 			}.start()
-			label.text = CommonFunctions.highlightText(if (sortOrder == 1) app.pkg else app.label,adapter.searchPattern,Constants.COLOR_FG_TEXT_HIGHLIGHT)
-			state.text = adapter.appLabelCache[app.pkg]
-			if (app.isItemSelected){
-				itemView.setBackgroundColor(adapter.bgHighlight)
-			} else {
-				itemView.setBackgroundColor(0) // transparent/null
-			}
-			itemView.setOnClickListener {
-				adapter.onAppClick?.invoke(app as AppItem)
-				if (app.isItemSelected){
-					itemView.setBackgroundColor(adapter.bgHighlight)
-				} else {
-					itemView.setBackgroundColor(0) // transparent/null
-				}
-			}
-			itemView.setOnLongClickListener {
-				adapter.onAppClick?.invoke(app as AppItem)
-				if (app.isItemSelected){
-					itemView.setBackgroundColor(adapter.bgHighlight)
-				} else {
-					itemView.setBackgroundColor(0) // transparent/null
-				}
-				true
-			}
+			label.text = CommonFunctions.highlightText(if (sortOrder == 1) app.pkg else app.label,searchPattern,Constants.COLOR_FG_TEXT_HIGHLIGHT)
+			state.text = appLabelCache[app.pkg]
+			itemView.setBackgroundColor(if (app.isItemSelected) bgHighlight else 0)
+		}
+		override fun onClick(view: View) {
+			val app = appListItems2[getAbsoluteAdapterPosition()]
+			onItemClick?.invoke(app as AppItem)
+			itemView.setBackgroundColor(if (app.isItemSelected) bgHighlight else 0)
+		}
+		override fun onLongClick(view: View): Boolean {
+			val app = appListItems2[getAbsoluteAdapterPosition()]
+			onItemLongClick?.invoke(app as AppItem)
+			itemView.setBackgroundColor(if (app.isItemSelected) bgHighlight else 0)
+			return true
 		}
 	}
 	class LabelViewHolder(binding: AppListSectionHeaderBinding): ViewHolder(binding.root) {
 		private val text: TextView = binding.text
-		fun bind(app: AbstractItem, adapter: AppListAdapter){
+		fun bind(app: AbstractItem){
 			text.text = app.label
 		}
 	}
