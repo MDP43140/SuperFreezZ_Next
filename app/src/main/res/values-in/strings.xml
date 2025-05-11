@@ -6,7 +6,8 @@
 <resources>
 	<string name="about">Tentang</string>
 	<string name="accessibility_svc_active">Layanan aksesibilitas aktif</string>
-	<string name="accessibility_svc_sum">Ini memungkinkan Anda menghentikan aplikasi secara otomatis, dan melakukannya lebih cepat. SuperFreezZ Next menggunakan layanan aksesibilitas untuk mengklik "Paksa berhenti", "OK", dan "Kembali". Layanan aksesibilitas ini menemukan tombol-tombol tersebut dengan mengambil konten Setelan dan melacak kemunculannya. Di Android 9 dan berikutnya, layanan aksesibilitas juga bisa mengunci layar setelah menghentikan aplikasi.</string>
+	<string name="accessibility_svc_name">Layanan aksesibilitas SuperFreezZ Next</string>
+	<string name="accessibility_svc_sum">Layanan ini memungkinkan Anda menghentikan aplikasi secara otomatis, dan lebih cepat. SuperFreezZ Next menggunakan layanan aksesibilitas untuk mengklik "Paksa berhenti", "OK", dan "Kembali". Layanan aksesibilitas ini menemukan tombol-tombol tersebut dengan mengambil konten Setelan dan melacak kemunculannya. Di Android 9 dan berikutnya, layanan aksesibilitas juga bisa mengunci layar setelah menghentikan aplikasi.</string>
 	<string name="all_apps_stopped">Semua aplikasi sudah dihentikan.</string>
 	<string name="apps_is_selected">%d aplikasi dipilih</string>
 	<string name="apps_is_stopped">%d aplikasi dihentikan</string>
