@@ -81,6 +81,81 @@ class AppListItems(private val ctx: Context){
 		override var stopMode: Int = -1
 		override fun loadIcon(){}
 	}
+	fun sort(
+		searchPattern: String,
+		sortOrder: Int,
+		categorizeItem: Int,
+		sortReverse: Boolean,
+		showUserApp: Boolean,
+		showSystemApp: Boolean
+	): List<AbstractItem> {
+		// Filtering (User/System/Runnning/Stopped)
+		var appList2: List<AbstractItem> = appList.filter {
+			var isSystemApp = CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
+			(showUserApp && !isSystemApp) ||
+			(showSystemApp && isSystemApp)
+		}
+		// Sort by A-Z
+		appList2 = when (sortOrder){
+			1    -> appList2.sortedBy { it.pkg.lowercase() }
+			else -> appList2.sortedBy { it.label.lowercase() }
+		}
+		// Reverse
+		if (sortReverse) appList2 = appList2.reversed()
+		// Filtering (Search. placed after sorting & reverse because this filtering also separates the startsWith and contains word)
+		if (!searchPattern.isEmpty()){
+			// Show the more relevant apps (that starts with the search pattern) at the top
+			val (importantApps, otherApps) = appList2
+				.asSequence()
+				.filter {
+					// headers, matching name, matching package
+					it is LabelItem ||
+					it.label.lowercase().contains(searchPattern) ||
+					it.pkg.lowercase().contains(searchPattern)
+				}
+				.partition {
+					(if (sortOrder == 1) it.pkg else it.label).lowercase().startsWith(searchPattern)
+				}
+			appList2 = importantApps + otherApps
+		}
+		// More complex sorting (running/stopped apps, last used, user/system apps)
+		when (categorizeItem){
+			1 -> {
+				// pending stopped first
+				val (pendingApps,otherApps) =
+					appList2.partition {
+						(it.stopMode == 1 || it.stopMode == 2) && !CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)
+					}
+				appList2 =
+					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_pendingStop))) +
+					pendingApps +
+					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_otherApps))) +
+					otherApps
+			}
+			2 -> {
+				// last used
+				getAggregatedUsageStats(356 * 2)
+				if (usageStatsMap != null){
+					appList2 = appList2.sortedBy {
+						usageStatsMap?.get(it.pkg)?.lastTimeUsed ?: -1L
+					}
+				}
+			}
+			3 -> {
+				// user apps first
+				val (sysApps,userApps) =
+					appList2.partition {
+						CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
+					}
+				appList2 =
+					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_userApps))) +
+					userApps +
+					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_sysApps))) +
+					sysApps
+			}
+		}
+		return appList2
+	}
 	fun getPendingStopApps(): List<AppItem>{
 		val list = mutableListOf<AppItem>()
 		for (app in appList)

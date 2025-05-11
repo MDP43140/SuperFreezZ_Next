@@ -87,71 +87,14 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 		}
 	};
 	fun sort() = Thread {
-		// Filtering (User/System/Runnning/Stopped)
-		appListItems2 = appListItems.appList.filter {
-			var isSystemApp = CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
-			(showUserApp && !isSystemApp) ||
-			(showSystemApp && isSystemApp)
-		}
-		// Sort by A-Z
-		appListItems2 = when (sortOrder){
-			1    -> appListItems2.sortedBy { it.pkg.lowercase() }
-			else -> appListItems2.sortedBy { it.label.lowercase() }
-		}
-		// Reverse
-		if (sortReverse) appListItems2 = appListItems2.reversed()
-		// Filtering (Search. placed after sorting & reverse because this filtering also separates the startsWith and contains word)
-		if (!searchPattern.isEmpty()){
-			// Show the more relevant apps (that starts with the search pattern) at the top
-			val (importantApps, otherApps) = appListItems2
-				.asSequence()
-				.filter {
-					// headers, matching name, matching package
-					it is LabelItem ||
-					it.label.lowercase().contains(searchPattern) ||
-					it.pkg.lowercase().contains(searchPattern)
-				}
-				.partition {
-					(if (sortOrder == 1) it.pkg else it.label).lowercase().startsWith(searchPattern)
-				}
-			appListItems2 = importantApps + otherApps
-		}
-		// More complex sorting (running/stopped apps, last used, user/system apps)
-		when (categorizeItem){
-			1 -> {
-				// pending stopped first
-				val (pendingApps,otherApps) =
-					appListItems2.partition {
-						(it.stopMode == 1 || it.stopMode == 2) && !CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)
-					}
-				appListItems2 =
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_pendingStop))) +
-					pendingApps +
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_otherApps))) +
-					otherApps
-			}
-			2 -> {
-				// last used
-				appListItems.getAggregatedUsageStats(356 * 2)
-				if (appListItems.usageStatsMap != null){
-					appListItems2 = appListItems2.sortedBy {
-						appListItems.usageStatsMap?.get(it.pkg)?.lastTimeUsed ?: -1L
-					}
-				}
-			}
-			3 -> {
-				// user apps first
-				val (sysApps,userApps) =
-					appListItems2.partition {
-						CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
-					}
-				appListItems2 =
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_userApps))) +
-					userApps +
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_sysApps))) +
-					sysApps
-			}
-		}
+		appListItems2 = appListItems.sort(
+			searchPattern,
+			sortOrder,
+			categorizeItem,
+			sortReverse,
+			showUserApp,
+			showSystemApp
+		)
 		// update state string cache
 		appLabelCache.clear()
 		appListItems2.forEach {
