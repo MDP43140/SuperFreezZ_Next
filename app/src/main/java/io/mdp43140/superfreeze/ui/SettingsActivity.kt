@@ -111,73 +111,65 @@ class SettingsActivity: BaseActivity(){
 		lateinit var exportFileLauncher: ActivityResultLauncher<String>
 		override fun onCreate(savedInstanceState: Bundle?) {
 			super.onCreate(savedInstanceState)
-			findPreference<Preference>("dataImport")?.onPreferenceClickListener =
-				Preference.OnPreferenceClickListener {
-					importFileLauncher.launch(arrayOf("application/json"))
-					false
-				}
-			findPreference<Preference>("dataExport")?.onPreferenceClickListener =
-				Preference.OnPreferenceClickListener {
-					exportFileLauncher.launch("SuperFreezZ_Next_settings.json")
-					false
-				}
-			findPreference<Preference>("theme")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					val themeStr = resources.getStringArray(R.array.themes_key)
-					AppCompatDelegate.setDefaultNightMode(when (value){
-						themeStr[1] -> AppCompatDelegate.MODE_NIGHT_NO
-						themeStr[2] -> AppCompatDelegate.MODE_NIGHT_YES
-						else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-					})
-					true
-				}
-			findPreference<Preference>("workMode")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					val modeStr = resources.getStringArray(R.array.workModes_key)
-					val dialogBuilder = MaterialAlertDialogBuilder(requireActivity())
-					App.workMode = value as String
-					when (value){
-						modeStr[0] -> {
-							// nothing for now...
-							true
-						}
-						modeStr[1] -> {
-							CommonFunctions.ensureAccessibilityGranted(requireActivity())
-							true
-						}
-						modeStr[2] -> {
-							// cache stuff...
-							if (CommonFunctions.checkRoot(requireActivity()) == true){
-								Toast.makeText(requireActivity(),"Root granted!",Toast.LENGTH_SHORT).show()
-							//FreezeService.stopAccessibilityService()
-							}
-							true
-						}
-						else -> false
+			findPreference<Preference>("dataImport")?.setOnPreferenceClickListener {
+				importFileLauncher.launch(arrayOf("application/json"))
+				false
+			}
+			findPreference<Preference>("dataExport")?.setOnPreferenceClickListener {
+				exportFileLauncher.launch("SuperFreezZ_Next_settings.json")
+				false
+			}
+			findPreference<Preference>("theme")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				val themeStr = resources.getStringArray(R.array.themes_key)
+				AppCompatDelegate.setDefaultNightMode(when (value){
+					themeStr[1] -> AppCompatDelegate.MODE_NIGHT_NO
+					themeStr[2] -> AppCompatDelegate.MODE_NIGHT_YES
+					else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+				})
+				true
+			}
+			findPreference<Preference>("workMode")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				val modeStr = resources.getStringArray(R.array.workModes_key)
+				val dialogBuilder = MaterialAlertDialogBuilder(requireActivity())
+				App.workMode = value as String
+				when (value){
+					modeStr[0] -> {
+						// nothing for now...
+						true
 					}
-				}
-			findPreference<Preference>("freezeWhenScreenOff")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					if (value == true && App.workMode == "accessibility"){
+					modeStr[1] -> {
 						CommonFunctions.ensureAccessibilityGranted(requireActivity())
+						true
 					}
-					true
+					modeStr[2] -> {
+						// cache stuff...
+						if (CommonFunctions.checkRoot(requireActivity()) == true){
+							Toast.makeText(requireActivity(),"Root granted!",Toast.LENGTH_SHORT).show()
+						//FreezeService.stopAccessibilityService()
+						}
+						true
+					}
+					else -> false
 				}
-			findPreference<Preference>("usageStatsAccess")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					if (value == true) CommonFunctions.ensureUsageAccessGranted(requireActivity())
-					true
+			}
+			findPreference<Preference>("freezeWhenScreenOff")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				if (value == true && App.workMode == "accessibility"){
+					CommonFunctions.ensureAccessibilityGranted(requireActivity())
 				}
-			findPreference<Preference>("mediaPlaybackNotification")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
-					true
-				}
-			findPreference<Preference>("persistentNotification")?.onPreferenceChangeListener =
-				Preference.OnPreferenceChangeListener { _:Preference, value:Any? ->
-					if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
-					true
-				}
+				true
+			}
+			findPreference<Preference>("usageStatsAccess")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				if (value == true) CommonFunctions.ensureUsageAccessGranted(requireActivity())
+				true
+			}
+			findPreference<Preference>("mediaPlaybackNotification")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
+				true
+			}
+			findPreference<Preference>("persistentNotification")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
+				if (value == true) CommonFunctions.ensureNotificationAccessGranted(requireActivity())
+				true
+			}
 		}
 		override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 			setPreferencesFromResource(R.xml.prefs,rootKey)
