@@ -47,7 +47,7 @@
 			android:parentActivityName=".ui.MainActivity" />
 		<service
 			android:exported="false"
-			android:label="SuperFreeze Accessibility Service"
+			android:label="@string/accessibility_svc_name"
 			android:name=".FreezeService"
 			android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
 			<intent-filter>
