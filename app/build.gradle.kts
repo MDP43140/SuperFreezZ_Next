@@ -96,10 +96,13 @@ android {
 			excludes += listOf(
 				"assets/dexopt/baseline.prof",
 				"assets/dexopt/baseline.profm",
+				"junit/runner/logo.gif",
+				"junit/runner/smalllogo.gif",
 				"kotlin/**.kotlin_builtins",
 				"META-INF/**", // including com/android/build/gradle/app-metadata.properties, services/**, version-control-info.textproto
 				"DebugProbesKt.bin",
-				"kotlin-tooling-metadata.json"
+				"kotlin-tooling-metadata.json",
+				"LICENSE-junit.txt"
 			)
 		}
 	}
@@ -138,8 +141,7 @@ dependencies {
 	implementation(libs.fastscroll)
 	// baseline profile
 	"baselineProfile"(project(":baselineprofile"))
-
 	// Tests (AndroidJUnitRunner & JUnit Rules, Assertions)
-	implementation(libs.androidx.test.runner)
-	implementation(libs.androidx.test.junit)
+	androidTestImplementation(libs.androidx.test.runner)
+	androidTestImplementation(libs.androidx.test.junit)
 }
