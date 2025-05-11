@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import io.mdp43140.ael.ErrorLogger
+import io.mdp43140.superfreeze.util.FreezeUtil
 import io.mdp43140.superfreeze.ui.MainActivity
 class App: Application(){
 	private var runCount = 0
@@ -51,6 +52,7 @@ class App: Application(){
 	}
 	companion object {
 		var appListItems: AppListItems? = null
+		var freezeUtil = FreezeUtil()
 		var prefs: SharedPreferences? = null
 		var workMode: String? = null
 	}

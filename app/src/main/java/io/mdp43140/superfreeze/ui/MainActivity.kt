@@ -114,7 +114,7 @@ class MainActivity: BaseActivity(){
 		}
 		if (currSelectedApp.isEmpty()){
 			// stop all pending stop apps
-			FreezeShortcutActivity.freezeApp(this)
+			App.freezeUtil.freezeApp(this)
 		}
 		else {
 			var prevState: MutableMap<String,tempAppItem> = mutableMapOf()
@@ -124,7 +124,7 @@ class MainActivity: BaseActivity(){
 				item.ignoreBgFree   = true
 				item.ignoreRunning  = true
 			}
-			FreezeShortcutActivity.freezeApp(this,currSelectedApp)
+			App.freezeUtil.freezeApp(this,currSelectedApp)
 			for (item in currSelectedApp){
 				// TODO: there is bug which had 2 same app selected,
 				// and when stopping, it tries to revert state, but for later reverts,
