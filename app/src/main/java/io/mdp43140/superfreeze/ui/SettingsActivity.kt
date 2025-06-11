@@ -73,7 +73,7 @@ class SettingsActivity: BaseActivity(){
 			// TODO - warning - Type mismatch: inferred type is (Mutable)Map<String!, *>? but (MutableMap<Any?, Any?>..Map<*, *>) was expected
 			val jsonData = JSONObject(App.prefs?.all)
 			jsonData.put("apps",JSONObject(AppListItems.prefs?.all))
-			CommonFunctions.writeContentToUri(this,uri,jsonData.toString())
+			CommonFunctions.writeContentToUri(this,uri,jsonData.toString(2))
 			Snackbar.make(
 				binding.root,
 				"Settings exported!",
