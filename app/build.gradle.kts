@@ -15,8 +15,8 @@ kotlin {
 	jvmToolchain(21)
 }
 android {
-	compileSdk = 35
-	buildToolsVersion = "35.0.0"
+	compileSdk = 36
+	buildToolsVersion = "36.0.0"
 	namespace = "io.mdp43140.superfreeze"
 	defaultConfig {
 		applicationId = "io.mdp43140.superfreeze_next"
@@ -65,12 +65,6 @@ android {
 			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 			signingConfig = signingConfigs.getByName("main")
 			vcsInfo.include = false
-			postprocessing {
-				isRemoveUnusedCode = true
-				isRemoveUnusedResources = true
-				isObfuscate = false
-				isOptimizeCode = true
-			}
 		}
 	}
 	androidResources {
