@@ -11,6 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+//import android.view.ViewGroup.MarginLayoutParams
+import android.view.WindowInsets
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,6 +31,52 @@ class MainActivity: BaseActivity(){
 	override fun onCreate(savedInstanceState: Bundle?){
 		super.onCreate(savedInstanceState)
 		binding = ActivityMainBinding.inflate(layoutInflater)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+			// Handle Edge-to-edge
+			binding.appsList.setOnApplyWindowInsetsListener { v, windowInsets ->
+				val insets = windowInsets.getInsets(
+					WindowInsets.Type.systemBars() or
+					WindowInsets.Type.displayCutout() or
+					WindowInsets.Type.ime()
+				)
+				v.setPadding(
+					insets.left,
+					insets.top,
+					insets.right,
+					insets.bottom + 144
+				)
+				WindowInsets.CONSUMED
+			}
+			binding.toolbar.setOnApplyWindowInsetsListener { v, windowInsets ->
+				val insets = windowInsets.getInsets(
+					WindowInsets.Type.systemBars() or
+					WindowInsets.Type.displayCutout() or
+					WindowInsets.Type.ime()
+				)
+				v.setPadding(
+					insets.left,
+					v.paddingTop,
+					insets.right,
+					insets.bottom
+				)
+				WindowInsets.CONSUMED
+			}
+			/* Not used for now because its so buggy
+			binding.fab.setOnApplyWindowInsetsListener { v, windowInsets ->
+				val insets = windowInsets.getInsets(
+					WindowInsets.Type.systemBars() or
+					WindowInsets.Type.displayCutout() or
+					WindowInsets.Type.ime()
+				)
+				(v.layoutParams as MarginLayoutParams).let { lp ->
+					lp.leftMargin = insets.left
+					lp.rightMargin = insets.right
+					lp.bottomMargin = insets.bottom
+				}
+				WindowInsets.CONSUMED
+			}
+			*/
+		}
 		binding.apply {
 			setContentView(root)
 			swiperefresh.setOnRefreshListener {

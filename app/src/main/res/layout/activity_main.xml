@@ -10,41 +10,33 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	tools:context=".ui.MainActivity">
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:orientation="vertical">
-		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-			android:id="@+id/swiperefresh"
-			android:layout_width="fill_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:orientation="vertical">
-			<!--ListView
-				android:fastScrollEnabled="true"
-				android:orientation="vertical" /-->
-			<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/appsList"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:scrollbars="none" />
-		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-		<com.google.android.material.appbar.MaterialToolbar
-			android:clipToPadding="false"
-			android:id="@+id/toolbar"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:title="@string/app_name" />
-	</LinearLayout>
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+		android:id="@+id/swiperefresh"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/appsList"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scrollbars="none"
+			android:clipToPadding="false" />
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+	<com.google.android.material.appbar.MaterialToolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:title="@string/app_name" />
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/fab"
 		android:src="@drawable/ic_stop"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentEnd="true"
-		android:layout_alignParentBottom="true"
 		android:layout_gravity="bottom|end"
-		android:layout_marginEnd="15dp"
-		android:layout_marginBottom="80dp"
-		android:tooltipText="@string/stop" />
+		android:layout_marginEnd="16dp"
+		android:layout_marginBottom="96dp"
+		android:tooltipText="@string/stop"
+		app:layout_anchor="@id/toolbar"
+		app:layout_anchorGravity="top|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

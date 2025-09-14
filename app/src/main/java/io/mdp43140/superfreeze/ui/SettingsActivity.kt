@@ -7,10 +7,12 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatDelegate
@@ -89,6 +91,23 @@ class SettingsActivity: BaseActivity(){
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		binding = ActivitySettingsBinding.inflate(layoutInflater)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+			// Handle Edge-to-edge
+			binding.root.setOnApplyWindowInsetsListener { v, windowInsets ->
+				val insets = windowInsets.getInsets(
+					WindowInsets.Type.systemBars() or
+					WindowInsets.Type.displayCutout()
+				)
+				v.setPadding(
+					insets.left,
+					insets.top,
+					insets.right,
+					v.paddingBottom
+				)
+				WindowInsets.CONSUMED
+			}
+		}
+		window.decorView.fitsSystemWindows = true
 		setContentView(binding.root)
 		loadFragment()
 	}

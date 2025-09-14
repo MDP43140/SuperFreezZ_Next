@@ -10,14 +10,9 @@
 		<item name="colorOnPrimary">@color/fg</item>
 		<item name="colorOnSecondary">@color/fg</item>
 		<item name="colorAccent">?colorPrimary</item>
-		<item name="android:statusBarColor">?colorSurface</item>
-		<item name="android:navigationBarColor">?colorSurface</item>
 		<item name="preferenceTheme">@style/AppPreferenceThemeOverlay</item>
 		<!-- fixes some UI issues on MIUI devices -->
 		<item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-		<!-- Temporary workaround for visual bug on Android 15 until edge-to-edge is implemented -->
-		<!--item name="android:fitsSystemWindows" tools:targetApi="35">true</item-->
-		<item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
 	</style>
 	<style name="AppTheme.NoActionBar" parent="AppTheme">
 		<item name="windowActionBar">false</item>
