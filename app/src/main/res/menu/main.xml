@@ -61,7 +61,7 @@
 	<item
 		android:id="@+id/settings"
 		android:title="@string/settings"
-		app:showAsAction="ifRoom" />
+		app:showAsAction="never" />
 	<group
 		app:showAsAction="never">
 		<!--item
