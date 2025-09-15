@@ -1,4 +1,5 @@
-## SuperFreezZ Next
+<center><h2>SuperFreezZ Next</h2>
+<img src="../app/src/main/res/mipmap-xxhdpi/ic_launcher.png"></center>
 An Android app that makes stopping bad apps easier.
 Inspired by Greenify, SuperFreezZ, and Battery Tool
 
