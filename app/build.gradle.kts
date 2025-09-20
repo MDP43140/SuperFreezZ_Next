@@ -22,8 +22,8 @@ android {
 		applicationId = "io.mdp43140.superfreeze_next"
 		minSdk = 24
 		targetSdk = compileSdk
-		versionCode = 9
-		versionName = "1.4.3"
+		versionCode = 10
+		versionName = "1.4.4"
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		testInstrumentationRunnerArguments["disableAnalytics"] = "true"
 		vectorDrawables {
