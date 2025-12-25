@@ -184,7 +184,7 @@ class MainActivity: BaseActivity(){
 				prevState.remove(item.pkg)
 			}
 		}
-		appListAdapter!!.sort()
+		appListAdapter.sort()
 		binding.swiperefresh.post {
 			binding.swiperefresh.isRefreshing = false
 		}
@@ -194,7 +194,7 @@ class MainActivity: BaseActivity(){
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
 			menu.setGroupDividerEnabled(true);
 		}
-		this.menu = menu!!
+		this.menu = menu
 		menu.findItem(R.id.sort_reverse).isChecked = AppListAdapter.sortReverse
 		menu.findItem(R.id.sort_user).isChecked = AppListAdapter.showUserApp
 		menu.findItem(R.id.sort_system).isChecked = AppListAdapter.showSystemApp
@@ -230,7 +230,7 @@ class MainActivity: BaseActivity(){
 			R.id.settings -> startActivity(Intent(this,SettingsActivity::class.java))
 			R.id.stop_off -> {
 				setRadioMenuSelected(item,R.id.stop_method)
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 				for (app in currSelectedApp){
 					app.stopMode = 0
 					App.appListItems?.storeDataToPrefs(app)
@@ -238,7 +238,7 @@ class MainActivity: BaseActivity(){
 			}
 			R.id.stop_normal -> {
 				setRadioMenuSelected(item,R.id.stop_method)
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 				for (app in currSelectedApp){
 					app.stopMode = 1
 					App.appListItems?.storeDataToPrefs(app)
@@ -246,7 +246,7 @@ class MainActivity: BaseActivity(){
 			}
 			R.id.stop_inactive -> {
 				setRadioMenuSelected(item,R.id.stop_method)
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 				for (app in currSelectedApp){
 					app.stopMode = 2
 					App.appListItems?.storeDataToPrefs(app)
@@ -255,7 +255,7 @@ class MainActivity: BaseActivity(){
 			R.id.ignoreRunning -> {
 				menu.findItem(R.id.ignoreRunning).isChecked =
 				!menu.findItem(R.id.ignoreRunning).isChecked
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 				for (app in currSelectedApp){
 					app.ignoreRunning = !app.ignoreRunning
 					App.appListItems?.storeDataToPrefs(app)
@@ -264,7 +264,7 @@ class MainActivity: BaseActivity(){
 			R.id.ignoreBgFree -> {
 				menu.findItem(R.id.ignoreBgFree).isChecked =
 				!menu.findItem(R.id.ignoreBgFree).isChecked
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 				for (app in currSelectedApp){
 					app.ignoreBgFree = !app.ignoreBgFree
 					App.appListItems?.storeDataToPrefs(app)
@@ -274,55 +274,55 @@ class MainActivity: BaseActivity(){
 				it.sortReverse = !it.sortReverse
 				item.isChecked = it.sortReverse
 				App.prefs!!.edit().putBoolean("sortReverse",item.isChecked).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.sort_user -> AppListAdapter.let {
 				it.showUserApp = !it.showUserApp
 				item.isChecked = it.showUserApp
 				App.prefs!!.edit().putBoolean("showUserApp",item.isChecked).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.sort_system -> AppListAdapter.let {
 				it.showSystemApp = !it.showSystemApp
 				item.isChecked = it.showSystemApp
 				App.prefs!!.edit().putBoolean("showSystemApp",item.isChecked).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.sort_label -> {
 				setRadioMenuSelected(item, R.id.sortByOrder)
 				AppListAdapter.sortOrder = 0
 				App.prefs!!.edit().putInt("sortBy",0).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.sort_pkg -> {
 				setRadioMenuSelected(item, R.id.sortByOrder)
 				AppListAdapter.sortOrder = 1
 				App.prefs!!.edit().putInt("sortBy",1).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.categorize_none -> {
 				setRadioMenuSelected(item, R.id.categorize)
 				AppListAdapter.categorizeItem = 0
 				App.prefs!!.edit().putInt("categorizeItem",0).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.categorize_appState -> {
 				setRadioMenuSelected(item, R.id.categorize)
 				AppListAdapter.categorizeItem = 1
 				App.prefs!!.edit().putInt("categorizeItem",1).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.categorize_unusedFirst -> {
 				setRadioMenuSelected(item, R.id.categorize)
 				AppListAdapter.categorizeItem = 2
 				App.prefs!!.edit().putInt("categorizeItem",2).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			R.id.categorize_userSystem -> {
 				setRadioMenuSelected(item, R.id.categorize)
 				AppListAdapter.categorizeItem = 3
 				App.prefs!!.edit().putInt("categorizeItem",3).apply()
-				appListAdapter!!.sort()
+				appListAdapter.sort()
 			}
 			else -> return super.onOptionsItemSelected(item)
 		}

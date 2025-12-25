@@ -127,9 +127,9 @@ class AppListItems(private val ctx: Context){
 						(it.stopMode == 1 || it.stopMode == 2) && !CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_STOPPED)
 					}
 				appList2 =
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_pendingStop))) +
+					listOf<AbstractItem>(LabelItem(ctx.getString(R.string.headerSection_pendingStop))) +
 					pendingApps +
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_otherApps))) +
+					listOf<AbstractItem>(LabelItem(ctx.getString(R.string.headerSection_otherApps))) +
 					otherApps
 			}
 			2 -> {
@@ -148,9 +148,9 @@ class AppListItems(private val ctx: Context){
 						CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
 					}
 				appList2 =
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_userApps))) +
+					listOf<AbstractItem>(LabelItem(ctx.getString(R.string.headerSection_userApps))) +
 					userApps +
-					listOf<AbstractItem>(LabelItem(ctx!!.getString(R.string.headerSection_sysApps))) +
+					listOf<AbstractItem>(LabelItem(ctx.getString(R.string.headerSection_sysApps))) +
 					sysApps
 			}
 		}
