@@ -12,7 +12,7 @@ plugins {
 }
 kotlin {
 	// Used as defaults for android.kotlinOptions.jvmTarget and android.compileOptions.*Compatibility
-	jvmToolchain(21)
+	jvmToolchain(25)
 }
 android {
 	compileSdk = 36
