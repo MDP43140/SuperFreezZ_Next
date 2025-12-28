@@ -133,31 +133,32 @@ val badPackages = hashSetOf<String>(
 "tv.hooq.android",
 "xyz.gl.moviein",
 
-// Financial apps (they're privacy
-// nightmare and sends spam notifications
-// every hour)
+// Financial apps (includes E-commerce as well)
+// (they're privacy nightmare and oftentimes
+// sends spam notifications every hour)
+"com.alfamart.alfagift",
+"com.bca",
 "com.bca.mybca.omni.android",
 "com.bcadigital.blu",
+"com.bpjstku",
+"com.dafturn.mypertamina",
 "com.finaccel.android",
 "com.gojek.app",
 "com.gojek.gopay",
 "com.grabtaxi.passenger",
+"com.lazada.android",
+"com.shopee.id",
+"com.shopee.lite.id",
+"com.shopeepay.id",
+"com.tokopedia.tkpd",
 "id.bmri.livin",
 "id.bni.wondr",
 "id.co.bni.tapcashgo",
 "id.co.bri.brimo",
 "id.dana",
 "io.silvrr.installment",
+"mypoin.indomaret.android",
 "ovo.id",
-
-// E-commerce apps (or similiar)
-// Same as financial apps, but worse
-"com.dafturn.mypertamina",
-"com.lazada.android",
-"com.shopee.id",
-"com.shopee.lite.id",
-"com.shopeepay.id",
-"com.tokopedia.tkpd",
 
 // SIM Companion app (dont need to run in background,
 // they mostly send spam notification)
@@ -178,6 +179,7 @@ val badPackages = hashSetOf<String>(
 "com.indosk.sensid",
 "com.intsig.camscanner",
 "com.lenovo.anyshare.gps",
+"com.openai.chatgpt",
 "com.opera.browser",
 "com.simejikeyboard",
 "com.speedy.vpn",
@@ -203,5 +205,4 @@ val badPackages = hashSetOf<String>(
 "com.google.android.music",
 "com.google.android.videos",
 "com.duokan.phone.remotecontroller",
-"com.openai.chatgpt",
 )
