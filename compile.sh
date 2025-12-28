@@ -6,8 +6,16 @@ ops="$1"
 # Make sure to use correct Java version (compiler
 # really hates incorrect version down to single digit)
 for i in \
-	/usr/lib/jvm/java-21-openjdk-amd64 \
-	/usr/lib/jvm/temurin-24-jdk-amd64;do
+	/usr/lib/jvm/temurin-25-jdk-amd64 \
+	/usr/lib/jvm/temurin-24-jdk-amd64 \
+	/usr/lib/jvm/temurin-23-jdk-amd64 \
+	/usr/lib/jvm/temurin-22-jdk-amd64 \
+	/usr/lib/jvm/temurin-21-jdk-amd64 \
+	/usr/lib/jvm/java-25-openjdk-amd64 \
+	/usr/lib/jvm/java-24-openjdk-amd64 \
+	/usr/lib/jvm/java-23-openjdk-amd64 \
+	/usr/lib/jvm/java-22-openjdk-amd64 \
+	/usr/lib/jvm/java-21-openjdk-amd64;do
 	if [ -d "$i" ];then
 		JAVA_HOME="$i"
 		break
