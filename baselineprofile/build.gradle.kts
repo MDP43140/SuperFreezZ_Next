@@ -6,16 +6,16 @@ plugins {
 	alias(libs.plugins.kotlin.android)
 }
 android {
-	buildToolsVersion = "35.0.0"
-	compileSdk = 35
+	buildToolsVersion = "36.0.0"
+	compileSdk = 36
 	namespace = "io.mdp43140.baselineprofile"
 	java {
 		toolchain {
-			languageVersion = JavaLanguageVersion.of(21)
+			languageVersion = JavaLanguageVersion.of(25)
 		}
 	}
 	kotlin {
-		jvmToolchain(21)
+		jvmToolchain(25)
 	}
 	defaultConfig {
 		minSdk = 24
