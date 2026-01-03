@@ -55,6 +55,7 @@ val goodPackages = hashSetOf(
 "xzr.perfmon",
 
 // Reputable F-Droid (and IzzyOnDroid) apps
+"app.lawnchair",
 "app.marlboroadvance.mpvex",
 "proton.android.pass",
 "proton.android.pass.fdroid",
