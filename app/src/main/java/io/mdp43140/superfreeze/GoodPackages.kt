@@ -36,10 +36,10 @@ val goodPackages = hashSetOf(
 "com.apkupdater.ci",
 "com.brave.browser",
 "com.collabora.libreoffice",
+"com.dark.tool_neuron",
 "com.dede.android_eggs",
 "com.kieronquinn.app.taptap",
 "com.onlyoffice.documents",
-"com.raival.file.explorer", // replaced by newer compose version
 "com.raival.compose.file.explorer",
 "com.x8bit.bitwarden",
 "io.github.vvb2060.keyattestation",
@@ -77,7 +77,6 @@ val goodPackages = hashSetOf(
 "com.f0x1d.logfox",
 "com.foobnix.pro.pdf.reader",
 "com.foxdebug.acode",
-"com.fsck.k9", // replaced by net.thunderbird.android
 "com.github.catfriend1.syncthingandroid",
 "com.github.catfriend1.syncthingfork",
 "com.github.muellerma.nfcreader",
@@ -88,7 +87,6 @@ val goodPackages = hashSetOf(
 "com.maltaisn.notes.sync",
 "com.mirfatif.noorulhuda",
 "com.mirfatif.permissionmanagerx",
-"com.nutomic.syncthingandroid", // deprecated, replaced by com.github.catfriend1.syncthingandroid (v1) or com.github.catfriend1.syncthingandroid (latest)
 "com.nononsenseapps.feeder",
 "com.nvllz.stepsy",
 "com.omgodse.notally",
@@ -98,9 +96,7 @@ val goodPackages = hashSetOf(
 "com.reecedunn.espeak",
 "com.rk.xededitor",
 "com.sadellie.unitto",
-"com.sanmer.mrepo", // no longer maintained, replaced by com.dergoogler.mmrl
 "com.shifthackz.aisdv1.app.foss",
-"com.slash.batterychargelimit", // no longer maintained, replaced by io.github.muntashirakon.bcl
 "com.smartpack.kernelmanager",
 "com.smartpack.kernelmanager.release",
 "com.termux",
