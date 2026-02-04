@@ -6,9 +6,8 @@ import java.util.Properties // used by signingConfigs.release (ksProps variable)
 import com.android.build.gradle.tasks.PackageAndroidArtifact // used by empty app-metadata.properties
 
 plugins {
-	alias(libs.plugins.androidx.baselineprofile)
 	alias(libs.plugins.android.application)
-	alias(libs.plugins.kotlin.android)
+	//alias(libs.plugins.androidx.baselineprofile)
 }
 kotlin {
 	// Used as defaults for android.kotlinOptions.jvmTarget and android.compileOptions.*Compatibility
@@ -100,9 +99,10 @@ android {
 			)
 		}
 	}
-	baselineProfile {
-		dexLayoutOptimization = true
-	}
+	// Disabled for now because androidx.baselineprofile doesnt support AGP 9.0.0
+	//baselineProfile {
+	//	dexLayoutOptimization = true
+	//}
 	dependenciesInfo {
 		// https://gitlab.com/IzzyOnDroid/repo/-/issues/491
 		includeInApk = false
@@ -134,7 +134,7 @@ dependencies {
 	// Scroll bar
 	implementation(libs.fastscroll)
 	// baseline profile
-	"baselineProfile"(project(":baselineprofile"))
+	//"baselineProfile"(project(":baselineprofile"))
 	// Tests (AndroidJUnitRunner & JUnit Rules, Assertions)
 	androidTestImplementation(libs.androidx.test.runner)
 	androidTestImplementation(libs.androidx.test.junit)

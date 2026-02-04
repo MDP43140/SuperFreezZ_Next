@@ -3,7 +3,6 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 plugins {
 	alias(libs.plugins.android.test)
 	alias(libs.plugins.androidx.baselineprofile)
-	alias(libs.plugins.kotlin.android)
 }
 android {
 	buildToolsVersion = "36.0.0"

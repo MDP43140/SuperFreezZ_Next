@@ -26,4 +26,4 @@ dependencyResolutionManagement {
 //}
 
 rootProject.name = "SuperFreezZ Next"
-include(":app",":baselineprofile")
+include(":app") // ":baselineprofile"
