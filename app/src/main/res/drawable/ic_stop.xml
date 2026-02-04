@@ -1,11 +1,11 @@
 <!--
 	~ SPDX-FileCopyrightText: 2016-2025 Google
-	~ SPDX-FileCopyrightText: 2025 MDP43140
+	~ SPDX-FileCopyrightText: 2025-2026 MDP43140
 	~ SPDX-License-Identifier: Apache-2.0
 	~ SPDX-License-Identifier: GPL-3.0-or-later
 	~
 	~ I made this icon by combining 2 icons from Google Material Icons
-	~ not sure how i would handle licensing on this one.
+	~ not sure how I should handle licensing on this one.
 	-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
 	android:width="24dp"
