@@ -6,6 +6,6 @@ plugins {
 tasks.withType(JavaCompile::class.java){
 	options.compilerArgs.add("-Xlint:all")
 }
-tasks.register("clean",Delete::class){
+tasks.register<Delete>("clean"){
 	delete(rootProject.layout.buildDirectory)
 }

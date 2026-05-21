@@ -3,7 +3,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 import java.util.Properties // used by signingConfigs.release (ksProps variable)
+import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.tasks.PackageAndroidArtifact // used by empty app-metadata.properties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
 	alias(libs.plugins.android.application)
@@ -11,9 +13,8 @@ plugins {
 }
 kotlin {
 	// Used as defaults for android.kotlinOptions.jvmTarget and android.compileOptions.*Compatibility
-	jvmToolchain(25)
 }
-android {
+configure<ApplicationExtension> {
 	compileSdk = 36
 	buildToolsVersion = "36.0.0"
 	namespace = "io.mdp43140.superfreeze"
