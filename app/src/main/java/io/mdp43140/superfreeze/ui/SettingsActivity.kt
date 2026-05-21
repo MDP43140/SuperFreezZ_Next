@@ -62,7 +62,7 @@ class SettingsActivity: BaseActivity(){
 				if (text == "") "Settings imported!" else "Unsupported data type:${text}",
 				Snackbar.LENGTH_SHORT
 			).let {
-				it.setAction(getString(android.R.string.ok)){ _: View ->
+				it.setAction(android.R.string.ok){ _: View ->
 					it.dismiss()
 				}
 				it.show()
@@ -81,7 +81,7 @@ class SettingsActivity: BaseActivity(){
 				"Settings exported!",
 				Snackbar.LENGTH_SHORT
 			).let {
-				it.setAction(getString(android.R.string.ok)){ _: View ->
+				it.setAction(android.R.string.ok){ _: View ->
 					it.dismiss()
 				}
 				it.show()

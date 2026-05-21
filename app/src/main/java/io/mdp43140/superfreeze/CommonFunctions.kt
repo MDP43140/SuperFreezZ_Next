@@ -76,7 +76,7 @@ object CommonFunctions {
 			MaterialAlertDialogBuilder(ctx)
 				.setTitle("Grant accessibility service")
 				.setMessage("Accessibility service is used for automating daunting force-stop tasks for non-root method")
-				.setPositiveButton(ctx.getString(android.R.string.ok)){ dialogInterface: DialogInterface, _: Int ->
+				.setPositiveButton(android.R.string.ok){ dialogInterface: DialogInterface, _: Int ->
 					ctx.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
 						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 						addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -87,7 +87,7 @@ object CommonFunctions {
 					})
 					dialogInterface.dismiss()
 				}
-				.setNegativeButton(ctx.getString(android.R.string.cancel)){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+				.setNegativeButton(android.R.string.cancel){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
 				.show()
 		}
 	}
@@ -95,7 +95,7 @@ object CommonFunctions {
 		MaterialAlertDialogBuilder(ctx)
 			.setTitle("Grant notification access")
 			.setMessage("Notification access is used to get app notifications (eg. apps that plays media, and apps that has persistent notification)")
-			.setPositiveButton(ctx.getString(android.R.string.ok)){ dialogInterface: DialogInterface, _: Int ->
+			.setPositiveButton(android.R.string.ok){ dialogInterface: DialogInterface, _: Int ->
 				ctx.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS).apply {
 					addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 					addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -106,14 +106,14 @@ object CommonFunctions {
 				})
 				dialogInterface.dismiss()
 			}
-			.setNegativeButton(ctx.getString(android.R.string.cancel)){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+			.setNegativeButton(android.R.string.cancel){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
 			.show()
 	}
 	fun ensureUsageAccessGranted(ctx: Activity){
 		MaterialAlertDialogBuilder(ctx)
 			.setTitle("Grant usage access")
 			.setMessage("Usage statistics is used for last app usage")
-			.setPositiveButton(ctx.getString(android.R.string.ok)){ dialogInterface: DialogInterface, _: Int ->
+			.setPositiveButton(android.R.string.ok){ dialogInterface: DialogInterface, _: Int ->
 				ctx.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).apply {
 					addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 					addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -124,7 +124,7 @@ object CommonFunctions {
 				})
 				dialogInterface.dismiss()
 			}
-			.setNegativeButton(ctx.getString(android.R.string.cancel)){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+			.setNegativeButton(android.R.string.cancel){ dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
 			.show()
 	}
 }
