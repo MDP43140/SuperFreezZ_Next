@@ -57,13 +57,13 @@
 	<string name="restrictStandby_title">Root: Setel mode standby aplikasi ke langka/terbatas</string>
 	<string name="restrictStandby_sum">Menghindari aplikasi dari sering berjalan di latar-belakang. Direset saat aplikasi di buka lagi</string>
 	<string name="reverse">Balikkan</string>
-	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode Aksesibilitas/Manual</string>
+	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode lain</string>
 	<string name="search">Cari</string>
 	<string name="setGlobHibernation_title">Root: Setel status hibernasi global aplikasi</string>
 	<string name="setGlobHibernation_sum">Opsi ini bukan mode hibernasi Greenify. Mengaktifkan opsi ini Akan mengatur status hibernasi, yang akan membersihkan cache (Android 12+) dan mengatur ulang izin (Android 11+, Android 6-10 dengan GmsCore, gunakan dengan risiko ditanggung sendiri)</string>
 	<string name="setInactiveBeforeNormalStop_title">Root: Atur inaktif sebelum berhenti normal</string>
 	<string name="setInactiveBeforeNormalStop_sum">Untuk memastikan Android tidak mentrigger aplikasi yang dihentikan dari berjalan di latar-belakang</string>
-	<string name="setRestrictionLvl_title">Root: Level pembatasan latar-belakang aplikasi</string>
+	<string name="setRestrictionLvl_title">Root: Tingkat pembatasan latar-belakang aplikasi</string>
 	<string name="setRestrictionLvl_sum">Mengubah perilaku standby aplikasi</string>
 	<string name="setStopType_title">Root: Tipe berhenti</string>
 	<string name="setStopType_sum">Mengubah bagaimana aplikasi dihentikan.</string>

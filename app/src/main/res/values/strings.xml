@@ -58,7 +58,7 @@
 	<string name="restrictStandby_title">Root: Set app standby mode to rare/restricted</string>
 	<string name="restrictStandby_sum">Avoids apps from frequently running in background. Resets when the app is opened again</string>
 	<string name="reverse">Reverse</string>
-	<string name="root_not_avail">Root method is not available, please either grant root access, or use Accesibility/Manual method</string>
+	<string name="root_not_avail">Root method is not available, please either grant root access, or use other methods</string>
 	<string name="search">Search</string>
 	<string name="setGlobHibernation_title">Root: Set app global hibernation state</string>
 	<string name="setGlobHibernation_sum">This is not Greenify\'s Hibernation mode. Will set hibernation state, which clears cache (Android 12+), and resets permission (Android 11+, Android 6-10 with GmsCore, use at your own inconvenience)</string>
