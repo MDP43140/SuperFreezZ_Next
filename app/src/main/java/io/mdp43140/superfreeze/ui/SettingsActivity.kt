@@ -28,6 +28,7 @@ import io.mdp43140.superfreeze.CommonFunctions
 import io.mdp43140.superfreeze.FreezeService
 import io.mdp43140.superfreeze.databinding.ActivitySettingsBinding
 import io.mdp43140.superfreeze.util.putData // SharedPreferencesExtension.kt
+import io.mdp43140.superfreeze.util.TermuxUtil
 import io.mdp43140.superfreeze.R
 class SettingsActivity: BaseActivity(){
 	private lateinit var binding: ActivitySettingsBinding
@@ -161,12 +162,23 @@ class SettingsActivity: BaseActivity(){
 						true
 					}
 					modeStr[2] -> {
+						TermuxUtil.requestPermission(requireActivity())
+						if (TermuxUtil.isTermuxGrantedExecCmd(requireActivity())){
+							Toast.makeText(requireActivity(),"Termux access granted!",Toast.LENGTH_SHORT).show()
+							true
+						} else {
+							false
+						}
+					}
+					modeStr[3] -> {
 						// cache stuff...
 						if (CommonFunctions.checkRoot(requireActivity()) == true){
 							Toast.makeText(requireActivity(),"Root granted!",Toast.LENGTH_SHORT).show()
 						//FreezeService.stopAccessibilityService()
+							true
+						} else {
+							false
 						}
-						true
 					}
 					else -> false
 				}

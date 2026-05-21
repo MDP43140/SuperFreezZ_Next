@@ -88,6 +88,7 @@
 	<string name="stopMode_inactive">In-aktif (root)</string>
 	<string name="stopped">Dihentikan</string>
 	<string name="stoppingApps">Menghentikan aplikasi</string>
+	<string name="termux">Metode Termux tidak tersedia, mohon berikan akses eksekusi skrip, berikan akses root/system/adb shell ke Termux, atau gunakan metode lain</string>
 	<string name="theme">Tema</string>
 	<string name="theme_sum">Pilih tema. Mulai ulang aplikasi untuk menerapkan perubahan sepenuhnya</string>
 	<string name="usageStatsAccess_title">Deteksi: Akses statistik pengunaan</string>
@@ -114,6 +115,7 @@
 	<string-array name="workModes_val">
 		<item>Manual</item>
 		<item>Aksesibilitas</item>
+		<item>Termux (root)</item>
 		<item>Root</item>
 	</string-array>
 </resources>

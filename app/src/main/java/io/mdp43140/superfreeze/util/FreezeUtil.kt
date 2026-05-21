@@ -17,6 +17,7 @@ import io.mdp43140.superfreeze.App
 import io.mdp43140.superfreeze.AppListItems
 import io.mdp43140.superfreeze.AppListItems.AppItem
 import io.mdp43140.superfreeze.FreezeService
+import io.mdp43140.superfreeze.util.TermuxUtil
 import io.mdp43140.superfreeze.R
 class FreezeUtil {
 	var appsToBeFrozen: List<AppItem>? = null
@@ -97,6 +98,74 @@ class FreezeUtil {
 				.show()
 			isRunning = false
 		}
+		else if (App.workMode == "termux"){
+			if (!TermuxUtil.isTermuxGrantedExecCmd(ctx)){
+				Toast
+					.makeText(ctx,ctx.getString(R.string.termux_not_avail),Toast.LENGTH_SHORT)
+					.show()
+				return
+			}
+			// Fun fact: these commands only needs shell (2000) level privilege
+			// but sadly methods other than root is not convenient to set up
+			// you will need computers, or initialize adb connection
+			// and those aren't permanent either
+			val setInactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_setInactiveBeforeNormalStop",false)
+			val restrictStandby = App.prefs!!.getBoolean("rootStop_restrictStandby",false)
+			val setGlobHibernation = App.prefs!!.getBoolean("rootStop_setGlobHibernation",false)
+			val setRestrictionLvl = App.prefs!!.getString("rootStop_setRestrictionLvl","dontChange")
+			val setStopType = App.prefs!!.getString("rootStop_setStopType","force-stop")
+			val stopTypeArrKey = ctx.resources.getStringArray(R.array.setStopType_key)
+			val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.setRestrictionLvl_key)
+			val cmd = buildString {
+				apps.forEach {
+					//append("echo \"[i] Stopping ${it.pkg}...\";\n")
+					if (it.stopMode == 2 || (it.stopMode == 1 && setInactiveBeforeNormalStop)){
+						// Sets inactive mode (equivalent to Greenify's shallow hibernation)
+						// Great for most messenger and some social media apps
+						append("/system/bin/am set-inactive ${it.pkg} true;\n")
+					}
+					if (restrictStandby){
+						// Set the app to restricted standby mode
+						// TODO: may restrict important apps from running in background?
+						append("/system/bin/am set-standby-bucket ${it.pkg} ")
+						append(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+							"restricted;\n"
+						else
+							"rare;\n"
+						)
+					}
+					if (setGlobHibernation){
+						// sets app in hibernation mode, which:
+						// - Clears cache (Android 12+)
+						// - Resets permission (Android 11+, Android 6-10 with GmsCore)
+						//   some people definitely don't want reconfiguring permission,
+						//   so i decided to disable this by default
+						append("cmd app_hibernation set-state --global ${it.pkg} true;\n")
+					}
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+						// Some modes [unrestricted|exempted] wont be added as an option because it does the opposite of stopping the app)
+						when (setRestrictionLvl){
+							restrictionLvlArrKey[1] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} adaptive_bucket;\n")
+							restrictionLvlArrKey[2] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} restricted_bucket;\n")
+							restrictionLvlArrKey[3] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} background_restricted;\n")
+							restrictionLvlArrKey[4] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} hibernation;\n")
+						}
+					}
+					if (it.stopMode == 1){
+						// PS: putting "all" or "current" before process name wont
+						//     do anything to app, dont know why that's the case
+						when (setStopType){
+							stopTypeArrKey[0] -> append("/system/bin/am kill ${it.pkg};\n")
+							stopTypeArrKey[1] -> append("/system/bin/am stop-app ${it.pkg};\n")
+							stopTypeArrKey[2] -> append("/system/bin/am force-stop ${it.pkg};\n")
+						}
+					}
+				}
+				//append("echo \"[+] Done!\";\n")
+				//append("sleep 3;\n")
+			}
+			TermuxUtil.execCmd(ctx, arrayOf("-c",cmd), prog = "/data/data/com.termux/files/usr/bin/su")
+		}
 		else if (App.workMode == "root"){
 			val sh: Shell.Job = Shell.getShell().newJob()
 			if (!Shell.rootAccess()){
@@ -141,7 +210,7 @@ class FreezeUtil {
 				}
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
 					// Some modes [unrestricted|exempted] wont be added as an option because it does the opposite of stopping the app)
-					when (setStopType){
+					when (setRestrictionLvl){
 						restrictionLvlArrKey[1] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} adaptive_bucket")
 						restrictionLvlArrKey[2] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} restricted_bucket")
 						restrictionLvlArrKey[3] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} background_restricted")

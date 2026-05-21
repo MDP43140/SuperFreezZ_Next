@@ -89,6 +89,8 @@
 	<string name="stopMode_inactive">Inactive (root)</string>
 	<string name="stopped">Stopped</string>
 	<string name="stoppingApps">Stopping apps</string>
+	<string name="termux_not_installed">Termux is not installed, use other methods</string>
+	<string name="termux_not_avail">Termux method is not available, please either grant execute external commands access, give root/system/adb shell access to Termux, or use other methods</string>
 	<string name="theme">Theme</string>
 	<string name="theme_sum">Select theme. Restart app to fully take effect</string>
 	<string name="usageStatsAccess_title">Detection: Usage stats access</string>
@@ -115,6 +117,7 @@
 	<string-array name="workModes_val">
 		<item>Manual</item>
 		<item>Accessibility</item>
+		<item>Termux (root)</item>
 		<item>Root</item>
 	</string-array>
 	<string-array name="setRestrictionLvl_key" translatable="false">
@@ -137,6 +140,7 @@
 	<string-array name="workModes_key" translatable="false">
 		<item>manual</item>
 		<item>accessibility</item>
+		<item>termux</item>
 		<item>root</item>
 	</string-array>
 	<bool name="leak_canary_allow_in_non_debuggable_build" translatable="false">true</bool>

@@ -161,8 +161,8 @@ class AppListItems(private val ctx: Context){
 		for (app in appList)
 			if (isAppPendingStop(app))
 				list += app
-		// Always freeze itself last
-		list.sortBy { it.pkg == ctx.packageName }
+		// Always stop SuperFreezZ or Termux last (or freezing process gets stopped because the app is killed)
+		list.sortBy { it.pkg == ctx.packageName || it.pkg == "com.termux" }
 		return list
 	}
 	fun isAppPendingStop(app: AppItem): Boolean {
