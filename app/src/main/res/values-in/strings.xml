@@ -59,14 +59,14 @@
 	<string name="reverse">Balikkan</string>
 	<string name="root_not_avail">Metode root tidak tersedia, mohon berikan akses root, atau gunakan metode lain</string>
 	<string name="search">Cari</string>
-	<string name="setGlobHibernation_title">Root: Setel status hibernasi global aplikasi</string>
-	<string name="setGlobHibernation_sum">Opsi ini bukan mode hibernasi Greenify. Mengaktifkan opsi ini Akan mengatur status hibernasi, yang akan membersihkan cache (Android 12+) dan mengatur ulang izin (Android 11+, Android 6-10 dengan GmsCore, gunakan dengan risiko ditanggung sendiri)</string>
-	<string name="setInactiveBeforeNormalStop_title">Root: Atur inaktif sebelum berhenti normal</string>
-	<string name="setInactiveBeforeNormalStop_sum">Untuk memastikan Android tidak mentrigger aplikasi yang dihentikan dari berjalan di latar-belakang</string>
-	<string name="setRestrictionLvl_title">Root: Tingkat pembatasan latar-belakang aplikasi</string>
-	<string name="setRestrictionLvl_sum">Mengubah perilaku standby aplikasi</string>
-	<string name="setStopType_title">Root: Tipe berhenti</string>
-	<string name="setStopType_sum">Mengubah bagaimana aplikasi dihentikan.</string>
+	<string name="globHibernation_title">Root: Setel status hibernasi global aplikasi</string>
+	<string name="globHibernation_sum">Opsi ini bukan mode hibernasi Greenify. Mengaktifkan opsi ini Akan mengatur status hibernasi, yang akan membersihkan cache (Android 12+) dan mengatur ulang izin (Android 11+, Android 6-10 dengan GmsCore, gunakan dengan risiko ditanggung sendiri)</string>
+	<string name="inactiveBeforeNormalStop_title">Root: Atur inaktif sebelum berhenti normal</string>
+	<string name="inactiveBeforeNormalStop_sum">Untuk memastikan Android tidak mentrigger aplikasi yang dihentikan dari berjalan di latar-belakang</string>
+	<string name="restrictionLvl_title">Root: Tingkat pembatasan latar-belakang aplikasi</string>
+	<string name="restrictionLvl_sum">Mengubah perilaku standby aplikasi</string>
+	<string name="stopType_title">Root: Tipe berhenti</string>
+	<string name="stopType_sum">Mengubah bagaimana aplikasi dihentikan.</string>
 	<string name="settings">Pengaturan</string>
 	<string name="showDetailedAppStateInfo">Tampilkan info status aplikasi yang mendetail</string>
 	<string name="showDetailedAppStateInfo_sum">cth. Apa yang menyebabkan aplikasi untuk dihentikan atau tidak (untuk sekarang hanya ada aplikasi F-Droid)</string>
@@ -95,14 +95,14 @@
 	<string name="usageStatsAccess_sum">Memungkinkan untuk menghentikan aplikasi yang tidak di gunakan saja</string>
 	<string name="workMode_title">Mode bekerja</string>
 	<string name="workMode_sum">Tentukan bagaimana SuperFreezZ Next akan menghentikan aplikasi</string>
-	<string-array name="setRestrictionLvl_val">
+	<string-array name="restrictionLvl_val">
 		<item>Jangan diubah (bawaan)</item>
 		<item>Bucket Adaptif (bawaan sistem)</item>
 		<item>Bucket Terbatas</item>
 		<item>Latar-belakang terbatas</item>
 		<item>Hibernasi</item>
 	</string-array>
-	<string-array name="setStopType_val">
+	<string-array name="stopType_val">
 		<item>Hentikan proses latar-belakang/cache</item>
 		<item>Jangan batalkan alarm &amp; pekerjaan yang dijadwalkan</item>
 		<item>Paksa berhenti (bawaan)</item>

@@ -109,17 +109,17 @@ class FreezeUtil {
 			// but sadly methods other than root is not convenient to set up
 			// you will need computers, or initialize adb connection
 			// and those aren't permanent either
-			val setInactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_setInactiveBeforeNormalStop",false)
+			val inactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_inactiveBeforeNormalStop",false)
 			val restrictStandby = App.prefs!!.getBoolean("rootStop_restrictStandby",false)
-			val setGlobHibernation = App.prefs!!.getBoolean("rootStop_setGlobHibernation",false)
-			val setRestrictionLvl = App.prefs!!.getString("rootStop_setRestrictionLvl","dontChange")
-			val setStopType = App.prefs!!.getString("rootStop_setStopType","force-stop")
-			val stopTypeArrKey = ctx.resources.getStringArray(R.array.setStopType_key)
-			val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.setRestrictionLvl_key)
+			val globHibernation = App.prefs!!.getBoolean("rootStop_globHibernation",false)
+			val restrictionLvl = App.prefs!!.getString("rootStop_restrictionLvl","dontChange")
+			val stopType = App.prefs!!.getString("rootStop_stopType","force-stop")
+			val stopTypeArrKey = ctx.resources.getStringArray(R.array.stopType_key)
+			val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.restrictionLvl_key)
 			val cmd = buildString {
 				apps.forEach {
 					//append("echo \"[i] Stopping ${it.pkg}...\";\n")
-					if (it.stopMode == 2 || (it.stopMode == 1 && setInactiveBeforeNormalStop)){
+					if (it.stopMode == 2 || (it.stopMode == 1 && inactiveBeforeNormalStop)){
 						// Sets inactive mode (equivalent to Greenify's shallow hibernation)
 						// Great for most messenger and some social media apps
 						append("/system/bin/am set-inactive ${it.pkg} true;\n")
@@ -134,7 +134,7 @@ class FreezeUtil {
 							"rare;\n"
 						)
 					}
-					if (setGlobHibernation){
+					if (globHibernation){
 						// sets app in hibernation mode, which:
 						// - Clears cache (Android 12+)
 						// - Resets permission (Android 11+, Android 6-10 with GmsCore)
@@ -144,7 +144,7 @@ class FreezeUtil {
 					}
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
 						// Some modes [unrestricted|exempted] wont be added as an option because it does the opposite of stopping the app)
-						when (setRestrictionLvl){
+						when (restrictionLvl){
 							restrictionLvlArrKey[1] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} adaptive_bucket;\n")
 							restrictionLvlArrKey[2] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} restricted_bucket;\n")
 							restrictionLvlArrKey[3] -> append("/system/bin/am set-bg-restriction-level --user 0 ${it.pkg} background_restricted;\n")
@@ -154,7 +154,7 @@ class FreezeUtil {
 					if (it.stopMode == 1){
 						// PS: putting "all" or "current" before process name wont
 						//     do anything to app, dont know why that's the case
-						when (setStopType){
+						when (stopType){
 							stopTypeArrKey[0] -> append("/system/bin/am kill ${it.pkg};\n")
 							stopTypeArrKey[1] -> append("/system/bin/am stop-app ${it.pkg};\n")
 							stopTypeArrKey[2] -> append("/system/bin/am force-stop ${it.pkg};\n")
@@ -178,15 +178,15 @@ class FreezeUtil {
 			// but sadly methods other than root is not convenient to set up
 			// you will need computers, or initialize adb connection
 			// and those aren't permanent either
-			val setInactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_setInactiveBeforeNormalStop",false)
+			val inactiveBeforeNormalStop = App.prefs!!.getBoolean("rootStop_inactiveBeforeNormalStop",false)
 			val restrictStandby = App.prefs!!.getBoolean("rootStop_restrictStandby",false)
-			val setGlobHibernation = App.prefs!!.getBoolean("rootStop_setGlobHibernation",false)
-			val setRestrictionLvl = App.prefs!!.getString("rootStop_setRestrictionLvl","dontChange")
-			val setStopType = App.prefs!!.getString("rootStop_setStopType","force-stop")
-			val stopTypeArrKey = ctx.resources.getStringArray(R.array.setStopType_key)
-			val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.setRestrictionLvl_key)
+			val globHibernation = App.prefs!!.getBoolean("rootStop_globHibernation",false)
+			val restrictionLvl = App.prefs!!.getString("rootStop_restrictionLvl","dontChange")
+			val stopType = App.prefs!!.getString("rootStop_stopType","force-stop")
+			val stopTypeArrKey = ctx.resources.getStringArray(R.array.stopType_key)
+			val restrictionLvlArrKey = ctx.resources.getStringArray(R.array.restrictionLvl_key)
 			apps.forEach {
-				if (it.stopMode == 2 || (it.stopMode == 1 && setInactiveBeforeNormalStop)){
+				if (it.stopMode == 2 || (it.stopMode == 1 && inactiveBeforeNormalStop)){
 					// Sets inactive mode (equivalent to Greenify's shallow hibernation)
 					// Great for most messenger and some social media apps
 					sh.add("am set-inactive ${it.pkg} true")
@@ -200,7 +200,7 @@ class FreezeUtil {
 						"am set-standby-bucket ${it.pkg} rare"
 					)
 				}
-				if (setGlobHibernation){
+				if (globHibernation){
 					// sets app in hibernation mode, which:
 					// - Clears cache (Android 12+)
 					// - Resets permission (Android 11+, Android 6-10 with GmsCore)
@@ -210,7 +210,7 @@ class FreezeUtil {
 				}
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
 					// Some modes [unrestricted|exempted] wont be added as an option because it does the opposite of stopping the app)
-					when (setRestrictionLvl){
+					when (restrictionLvl){
 						restrictionLvlArrKey[1] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} adaptive_bucket")
 						restrictionLvlArrKey[2] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} restricted_bucket")
 						restrictionLvlArrKey[3] -> sh.add("am set-bg-restriction-level --user 0 ${it.pkg} background_restricted")
@@ -220,7 +220,7 @@ class FreezeUtil {
 				if (it.stopMode == 1){
 					// PS: putting "all" or "current" before process name wont
 					//     do anything to app, dont know why that's the case
-					when (setStopType){
+					when (stopType){
 						stopTypeArrKey[0] -> sh.add("am kill ${it.pkg}")
 						stopTypeArrKey[1] -> sh.add("am stop-app ${it.pkg}")
 						stopTypeArrKey[2] -> sh.add("am force-stop ${it.pkg}")

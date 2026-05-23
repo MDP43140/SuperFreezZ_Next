@@ -83,9 +83,9 @@
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
-			android:key="rootStop_setInactiveBeforeNormalStop"
-			android:title="@string/setInactiveBeforeNormalStop_title"
-			android:summary="@string/setInactiveBeforeNormalStop_sum"
+			android:key="rootStop_inactiveBeforeNormalStop"
+			android:title="@string/inactiveBeforeNormalStop_title"
+			android:summary="@string/inactiveBeforeNormalStop_sum"
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
@@ -95,25 +95,25 @@
 			app:iconSpaceReserved="false" />
 		<SwitchPreferenceCompat
 			android:defaultValue="false"
-			android:key="rootStop_setGlobHibernation"
-			android:title="@string/setGlobHibernation_title"
-			android:summary="@string/setGlobHibernation_sum"
+			android:key="rootStop_globHibernation"
+			android:title="@string/globHibernation_title"
+			android:summary="@string/globHibernation_sum"
 			app:iconSpaceReserved="false" />
 		<ListPreference
 			android:defaultValue="dontChange"
-			android:entries="@array/setRestrictionLvl_val"
-			android:entryValues="@array/setRestrictionLvl_key"
-			android:key="rootStop_setRestrictionLvl"
-			android:title="@string/setRestrictionLvl_title"
-			android:summary="@string/setRestrictionLvl_sum"
+			android:entries="@array/restrictionLvl_val"
+			android:entryValues="@array/restrictionLvl_key"
+			android:key="rootStop_restrictionLvl"
+			android:title="@string/restrictionLvl_title"
+			android:summary="@string/restrictionLvl_sum"
 			app:iconSpaceReserved="false" />
 		<ListPreference
 			android:defaultValue="force-stop"
-			android:entries="@array/setStopType_val"
-			android:entryValues="@array/setStopType_key"
-			android:key="rootStop_setStopType"
-			android:title="@string/setStopType_title"
-			android:summary="@string/setStopType_sum"
+			android:entries="@array/stopType_val"
+			android:entryValues="@array/stopType_key"
+			android:key="rootStop_stopType"
+			android:title="@string/stopType_title"
+			android:summary="@string/stopType_sum"
 			app:iconSpaceReserved="false" />
 	</PreferenceCategory>
 	<PreferenceCategory
