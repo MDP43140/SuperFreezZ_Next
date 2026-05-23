@@ -107,6 +107,7 @@ class MainActivity: BaseActivity(){
 		binding.swiperefresh.post {
 			binding.swiperefresh.isRefreshing = true
 		}
+		currSelectedApp.clear()
 		App.appListItems?.loadApps()
 		App.appListItems?.getDataFromPrefs()
 		App.appListItems?.getActiveAccessibilityServices()
