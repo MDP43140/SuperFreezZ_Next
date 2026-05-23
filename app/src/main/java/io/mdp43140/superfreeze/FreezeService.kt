@@ -34,7 +34,7 @@ class FreezeService: AccessibilityService(){
 	}
 	override fun onCreate(){
 		super.onCreate()
-		disableIfUsingRoot()
+		disableIfNonAccessibility()
 		isEnabled = true
 		try {
 			val res = applicationContext.packageManager.getResourcesForApplication(AppListItems.settingsPkg)
@@ -112,7 +112,7 @@ class FreezeService: AccessibilityService(){
 	private fun pressOkButton(node: AccessibilityNodeInfo) {
 		notifyThereIsStillMovement(this)
 		// If no OK button found, find Force Stop button
-		// i did this because apparently on some ROM "Force stop" button shows first before "OK"
+		// apparently on some ROM "Force stop" button shows first before "OK"
 		val button = node.matchNode { nodeInfo: AccessibilityNodeInfo? ->
 			nodeInfo?.compareText(getString(android.R.string.ok)) == true
 		} ?: node.matchNode { nodeInfo: AccessibilityNodeInfo? ->
@@ -136,9 +136,9 @@ class FreezeService: AccessibilityService(){
 		}
 	}
 	@RequiresApi(Build.VERSION_CODES.N)
-	private fun disableIfUsingRoot(): Boolean {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && App.workMode == "root"){
-			Log.i(TAG, "Root method is being used, accessibility service will be turned off automatically to save battery")
+	private fun disableIfNonAccessibility(): Boolean {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && App.workMode != "accessibility"){
+			Log.i(TAG, "Non-accessibility method is used, service turned off to save power")
 			isEnabled = false
 			disableSelf()
 			return true
@@ -146,7 +146,7 @@ class FreezeService: AccessibilityService(){
 		return false
 	}
 	override fun onServiceConnected() {
-		disableIfUsingRoot()
+		disableIfNonAccessibility()
 		Log.i(TAG, "Service connected")
 		isEnabled = true
 	}

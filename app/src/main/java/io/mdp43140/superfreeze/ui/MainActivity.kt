@@ -162,7 +162,7 @@ class MainActivity: BaseActivity(){
 			App.freezeUtil.freezeApp(this)
 		}
 		else {
-			var prevState: MutableMap<String,tempAppItem> = mutableMapOf()
+			val prevState: MutableMap<String,tempAppItem> = mutableMapOf()
 			for (item in currSelectedApp){
 				prevState[item.pkg] = tempAppItem(item.stopMode,item.ignoreBgFree,item.ignoreRunning)
 				item.stopMode       = 1
@@ -352,15 +352,9 @@ class MainActivity: BaseActivity(){
 	}
 	override fun onTrimMemory(level: Int){
 		// See https://developer.android.com/topic/performance/memory#release
-		// on API 34+, apps only notified with UI_HIDDEN and BACKGROUND level
 		when (level){
-			ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN -> appListAdapter.trimMemory()
-			ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE -> {}
-			ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW,
-			ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL,
-			ComponentCallbacks2.TRIM_MEMORY_BACKGROUND,
-			ComponentCallbacks2.TRIM_MEMORY_MODERATE,
-			ComponentCallbacks2.TRIM_MEMORY_COMPLETE -> {
+			ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN,
+			ComponentCallbacks2.TRIM_MEMORY_BACKGROUND -> {
 				appListAdapter.trimMemory()
 			}
 			else -> {}

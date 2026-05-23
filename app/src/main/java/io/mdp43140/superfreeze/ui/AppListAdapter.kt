@@ -102,7 +102,7 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 			// Stop mode (nothing/Inactive stop/Not stopping)
 			// Ignored bg free
 			// Ignored running
-			appLabelCache.put(it.pkg,StringBuilder().apply {
+			appLabelCache.put(it.pkg,buildString {
 				append(
 					when {
 						CommonFunctions.isFlagSet(it.flags, ApplicationInfo.FLAG_STOPPED) ->
@@ -147,7 +147,7 @@ class AppListAdapter(): RecyclerView.Adapter<ViewHolder>(), PopupTextProvider {
 					if (it.isSignedByFDroid)
 						append("\n").append(ctx!!.getString(R.string.signed_by_fdroid))
 				}
-			}.toString())
+			})
 		}
 		// update list
 		ctx!!.runOnUiThread {

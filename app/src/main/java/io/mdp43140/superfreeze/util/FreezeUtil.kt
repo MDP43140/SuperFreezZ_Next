@@ -78,7 +78,7 @@ class FreezeUtil {
 				}
 				if (it.stopMode != 1){
 					Toast
-						.makeText(ctx,"Skipping app with inactive stop mode as we dont have enough privilege for this...",Toast.LENGTH_SHORT)
+						.makeText(ctx,"Skipping app with inactive stop mode, as we don't have the privilege for it...",Toast.LENGTH_SHORT)
 						.show();
 				}
 				else if (App.workMode == "manual"){

@@ -91,7 +91,7 @@ class AppListItems(private val ctx: Context){
 	): List<AbstractItem> {
 		// Filtering (User/System/Runnning/Stopped)
 		var appList2: List<AbstractItem> = appList.filter {
-			var isSystemApp = CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
+			val isSystemApp = CommonFunctions.isFlagSet(it.flags,ApplicationInfo.FLAG_SYSTEM)
 			(showUserApp && !isSystemApp) ||
 			(showSystemApp && isSystemApp)
 		}
@@ -237,22 +237,16 @@ class AppListItems(private val ctx: Context){
 	}
 	fun getDataFromPrefs(){
 		prefs?.let {
-			val emptySet2: Set<String> = emptySet()
-			val equalSign = '='
-			val trueStr = "true"
-			val ignoreRunning = "ignoreRunning"
-			val ignoreBgFree = "ignoreBgFree"
-			val stopMode = "stopMode"
 			for (app in appList){
-				for (data in it.getStringSet(app.pkg,emptySet2)!!){
-					val equalIndex = data.indexOf(equalSign)
-					if (equalIndex != -1) {
-						val k = data.substring(0,equalIndex)
-						val v = data.substring(equalIndex + 1)
+				for (data in it.getStringSet(app.pkg,emptySet())!!){
+					val parts = data.split('=', limit = 2)
+					if (parts.size == 2){
+						val k = parts[0]
+						val v = parts[1]
 						when (k){
-							ignoreRunning -> app.ignoreRunning = v == trueStr
-							ignoreBgFree  -> app.ignoreBgFree  = v == trueStr
-							stopMode      -> app.stopMode      = v.toInt()
+							"ignoreRunning" -> app.ignoreRunning = v == "true"
+							"ignoreBgFree"  -> app.ignoreBgFree  = v == "true"
+							"stopMode"      -> app.stopMode      = v.toInt()
 						}
 					}
 				}
@@ -260,7 +254,7 @@ class AppListItems(private val ctx: Context){
 		}
 	}
 	fun storeDataToPrefs(appInfo: AppItem){
-		prefs!!.edit().putStringSet("${appInfo.pkg}",mutableSetOf<String>(
+		prefs!!.edit().putStringSet(appInfo.pkg,setOf<String>(
 			"ignoreRunning=${appInfo.ignoreRunning}",
 			"ignoreBgFree=${appInfo.ignoreBgFree}",
 			"stopMode=${appInfo.stopMode}"

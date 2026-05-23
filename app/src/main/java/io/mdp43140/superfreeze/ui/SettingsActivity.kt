@@ -73,9 +73,8 @@ class SettingsActivity: BaseActivity(){
 	}
 	private val exportFileLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
 		if (uri != null){
-			// TODO - warning - Type mismatch: inferred type is (Mutable)Map<String!, *>? but (MutableMap<Any?, Any?>..Map<*, *>) was expected
-			val jsonData = JSONObject(App.prefs?.all)
-			jsonData.put("apps",JSONObject(AppListItems.prefs?.all))
+			val jsonData = JSONObject(App.prefs?.all as Map<String, Any?>)
+			jsonData.put("apps",JSONObject(AppListItems.prefs?.all as Map<String, Any?>))
 			CommonFunctions.writeContentToUri(this,uri,jsonData.toString(2))
 			Snackbar.make(
 				binding.root,
@@ -150,7 +149,6 @@ class SettingsActivity: BaseActivity(){
 			}
 			findPreference<Preference>("workMode")?.setOnPreferenceChangeListener { _:Preference, value:Any? ->
 				val modeStr = resources.getStringArray(R.array.workModes_key)
-				val dialogBuilder = MaterialAlertDialogBuilder(requireActivity())
 				App.workMode = value as String
 				when (value){
 					modeStr[0] -> {
@@ -174,7 +172,6 @@ class SettingsActivity: BaseActivity(){
 						// cache stuff...
 						if (CommonFunctions.checkRoot(requireActivity()) == true){
 							Toast.makeText(requireActivity(),"Root granted!",Toast.LENGTH_SHORT).show()
-						//FreezeService.stopAccessibilityService()
 							true
 						} else {
 							false
