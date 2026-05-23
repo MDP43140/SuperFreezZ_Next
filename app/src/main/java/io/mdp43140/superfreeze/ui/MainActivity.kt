@@ -130,15 +130,11 @@ class MainActivity: BaseActivity(){
 			binding.toolbar.subtitle = ""
 			menu.findItem(R.id.ignoreBgFree).setVisible(false)
 			menu.findItem(R.id.ignoreRunning).setVisible(false)
-			menu.findItem(R.id.stop_off).setEnabled(false)
-			menu.findItem(R.id.stop_normal).setEnabled(false)
-			menu.findItem(R.id.stop_inactive).setEnabled(false)
+			menu.findItem(R.id.stopMode).setVisible(false)
 		} else {
 			menu.findItem(R.id.ignoreBgFree).setVisible(true)
 			menu.findItem(R.id.ignoreRunning).setVisible(true)
-			menu.findItem(R.id.stop_off).setEnabled(true)
-			menu.findItem(R.id.stop_normal).setEnabled(true)
-			menu.findItem(R.id.stop_inactive).setEnabled(true)
+			menu.findItem(R.id.stopMode).setVisible(true)
 			binding.toolbar.subtitle = getString(R.string.apps_is_selected,currSelectedApp.size)
 			if (currSelectedApp.size == 1){
 				setRadioMenuSelected(menu.findItem(when (app.stopMode){
@@ -201,9 +197,7 @@ class MainActivity: BaseActivity(){
 		menu.findItem(R.id.sort_system).isChecked = AppListAdapter.showSystemApp
 		menu.findItem(R.id.ignoreBgFree).setVisible(false)
 		menu.findItem(R.id.ignoreRunning).setVisible(false)
-		menu.findItem(R.id.stop_off).setEnabled(false)
-		menu.findItem(R.id.stop_normal).setEnabled(false)
-		menu.findItem(R.id.stop_inactive).setEnabled(false)
+		menu.findItem(R.id.stopMode).setVisible(false)
 		setRadioMenuSelected(menu.findItem(when (AppListAdapter.sortOrder){
 			1 -> R.id.sort_pkg
 			else -> R.id.sort_label
